@@ -3,7 +3,8 @@ import Image from "next/image";
 import WhyDixoy from "./components/WhyDixoy";
 import ContactCTA from "./components/ContactCTA";
 import Footer from "./components/Footer";
-import HeroGallery from "./components/HeroGallery";
+import HeroShowcase from "./components/HeroShowcase";
+
 
 export default function Home() {
   const whatsappMessage = [
@@ -20,67 +21,36 @@ export default function Home() {
   )}`;
 
   return (
-    <main className="min-h-screen bg-white text-zinc-950">
-      <nav className="sticky top-0 z-50 mx-auto flex max-w-7xl items-center justify-between border-b border-zinc-200/50 bg-white/90 px-6 py-4 backdrop-blur-md lg:px-12">
-        <a href="#" className="flex items-center">
-          <img
-            src="/logos/logo-dixoy-horizontal.svg"
-            alt="DIXOY"
-            className="h-auto w-[100px] md:w-[125px]"
-          />
-        </a>
+    <main className="min-h-screen bg-[#F5F5F7] text-zinc-950">
+     <nav className="sticky top-0 z-50 w-full border-b border-zinc-200/60 bg-[#F5F5F7]/90 backdrop-blur-md">
+  <div className="flex h-12 w-full items-center justify-between px-6 lg:px-10">
+    <a href="#" className="flex items-center">
+      <img
+        src="/logos/logo-dixoy-horizontal.svg"
+        alt="DIXOY"
+        className="block h-auto w-[78px] md:w-[92px]"
+      />
+    </a>
 
-        <div className="hidden gap-8 text-sm font-medium md:flex">
-          <a href="#soluciones">Soluciones</a>
-          <a href="#proyectos">Proyectos</a>
-          <a href="#nosotros">Nosotros</a>
-          <a href="#contacto">Contacto</a>
-        </div>
+    <div className="hidden gap-7 text-xs font-medium md:flex">
+      <a href="#soluciones">Soluciones</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </div>
 
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-full bg-zinc-950 px-4 py-2 text-xs text-white md:px-5 md:text-sm"
-        >
-          Cotizar
-        </a>
-      </nav>
+    <a
+      href={whatsappLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="rounded-full bg-zinc-950 px-4 py-1.5 text-xs text-white"
+    >
+      Cotizar
+    </a>
+  </div>
+</nav>
 
-      <section className="mx-auto grid max-w-7xl items-start gap-12 px-6 pb-16 pt-8 lg:grid-cols-2 lg:px-12">
-        <div>
-          <h1 className="max-w-3xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-            Un solo aliado para construir la imagen, tecnología e infraestructura
-            que impulsa tu empresa.
-          </h1>
-
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
-            Integramos diseño, adecuación de espacios, tecnología y soluciones
-            empresariales para ayudarte a crecer con una operación más sólida y
-            profesional.
-          </p>
-
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <a
-  className="rounded-full bg-zinc-950 px-7 py-3 text-center text-white"
-  href={whatsappLink}
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Solicitar cotización
-</a>
-
-            <a
-  className="rounded-full border border-zinc-300 px-7 py-3 text-center"
-  href="#proyectos"
->
-  Ver proyectos
-</a>
-          </div>
-        </div>
-
-        <HeroGallery />
-      </section>
+  <HeroShowcase whatsappLink={whatsappLink} />
 
       <section
         id="soluciones"
