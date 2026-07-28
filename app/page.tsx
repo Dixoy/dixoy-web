@@ -134,6 +134,7 @@ export default function Home() {
         <nav aria-label="Navegación principal" className="desktop-nav">
           <a href="#soluciones">Soluciones</a>
           <a href="#proyectos">Proyectos</a>
+          <a href="/tienda">Tienda</a>
           <a href="#nosotros">Nosotros</a>
         </nav>
 
@@ -155,6 +156,7 @@ export default function Home() {
           <nav aria-label="Navegación móvil">
             <a href="#soluciones">Soluciones</a>
             <a href="#proyectos">Proyectos</a>
+            <a href="/tienda">Tienda</a>
             <a href="#nosotros">Nosotros</a>
             <a href="#contacto">Hablemos</a>
           </nav>
@@ -432,6 +434,7 @@ export default function Home() {
         <div className="footer-links">
           <a href="#soluciones">Soluciones</a>
           <a href="#proyectos">Proyectos</a>
+          <a href="/tienda">Tienda</a>
           <a href="#nosotros">Nosotros</a>
           <a
             href={whatsappLink}
