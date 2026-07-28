@@ -12,42 +12,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL("https://dixoy.co"),
-
-  title: "DIXOY | Soluciones empresariales",
+  title: "DIXOY | Soluciones empresariales integrales",
   description:
-    "Integramos diseño, adecuación de espacios, tecnología e infraestructura para fortalecer tu empresa.",
-
+    "Diseño, adecuación de espacios, tecnología y soluciones empresariales con un solo aliado.",
   openGraph: {
     title: "DIXOY | Soluciones empresariales",
     description:
-      "Diseño, imagen corporativa, tecnología, adecuación de espacios e infraestructura para empresas.",
-    url: "https://dixoy.co",
-    siteName: "DIXOY",
+      "Integramos marca, espacios, tecnología e infraestructura para fortalecer tu empresa.",
     images: [
       {
+        alt: "DIXOY, soluciones empresariales",
+        height: 630,
         url: "/og-dixoy.png",
         width: 1200,
-        height: 630,
-        alt: "DIXOY Soluciones Empresariales",
       },
     ],
     locale: "es_CO",
+    siteName: "DIXOY",
     type: "website",
+    url: "https://dixoy.co",
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "DIXOY | Soluciones empresariales",
-    description:
-      "Soluciones empresariales que integran marca, espacio, tecnología e infraestructura.",
     images: ["/og-dixoy.png"],
   },
-
   icons: {
-    icon: "/icon.png",
-    apple: "/apple-icon.png",
+    icon: "/logos/logo-dixoy-icon.svg",
+    shortcut: "/logos/logo-dixoy-icon.svg",
   },
 };
 
@@ -57,12 +50,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-  lang="es"
-  suppressHydrationWarning
-  className={`${geistSans.variable} ${geistMono.variable}`}
->
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="es">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
