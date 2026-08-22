@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DIXOY Web
 
-## Getting Started
+Sitio corporativo de DIXOY construido con Next.js y publicado como exportación estática en Cloudflare Pages.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build de producción:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## SEO
 
-## Learn More
+El sitio incluye metadata por página, canonical, datos estructurados, `public/robots.txt` y `public/sitemap.xml`.
 
-To learn more about Next.js, take a look at the following resources:
+La tienda permanece fuera de indexación mientras se prepara su integración con Inventario en DixApp.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Google Analytics 4
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+La medición se activa únicamente cuando existe esta variable de entorno en el build de Cloudflare Pages:
 
-## Deploy on Vercel
+```text
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Al activarse, la web carga la etiqueta de Google en todas las páginas y registra clics de contacto a WhatsApp y correo. Los clics de WhatsApp se envían como evento `generate_lead`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Google Search Console
+
+Para una propiedad de dominio se recomienda verificar `dixoy.co` mediante DNS en Cloudflare.
+
+Si se usa verificación HTML de una propiedad con prefijo de URL, puede añadirse el token de Google como:
+
+```text
+GOOGLE_SITE_VERIFICATION=token-entregado-por-google
+```
+
+El layout genera automáticamente la meta de verificación cuando la variable existe.
+
+Después de verificar Search Console, enviar:
+
+```text
+https://dixoy.co/sitemap.xml
+```
+
+## Producción
+
+Repositorio: `Dixoy/dixoy-web`
+
+Rama de producción: `main`
+
+Dominio:
+
+```text
+https://dixoy.co
+```
