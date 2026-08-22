@@ -21,15 +21,23 @@ El sitio incluye metadata por página, canonical, datos estructurados, `public/r
 
 La tienda permanece fuera de indexación mientras se prepara su integración con Inventario en DixApp.
 
-## Google Analytics 4
+## Google Tag Manager y Analytics 4
 
-La medición se activa únicamente cuando existe esta variable de entorno en el build de Cloudflare Pages:
+La web carga el contenedor de Google Tag Manager:
 
 ```text
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+GTM-T3P5JRT3
 ```
 
-Al activarse, la web carga la etiqueta de Google en todas las páginas y registra clics de contacto a WhatsApp y correo. Los clics de WhatsApp se envían como evento `generate_lead`.
+La propiedad de Google Analytics 4 usa el ID de medición:
+
+```text
+G-7EV215ENTM
+```
+
+Analytics debe configurarse dentro de Google Tag Manager mediante una etiqueta de Google que se active en todas las páginas.
+
+La web envía al `dataLayer` un evento `generate_lead` cuando una persona hace clic en WhatsApp o correo, junto con `contact_method`, `link_url` y `page_location`. Ese evento puede conectarse a GA4 desde Tag Manager mediante un activador de evento personalizado.
 
 ## Google Search Console
 
