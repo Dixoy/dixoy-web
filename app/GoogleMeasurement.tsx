@@ -6,37 +6,32 @@ import { useEffect } from "react";
 declare global {
   interface Window {
     dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
   }
 }
 
-const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const tagManagerId = "GTM-T3P5JRT3";
 
 function ContactEventTracking() {
   useEffect(() => {
-    if (!measurementId) return;
-
     const handleClick = (event: MouseEvent) => {
       const target = event.target as Element | null;
       const link = target?.closest("a");
-      if (!link || !window.gtag) return;
+      if (!link) return;
 
       const href = link.getAttribute("href") ?? "";
+      let contactMethod: "whatsapp" | "email" | null = null;
 
-      if (href.includes("wa.me/")) {
-        window.gtag("event", "generate_lead", {
-          contact_method: "whatsapp",
-          link_url: href,
-        });
-        return;
-      }
+      if (href.includes("wa.me/")) contactMethod = "whatsapp";
+      if (href.startsWith("mailto:")) contactMethod = "email";
+      if (!contactMethod) return;
 
-      if (href.startsWith("mailto:")) {
-        window.gtag("event", "contact", {
-          contact_method: "email",
-          link_url: href,
-        });
-      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "generate_lead",
+        contact_method: contactMethod,
+        link_url: href,
+        page_location: window.location.href,
+      });
     };
 
     document.addEventListener("click", handleClick);
@@ -47,23 +42,26 @@ function ContactEventTracking() {
 }
 
 export default function GoogleMeasurement() {
-  if (!measurementId) return null;
-
   return (
     <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
-        strategy="afterInteractive"
-      />
-      <Script id="dixoy-google-analytics" strategy="afterInteractive">
+      <Script id="dixoy-google-tag-manager" strategy="afterInteractive">
         {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          window.gtag = gtag;
-          gtag('js', new Date());
-          gtag('config', '${measurementId}');
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${tagManagerId}');
         `}
       </Script>
+      <noscript>
+        <iframe
+          height="0"
+          src={`https://www.googletagmanager.com/ns.html?id=${tagManagerId}`}
+          style={{ display: "none", visibility: "hidden" }}
+          title="Google Tag Manager"
+          width="0"
+        />
+      </noscript>
       <ContactEventTracking />
     </>
   );
