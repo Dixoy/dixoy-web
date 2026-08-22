@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://dixoy.co/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://dixoy.co/soluciones</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://dixoy.co/soluciones/marca</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/soluciones/espacios</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/soluciones/tecnologia</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/soluciones/personalizado</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/servicios</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://dixoy.co/servicios/diseno-de-marca</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/servicios/impresion-gran-formato</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/servicios/avisos-y-senalizacion</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/servicios/material-pop</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/servicios/adecuacion-de-espacios</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/servicios/control-de-acceso</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/servicios/soluciones-digitales</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/usme</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://dixoy.co/tienda</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>
