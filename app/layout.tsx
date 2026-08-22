@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import GoogleMeasurement from "./GoogleMeasurement";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,6 +12,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -55,6 +58,11 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  verification: googleSiteVerification
+    ? {
+        google: googleSiteVerification,
+      }
+    : undefined,
   openGraph: {
     title: "DIXOY | Soluciones para empresas en Bogotá",
     description:
@@ -99,6 +107,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
           type="application/ld+json"
         />
+        <GoogleMeasurement />
         {children}
       </body>
     </html>
