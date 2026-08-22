@@ -29,6 +29,7 @@ export default function ServiceDetail({
         <nav className={styles.nav} aria-label="Navegación de servicios">
           <Link href="/servicios">Servicios</Link>
           <Link href="/soluciones">Soluciones</Link>
+          <Link href="/bogota">Bogotá</Link>
           <Link href="/usme">Usme</Link>
           <Link className={styles.cta} href="/#contacto">Hablemos</Link>
         </nav>
@@ -69,12 +70,18 @@ export default function ServiceDetail({
             Si el proyecto necesita combinar diseño, producción, instalación, tecnología u otra capacidad, podemos coordinarlo dentro de una misma solución.
           </p>
         </div>
-        <Link href="/soluciones">Conocer todas las soluciones</Link>
+        <div className={styles.actions}>
+          <Link href="/soluciones">Conocer todas las soluciones</Link>
+          <Link href="/#proyectos">Ver proyectos realizados</Link>
+        </div>
       </section>
 
       <footer className={styles.footer}>
         <span>© 2026 DIXOY · Bogotá, Colombia</span>
-        <Link href="/servicios">Todos los servicios</Link>
+        <div className={styles.actions}>
+          <Link href="/servicios">Todos los servicios</Link>
+          <Link href="/bogota">DIXOY en Bogotá</Link>
+        </div>
       </footer>
     </main>
   );
