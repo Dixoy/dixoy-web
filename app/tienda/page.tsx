@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/tienda",
   },
+  robots: {
+    index: false,
+    follow: true,
+  },
   openGraph: {
     title: "Tienda DIXOY | Productos corporativos personalizados",
     description:
