@@ -54,6 +54,7 @@ export default function SolutionsPage() {
         </Link>
         <nav className={styles.nav} aria-label="Navegación principal">
           <Link href="/soluciones">Soluciones</Link>
+          <Link href="/servicios">Servicios</Link>
           <Link href="/usme">Usme</Link>
           <Link className={styles.cta} href="/#contacto">Hablemos</Link>
         </nav>
@@ -69,7 +70,7 @@ export default function SolutionsPage() {
         </p>
         <div className={styles.actions}>
           <Link className={styles.primary} href="/#contacto">Cuéntanos qué necesitas</Link>
-          <Link className={styles.secondary} href="/usme">Ver atención en Usme</Link>
+          <Link className={styles.secondary} href="/servicios">Ver servicios específicos</Link>
         </div>
       </section>
 
@@ -99,7 +100,7 @@ export default function SolutionsPage() {
           <h2>No necesitas saber qué proveedor buscar.</h2>
           <p>Cuéntanos el problema o la idea. Nosotros te ayudamos a aterrizar cómo resolverlo.</p>
         </div>
-        <Link href="/#contacto">Hablar con DIXOY</Link>
+        <Link href="/servicios">Explorar servicios</Link>
       </section>
 
       <footer className={styles.footer}>
