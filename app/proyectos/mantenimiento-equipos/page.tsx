@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import ProjectCase from "../ProjectCase";
+
+export const metadata: Metadata = { title: "Mantenimiento de equipos | Proyecto DIXOY", description: "Caso de diagnóstico y servicio técnico de equipos de cómputo para apoyar la continuidad de la operación.", alternates: { canonical: "/proyectos/mantenimiento-equipos" } };
+
+export default function Page(){return <ProjectCase category="Tecnología y soporte" title="Mantenimiento de equipos" intro="Diagnóstico y servicio técnico para conservar la estabilidad y el desempeño de la operación." cover={{src:"/images/portfolio/optimized/project-09.webp",alt:"Equipos de cómputo durante servicio técnico"}} images={[{src:"/images/portfolio/optimized/project-09.webp",alt:"Detalle de equipos y componentes revisados",position:"center 36%"}]} services={[{label:"Soluciones digitales",href:"/servicios/soluciones-digitales"}]} challenge="Atender equipos que requerían revisión técnica para mantener su funcionamiento y evitar interrupciones innecesarias en la operación." solution="Se realizó diagnóstico y servicio técnico sobre los equipos, revisando componentes y condiciones de funcionamiento según la necesidad identificada." result="Los equipos quedaron revisados y atendidos para continuar apoyando la operación con mayor estabilidad."/>}

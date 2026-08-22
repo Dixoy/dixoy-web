@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import ProjectCase from "../ProjectCase";
+
+export const metadata: Metadata = { title: "Integración de equipo audiovisual | Proyecto DIXOY", description: "Preparación y puesta a punto de equipo audiovisual especializado para registro y operación en campo.", alternates: { canonical: "/proyectos/integracion-equipo-audiovisual" } };
+
+export default function Page(){return <ProjectCase category="Tecnología especializada" title="Integración de equipo audiovisual" intro="Preparación y puesta a punto de tecnología especializada para registro y operación en campo." cover={{src:"/images/portfolio/optimized/project-10.webp",alt:"Equipo audiovisual especializado preparado por DIXOY"}} images={[{src:"/images/portfolio/optimized/project-10.webp",alt:"Detalle del sistema y componentes audiovisuales",position:"center 62%"}]} services={[{label:"Soluciones digitales",href:"/servicios/soluciones-digitales"}]} challenge="Dejar preparado un conjunto de tecnología especializada para que pudiera operar de forma organizada y confiable en campo." solution="Se revisó, organizó y puso a punto el equipo audiovisual y sus componentes para dejar la solución preparada para su uso." result="El sistema quedó listo para apoyar tareas de registro y operación con una configuración más clara y controlada."/>}

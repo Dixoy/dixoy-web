@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import ProjectCase from "../ProjectCase";
+
+export const metadata: Metadata = { title: "Credenciales para eventos | Proyecto DIXOY", description: "Diseño y producción de credenciales e identificaciones para apoyar acceso y organización en eventos.", alternates: { canonical: "/proyectos/credenciales-eventos" } };
+
+export default function Page(){return <ProjectCase category="Producción corporativa" title="Credenciales para eventos" intro="Diseño y producción de identificaciones listas para apoyar el acceso y la organización del evento." cover={{src:"/images/portfolio/optimized/project-13.webp",alt:"Credenciales empresariales producidas por DIXOY"}} images={[{src:"/images/portfolio/optimized/project-13.webp",alt:"Detalle de impresión y acabado de credenciales",position:"center 56%"}]} services={[{label:"Diseño de marca",href:"/servicios/diseno-de-marca"},{label:"Material POP",href:"/servicios/material-pop"}]} challenge="Contar con identificaciones claras y listas para uso durante un evento, manteniendo una presentación consistente y funcional." solution="Se integraron diseño y producción para entregar credenciales preparadas para apoyar identificación, acceso y organización del evento." result="Las identificaciones quedaron terminadas y listas para incorporarse a la operación del evento de forma ordenada y coherente."/>}

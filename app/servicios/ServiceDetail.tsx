@@ -29,6 +29,7 @@ export default function ServiceDetail({
         <nav className={styles.nav} aria-label="Navegación de servicios">
           <Link href="/servicios">Servicios</Link>
           <Link href="/soluciones">Soluciones</Link>
+          <Link href="/proyectos">Proyectos</Link>
           <Link href="/bogota">Bogotá</Link>
           <Link href="/usme">Usme</Link>
           <Link className={styles.cta} href="/#contacto">Hablemos</Link>
@@ -72,7 +73,7 @@ export default function ServiceDetail({
         </div>
         <div className={styles.actions}>
           <Link href="/soluciones">Conocer todas las soluciones</Link>
-          <Link href="/#proyectos">Ver proyectos realizados</Link>
+          <Link href="/proyectos">Ver proyectos realizados</Link>
         </div>
       </section>
 
@@ -80,6 +81,7 @@ export default function ServiceDetail({
         <span>© 2026 DIXOY · Bogotá, Colombia</span>
         <div className={styles.actions}>
           <Link href="/servicios">Todos los servicios</Link>
+          <Link href="/proyectos">Proyectos</Link>
           <Link href="/bogota">DIXOY en Bogotá</Link>
         </div>
       </footer>
