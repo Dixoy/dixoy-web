@@ -71,6 +71,7 @@ const serviceItems = [
   {
     number: "01",
     label: "Tu marca",
+    href: "/soluciones/marca",
     description: "Identidad, impresión y comunicación visual.",
     detail:
       "Construimos una presencia coherente para que tu empresa se vea tan profesional como trabaja.",
@@ -85,6 +86,7 @@ const serviceItems = [
   {
     number: "02",
     label: "Tu espacio",
+    href: "/soluciones/espacios",
     description: "Adecuación, exhibición e infraestructura.",
     detail:
       "Transformamos espacios comerciales y corporativos para comunicar, funcionar y recibir mejor.",
@@ -98,6 +100,7 @@ const serviceItems = [
   {
     number: "03",
     label: "Tecnología",
+    href: "/soluciones/tecnologia",
     description: "Sistemas, soporte y soluciones digitales.",
     detail:
       "Implementamos tecnología útil para hacer más segura, organizada y eficiente tu operación.",
@@ -112,6 +115,7 @@ const serviceItems = [
   {
     number: "04",
     label: "Personalizado",
+    href: "/soluciones/personalizado",
     description: "Productos y proyectos hechos a la medida.",
     detail:
       "Desarrollamos soluciones especiales cuando un producto estándar simplemente no es suficiente.",
@@ -132,7 +136,8 @@ export default function Home() {
         <BrandMark />
 
         <nav aria-label="Navegación principal" className="desktop-nav">
-          <a href="#soluciones">Soluciones</a>
+          <a href="/soluciones">Soluciones</a>
+          <a href="/servicios">Servicios</a>
           <a href="#proyectos">Proyectos</a>
           <a href="#nosotros">Nosotros</a>
         </nav>
@@ -153,7 +158,8 @@ export default function Home() {
             <span />
           </summary>
           <nav aria-label="Navegación móvil">
-            <a href="#soluciones">Soluciones</a>
+            <a href="/soluciones">Soluciones</a>
+            <a href="/servicios">Servicios</a>
             <a href="#proyectos">Proyectos</a>
             <a href="#nosotros">Nosotros</a>
             <a href="#contacto">Hablemos</a>
@@ -249,16 +255,18 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a
-                href={whatsappLink}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
+              <a href={item.href}>
                 Explorar solución
                 <ArrowUpRight size={16} />
               </a>
             </article>
           ))}
+        </div>
+        <div className="services-overview-link">
+          <a className="text-link" href="/servicios">
+            Ver servicios específicos
+            <ArrowUpRight size={16} />
+          </a>
         </div>
       </section>
 
@@ -430,7 +438,9 @@ export default function Home() {
           Soluciones para la imagen, el espacio y la operación de tu empresa.
         </p>
         <div className="footer-links">
-          <a href="#soluciones">Soluciones</a>
+          <a href="/soluciones">Soluciones</a>
+          <a href="/servicios">Servicios</a>
+          <a href="/usme">Usme</a>
           <a href="#proyectos">Proyectos</a>
           <a href="#nosotros">Nosotros</a>
           <a
