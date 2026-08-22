@@ -14,6 +14,14 @@
   <url><loc>https://dixoy.co/servicios/adecuacion-de-espacios</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://dixoy.co/servicios/control-de-acceso</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://dixoy.co/servicios/soluciones-digitales</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://dixoy.co/proyectos</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://dixoy.co/proyectos/privacidad-visual-oficinas</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dixoy.co/proyectos/ambientacion-punto-de-venta</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dixoy.co/proyectos/textil-corporativo</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dixoy.co/proyectos/mantenimiento-equipos</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dixoy.co/proyectos/integracion-equipo-audiovisual</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dixoy.co/proyectos/credenciales-eventos</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dixoy.co/proyectos/aviso-comercial-gran-formato</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://dixoy.co/usme</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://dixoy.co/bogota</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
 </urlset>
