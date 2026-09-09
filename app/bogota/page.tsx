@@ -6,12 +6,12 @@ import styles from "../localVisual.module.css";
 export const metadata: Metadata = {
   title: "DIXOY en Bogotá | Soluciones para empresas",
   description:
-    "Diseño, impresión, gran formato, adecuación de espacios, tecnología, control de acceso y soluciones personalizadas para empresas en Bogotá.",
+    "Diseño, impresión, producción multimedia, gran formato, adecuación de espacios, tecnología, control de acceso y soluciones personalizadas para empresas en Bogotá.",
   alternates: { canonical: "/bogota" },
   openGraph: {
     title: "DIXOY en Bogotá | Soluciones para empresas",
     description:
-      "Un solo aliado para conectar marca, espacios, tecnología y soluciones personalizadas para empresas en Bogotá.",
+      "Un solo aliado para conectar marca, multimedia, espacios, tecnología y soluciones personalizadas para empresas en Bogotá.",
     images: ["/og-dixoy.png"],
     locale: "es_CO",
     siteName: "DIXOY",
@@ -29,6 +29,7 @@ const services = [
   ["Impresión y gran formato", "/servicios/impresion-gran-formato", "Producción gráfica para oficinas, puntos de venta, eventos y comunicación comercial."],
   ["Avisos y señalización", "/servicios/avisos-y-senalizacion", "Visibilidad, orientación y gráfica aplicada para espacios interiores y exteriores."],
   ["Material POP", "/servicios/material-pop", "Piezas para exhibición, activaciones, campañas y comunicación en punto de venta."],
+  ["Producción multimedia", "/soluciones/multimedia", "Video, fotografía, reels, podcast, cámaras, streaming, eventos y postproducción."],
   ["Adecuación de espacios", "/servicios/adecuacion-de-espacios", "Intervenciones que conectan funcionalidad, imagen, producción e instalación."],
   ["Control de acceso", "/servicios/control-de-acceso", "Tecnología para administrar ingresos y reforzar la seguridad de espacios empresariales."],
   ["Soluciones digitales", "/servicios/soluciones-digitales", "Web, herramientas e integraciones para procesos reales de la empresa."],
@@ -56,7 +57,7 @@ export default function BogotaPage() {
             <p className={styles.eyebrow}>DIXOY · Bogotá</p>
             <h1>Soluciones para empresas que necesitan <span>hacer que las cosas pasen.</span></h1>
             <p className={styles.lead}>
-              Conectamos diseño, producción, espacios y tecnología para resolver necesidades empresariales en Bogotá sin repartir el proyecto entre demasiados proveedores.
+              Conectamos diseño, producción, multimedia, espacios y tecnología para resolver necesidades empresariales en Bogotá sin repartir el proyecto entre demasiados proveedores.
             </p>
             <div className={styles.actions}>
               <a className={styles.primary} href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablar de mi proyecto</a>
@@ -73,7 +74,7 @@ export default function BogotaPage() {
         </div>
         <div className={styles.trustStrip}>
           <article><strong>Una sola conversación</strong><p>Partimos del objetivo y conectamos las capacidades que realmente hacen falta.</p></article>
-          <article><strong>De idea a ejecución</strong><p>Podemos diseñar, producir, suministrar, instalar o coordinar según el proyecto.</p></article>
+          <article><strong>De idea a ejecución</strong><p>Podemos diseñar, producir, grabar, suministrar, instalar o coordinar según el proyecto.</p></article>
           <article><strong>Bogotá y proyectos en Colombia</strong><p>Atendemos necesidades locales y proyectos que requieren coordinación más amplia.</p></article>
         </div>
       </section>
@@ -84,7 +85,7 @@ export default function BogotaPage() {
             <p className={styles.sectionKicker}>Servicios para empresas en Bogotá</p>
             <h2>Entra por una necesidad concreta. <span>Conectamos lo demás si hace falta.</span></h2>
           </div>
-          <p>Un aviso puede necesitar diseño e instalación. Un espacio puede necesitar gráfica, mobiliario y tecnología. Por eso organizamos el proyecto alrededor del objetivo, no de un catálogo cerrado.</p>
+          <p>Un aviso puede necesitar diseño e instalación. Un evento puede necesitar cámaras, streaming y contenido. Un espacio puede necesitar gráfica, mobiliario y tecnología. Por eso organizamos el proyecto alrededor del objetivo, no de un catálogo cerrado.</p>
         </div>
         <div className={styles.serviceGrid}>
           {services.map(([title, href, text], index) => (
@@ -99,7 +100,7 @@ export default function BogotaPage() {
       <section className={styles.darkSection}>
         <div className={styles.sectionHead}>
           <div><p className={styles.sectionKicker}>Aplicaciones reales</p><h2>La capacidad se entiende mejor <span>cuando se ve ejecutada.</span></h2></div>
-          <p>Casos donde DIXOY conectó producción, espacios, imagen o tecnología para resolver una necesidad concreta.</p>
+          <p>Casos donde DIXOY conectó producción, espacios, imagen, multimedia o tecnología para resolver una necesidad concreta.</p>
         </div>
         <div className={styles.projectGrid}>
           <Link className={styles.projectCard} href="/proyectos/ambientacion-punto-de-venta">
@@ -110,9 +111,9 @@ export default function BogotaPage() {
             <div className={styles.projectImage}><Image alt="Privacidad visual para oficinas" fill sizes="(max-width: 900px) 100vw, 27vw" src="/media/projects/corporate-spaces/office-overview.webp" /></div>
             <div className={styles.projectCopy}><span>Espacios corporativos</span><h3>Privacidad visual para oficinas</h3><p>Una solución funcional integrada al lenguaje del espacio.</p></div>
           </Link>
-          <Link className={styles.projectCard} href="/proyectos/aviso-comercial-gran-formato">
-            <div className={styles.projectImage}><Image alt="Aviso comercial de gran formato" fill sizes="(max-width: 900px) 100vw, 27vw" src="/images/portfolio/optimized/project-15.webp" /></div>
-            <div className={styles.projectCopy}><span>Visibilidad exterior</span><h3>Aviso comercial</h3><p>Producción visual a gran escala con intención de marca.</p></div>
+          <Link className={styles.projectCard} href="/proyectos/integracion-equipo-audiovisual">
+            <div className={styles.projectImage}><Image alt="Equipo audiovisual integrado por DIXOY" fill sizes="(max-width: 900px) 100vw, 27vw" src="/images/portfolio/optimized/project-10.webp" /></div>
+            <div className={styles.projectCopy}><span>Multimedia + tecnología</span><h3>Integración audiovisual</h3><p>Equipo preparado para registro, producción y operación en campo.</p></div>
           </Link>
         </div>
       </section>
@@ -121,12 +122,12 @@ export default function BogotaPage() {
         <div className={styles.localCopy}>
           <p className={styles.sectionKicker}>Cómo trabajamos en Bogotá</p>
           <h2>No vendemos piezas aisladas. <span>Organizamos una solución.</span></h2>
-          <p>Podemos atender algo puntual o asumir un alcance más amplio. Primero entendemos el objetivo, después definimos qué debe diseñarse, producirse, instalarse o integrarse para llegar a un resultado coherente.</p>
+          <p>Podemos atender algo puntual o asumir un alcance más amplio. Primero entendemos el objetivo, después definimos qué debe diseñarse, producirse, grabarse, instalarse o integrarse para llegar a un resultado coherente.</p>
         </div>
         <div className={styles.localFacts}>
           <article><strong>01 · Entendemos</strong><p>Objetivo, tiempos, presupuesto, espacio y contexto.</p></article>
-          <article><strong>02 · Conectamos</strong><p>Marca, producción, espacios o tecnología según la necesidad.</p></article>
-          <article><strong>03 · Implementamos</strong><p>Coordinamos entrega, montaje, instalación o puesta en marcha.</p></article>
+          <article><strong>02 · Conectamos</strong><p>Marca, multimedia, producción, espacios o tecnología según la necesidad.</p></article>
+          <article><strong>03 · Implementamos</strong><p>Coordinamos entrega, grabación, montaje, instalación o puesta en marcha.</p></article>
         </div>
       </section>
 
@@ -135,8 +136,8 @@ export default function BogotaPage() {
           <p className={styles.sectionKicker}>Preguntas frecuentes</p>
           <h2>Antes de empezar un proyecto en Bogotá.</h2>
           <div className={styles.faqGrid}>
-            <article><h3>¿DIXOY trabaja solo publicidad?</h3><p>No. La publicidad y la comunicación visual son una parte. También trabajamos espacios, tecnología y soluciones personalizadas.</p></article>
-            <article><h3>¿Pueden encargarse de instalación?</h3><p>Sí, cuando el proyecto lo requiere podemos contemplar montaje, instalación o puesta en marcha dentro del alcance.</p></article>
+            <article><h3>¿DIXOY trabaja solo publicidad?</h3><p>No. La publicidad y la comunicación visual son una parte. También trabajamos multimedia, producción audiovisual, espacios, tecnología y soluciones personalizadas.</p></article>
+            <article><h3>¿Pueden encargarse de instalación o producción?</h3><p>Sí. Según el proyecto podemos contemplar grabación, producción, montaje, instalación o puesta en marcha dentro del alcance.</p></article>
             <article><h3>¿Puedo cotizar solo un servicio?</h3><p>Sí. Puedes llegar por una necesidad puntual y solo conectamos otras áreas si realmente aportan al proyecto.</p></article>
             <article><h3>¿Trabajan con empresas pequeñas?</h3><p>Sí. Atendemos negocios, emprendimientos y empresas según el alcance y la necesidad concreta.</p></article>
           </div>
