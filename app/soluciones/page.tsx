@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../hubVisual.module.css";
+import central from "../multimediaFeature.module.css";
 
 export const metadata: Metadata = {
   title: "Soluciones para empresas | DIXOY",
   description:
-    "Conoce las cuatro áreas con las que DIXOY conecta marca, espacios, tecnología y soluciones personalizadas para empresas.",
+    "Conoce las cinco áreas con las que DIXOY conecta marca, espacios, tecnología, multimedia y soluciones personalizadas para empresas.",
   alternates: { canonical: "/soluciones" },
 };
 
@@ -71,7 +72,7 @@ export default function SolutionsPage() {
             <p className={styles.eyebrow}><span />Cómo ayudamos</p>
             <h1>Distintas capacidades. <em>Una sola forma de resolver.</em></h1>
             <p className={styles.lead}>
-              DIXOY conecta diseño, producción, espacios y tecnología para que una necesidad no termine repartida entre varios proveedores. Entendemos el objetivo y coordinamos la solución completa.
+              DIXOY conecta diseño, producción, multimedia, espacios y tecnología para que una necesidad no termine repartida entre varios proveedores. Entendemos el objetivo y coordinamos la solución completa.
             </p>
             <div className={styles.actions}>
               <Link className={styles.primary} href="/#contacto">Cuéntanos qué necesitas</Link>
@@ -102,7 +103,7 @@ export default function SolutionsPage() {
 
       <section className={styles.section}>
         <div className={styles.sectionHead}>
-          <div><p className={styles.sectionKicker}>Cuatro áreas</p><h2>No son negocios separados. <span>Son capacidades que se conectan.</span></h2></div>
+          <div><p className={styles.sectionKicker}>Cinco áreas</p><h2>No son negocios separados. <span>Son capacidades que se conectan.</span></h2></div>
           <p>Cada área puede resolver una necesidad puntual o convertirse en parte de un proyecto integral. La diferencia está en poder coordinarlo dentro de una misma visión.</p>
         </div>
 
@@ -120,6 +121,20 @@ export default function SolutionsPage() {
             </Link>
           ))}
         </div>
+
+        <Link className={central.feature} href="/soluciones/multimedia">
+          <div className={central.featureCopy}>
+            <p className={central.featureEyebrow}>05 · Multimedia</p>
+            <h3>Video, contenido y producción en vivo como una capacidad central de DIXOY.</h3>
+            <p className={central.featureText}>Grabación, fotografía, reels, podcast, entrevistas, cámaras, streaming, cobertura de eventos, edición y postproducción dentro de una misma línea de trabajo.</p>
+            <div className={central.chips}><span>Video</span><span>Fotografía</span><span>Podcast</span><span>Streaming</span><span>Eventos</span><span>Postproducción</span></div>
+            <span className={central.featureAction}>Explorar Multimedia →</span>
+          </div>
+          <div className={central.featureVisual}>
+            <Image alt="Equipo audiovisual preparado por DIXOY" fill sizes="(max-width: 900px) 100vw, 38vw" src="/images/portfolio/optimized/project-10.webp" />
+            <div className={central.featureLabel}><span>Contenido + técnica</span><strong>De la cámara a la entrega final.</strong></div>
+          </div>
+        </Link>
       </section>
 
       <section className={styles.projectBand}>
@@ -127,7 +142,7 @@ export default function SolutionsPage() {
           <div className={styles.projectCopy}>
             <p className={styles.sectionKicker}>Una sola visión</p>
             <h2>El resultado mejora cuando las decisiones se conectan desde el principio.</h2>
-            <p>Un aviso puede necesitar diseño. Un espacio puede necesitar gráfica. Un montaje puede necesitar tecnología. Por eso trabajamos por objetivo y no por departamentos aislados.</p>
+            <p>Un aviso puede necesitar diseño. Un evento puede necesitar cámaras y streaming. Un espacio puede necesitar gráfica. Un montaje puede necesitar tecnología. Por eso trabajamos por objetivo y no por departamentos aislados.</p>
             <Link href="/proyectos">Ver proyectos reales</Link>
           </div>
           <div className={styles.projectImages}>
