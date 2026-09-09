@@ -25,7 +25,7 @@ const organizationSchema = {
   email: "somos@dixoy.co",
   telephone: "+573118072144",
   description:
-    "DIXOY integra diseño, producción, espacios, tecnología y soluciones personalizadas para ayudar a empresas a avanzar.",
+    "DIXOY integra diseño, producción, multimedia, espacios, tecnología y soluciones personalizadas para ayudar a empresas a avanzar.",
   areaServed: [
     {
       "@type": "City",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   applicationName: "DIXOY",
   title: "DIXOY | Soluciones para empresas en Bogotá",
   description:
-    "Diseño, impresión, espacios, tecnología y soluciones personalizadas para empresas. Un solo aliado para llevar tus ideas hasta la implementación.",
+    "Diseño, impresión, producción multimedia, espacios, tecnología y soluciones personalizadas para empresas. Un solo aliado para llevar tus ideas hasta la implementación.",
   alternates: {
     canonical: "/",
   },
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "DIXOY | Soluciones para empresas en Bogotá",
     description:
-      "Integramos marca, espacios, tecnología y soluciones personalizadas para hacer avanzar tu empresa.",
+      "Integramos marca, multimedia, espacios, tecnología y soluciones personalizadas para hacer avanzar tu empresa.",
     images: [
       {
         alt: "DIXOY, soluciones para empresas",
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DIXOY | Soluciones para empresas en Bogotá",
     description:
-      "Diseño, impresión, espacios, tecnología y soluciones personalizadas con un solo aliado.",
+      "Diseño, impresión, multimedia, espacios, tecnología y soluciones personalizadas con un solo aliado.",
     images: ["/og-dixoy.png"],
   },
   icons: {
