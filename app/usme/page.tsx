@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./usme.module.css";
+import styles from "../localVisual.module.css";
 
 export const metadata: Metadata = {
   title: "DIXOY en Usme | Soluciones para empresas y negocios",
@@ -20,155 +20,140 @@ export const metadata: Metadata = {
   },
 };
 
-const whatsappMessage = encodeURIComponent(
+const whatsappLink = `https://wa.me/573118072144?text=${encodeURIComponent(
   "Hola DIXOY, estoy en Usme y quiero cotizar una solución para mi negocio o empresa.",
-);
-const whatsappLink = `https://wa.me/573118072144?text=${whatsappMessage}`;
+)}`;
 
-const solutions = [
-  {
-    number: "01",
-    title: "Tu marca",
-    href: "/soluciones/marca",
-    text: "Diseño, identidad, impresión, avisos, señalización, material POP y comunicación visual para hacer visible tu negocio.",
-    items: ["Diseño e identidad", "Impresión y gran formato", "Avisos, POP y señalización"],
-  },
-  {
-    number: "02",
-    title: "Tu espacio",
-    href: "/soluciones/espacios",
-    text: "Adecuamos y transformamos espacios comerciales y corporativos para que funcionen mejor y representen tu marca.",
-    items: ["Adecuaciones locativas", "Ambientación y exhibición", "Stands, mobiliario y montajes"],
-  },
-  {
-    number: "03",
-    title: "Tecnología",
-    href: "/soluciones/tecnologia",
-    text: "Implementamos tecnología útil para organizar, conectar y proteger la operación de tu empresa.",
-    items: ["Soporte e infraestructura", "Redes y control de acceso", "Web y soluciones digitales"],
-  },
-  {
-    number: "04",
-    title: "Personalizado",
-    href: "/soluciones/personalizado",
-    text: "Desarrollamos productos y soluciones especiales cuando necesitas algo que no se resuelve con una opción estándar.",
-    items: ["Textiles corporativos", "Promocionales", "Producciones a medida"],
-  },
-];
-
-const localServices = [
-  ["Diseño de marca", "/servicios/diseno-de-marca"],
-  ["Impresión y gran formato", "/servicios/impresion-gran-formato"],
-  ["Avisos y señalización", "/servicios/avisos-y-senalizacion"],
-  ["Material POP", "/servicios/material-pop"],
-  ["Adecuación de espacios", "/servicios/adecuacion-de-espacios"],
-  ["Control de acceso", "/servicios/control-de-acceso"],
-  ["Soluciones digitales", "/servicios/soluciones-digitales"],
+const services = [
+  ["Diseño de marca", "/servicios/diseno-de-marca", "Identidad y piezas visuales para negocios que quieren presentarse mejor."],
+  ["Impresión y gran formato", "/servicios/impresion-gran-formato", "Volantes, piezas comerciales, vinilos, pendones y producción gráfica de mayor escala."],
+  ["Avisos y señalización", "/servicios/avisos-y-senalizacion", "Avisos, señalización y gráfica aplicada para hacer visible y ordenar mejor un espacio."],
+  ["Material POP", "/servicios/material-pop", "Piezas para campañas, exhibición, activaciones y comunicación en punto de venta."],
+  ["Adecuación de espacios", "/servicios/adecuacion-de-espacios", "Mejoras y montajes para locales, oficinas y espacios de atención."],
+  ["Control de acceso", "/servicios/control-de-acceso", "Tecnología para administrar ingresos y reforzar la seguridad de espacios."],
+  ["Soluciones digitales", "/servicios/soluciones-digitales", "Web y herramientas digitales para organizar, comunicar y atender mejor."],
 ] as const;
 
 export default function UsmePage() {
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <Link aria-label="Ir al inicio de DIXOY" className={styles.logo} href="/">
+        <Link aria-label="DIXOY, inicio" className={styles.logo} href="/">
           <Image alt="DIXOY" height={255} priority src="/logos/logo-dixoy-horizontal.svg" unoptimized width={986} />
         </Link>
-        <nav aria-label="Navegación de DIXOY en Usme">
+        <nav aria-label="Navegación principal" className={styles.nav}>
           <Link href="/soluciones">Soluciones</Link>
           <Link href="/servicios">Servicios</Link>
+          <Link href="/proyectos">Proyectos</Link>
           <Link href="/bogota">Bogotá</Link>
         </nav>
-        <a className={styles.headerCta} href={whatsappLink} rel="noopener noreferrer" target="_blank">Cotizar</a>
+        <a className={styles.headerCta} href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablemos</a>
       </header>
 
-      <section className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <p className={styles.kicker}>DIXOY en Usme · Bogotá</p>
-          <h1>Soluciones para hacer avanzar <span>tu negocio.</span></h1>
-          <p className={styles.lead}>
-            Desde Usme acompañamos empresas, comercios y emprendedores con diseño, producción, adecuación de espacios, tecnología y soluciones personalizadas.
-          </p>
-          <div className={styles.actions}>
-            <a className={styles.primary} href={whatsappLink} rel="noopener noreferrer" target="_blank">Cuéntanos qué necesitas</a>
-            <a className={styles.secondary} href="#soluciones">Ver soluciones</a>
+      <section className={styles.heroShell}>
+        <div className={styles.hero}>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>DIXOY · Usme, Bogotá</p>
+            <h1>Una empresa local también merece una solución <span>bien pensada.</span></h1>
+            <p className={styles.lead}>
+              Desde Usme acompañamos negocios, emprendimientos y empresas con diseño, impresión, avisos, espacios, tecnología y producción personalizada, con atención cercana y capacidad para ejecutar más allá de una sola necesidad.
+            </p>
+            <div className={styles.actions}>
+              <a className={styles.primary} href={whatsappLink} rel="noopener noreferrer" target="_blank">Cotizar en Usme</a>
+              <a className={styles.secondary} href="#servicios">Ver servicios</a>
+            </div>
+          </div>
+          <div className={styles.heroVisual}>
+            <Image alt="Aviso comercial producido por DIXOY" fill priority sizes="(max-width: 900px) 100vw, 48vw" src="/images/portfolio/optimized/project-15.webp" />
+            <div className={styles.heroOverlay}>
+              <span>Cercanía + ejecución</span>
+              <strong>Atención desde Usme para proyectos que necesitan diseño, producción o implementación.</strong>
+            </div>
           </div>
         </div>
-        <aside className={styles.heroPanel}>
-          <span>Un solo aliado</span>
-          <strong>De la idea a la implementación.</strong>
-          <p>No tienes que coordinar varios proveedores. Entendemos la necesidad, proponemos la solución y acompañamos la ejecución.</p>
-        </aside>
-      </section>
-
-      <section className={styles.intro}>
-        <p className={styles.kicker}>Más que publicidad</p>
-        <div>
-          <h2>Una empresa puede necesitar muchas cosas. Nosotros conectamos las piezas.</h2>
-          <p>
-            Puedes llegar a DIXOY buscando un aviso, una impresión, uniformes, una página web, un control de acceso o una adecuación. Nuestro trabajo es entender el objetivo completo y ayudarte a resolverlo de forma coherente.
-          </p>
+        <div className={styles.trustStrip}>
+          <article><strong>Atención con cita previa</strong><p>Coordinamos cada visita para entender mejor la necesidad y aprovechar el tiempo.</p></article>
+          <article><strong>Una solución, no varios proveedores</strong><p>Podemos conectar diseño, producción, montaje y tecnología según el proyecto.</p></article>
+          <article><strong>Usme, Bogotá y proyectos en Colombia</strong><p>Partimos de una atención local con capacidad para alcances más amplios.</p></article>
         </div>
       </section>
 
-      <section className={styles.solutions} id="soluciones">
-        {solutions.map((solution) => (
-          <article className={styles.card} key={solution.title}>
-            <span className={styles.number}>{solution.number}</span>
-            <h2>{solution.title}</h2>
-            <p>{solution.text}</p>
-            <ul>{solution.items.map((item) => <li key={item}>{item}</li>)}</ul>
-            <Link href={solution.href}>Explorar esta solución →</Link>
-          </article>
-        ))}
-      </section>
-
-      <section className={styles.localSection}>
-        <div>
-          <p className={styles.kicker}>Servicios para empresas en Usme</p>
-          <h2>Entra por lo que necesitas hoy. DIXOY conecta lo demás cuando hace falta.</h2>
+      <section className={styles.section} id="servicios">
+        <div className={styles.sectionHead}>
+          <div>
+            <p className={styles.sectionKicker}>Servicios para negocios y empresas en Usme</p>
+            <h2>Lo que necesitas hoy puede ser <span>la entrada a algo más completo.</span></h2>
+          </div>
+          <p>Puedes llegar buscando una impresión, un aviso, un uniforme, una adecuación o una solución digital. Nosotros te ayudamos a organizar el alcance sin hacer el proyecto más complejo de lo necesario.</p>
         </div>
-        <div className={styles.localGrid}>
-          {localServices.map(([label, href]) => (
-            <article key={href}>
-              <strong>{label}</strong>
-              <p><Link href={href}>Conocer el servicio →</Link></p>
-            </article>
+        <div className={styles.serviceGrid}>
+          {services.map(([title, href, text], index) => (
+            <Link className={styles.serviceCard} href={href} key={href}>
+              <span className={styles.serviceNumber}>{String(index + 1).padStart(2, "0")}</span>
+              <div><h3>{title}</h3><p>{text}</p><small>Conocer el servicio →</small></div>
+            </Link>
           ))}
         </div>
       </section>
 
-      <section className={styles.localSection} id="como-trabajamos">
-        <div>
-          <p className={styles.kicker}>Cerca para resolver mejor</p>
-          <h2>Atención desde Usme, capacidad para proyectos en Bogotá y Colombia.</h2>
+      <section className={styles.darkSection}>
+        <div className={styles.sectionHead}>
+          <div><p className={styles.sectionKicker}>Trabajo que sí se puede mostrar</p><h2>Diseño y producción que terminan <span>en algo real.</span></h2></div>
+          <p>Una parte importante de DIXOY es convertir ideas y archivos en piezas, espacios y materiales listos para usarse.</p>
         </div>
-        <div className={styles.localGrid}>
-          <article><strong>01 · Entendemos</strong><p>Nos cuentas qué necesitas, para cuándo y qué quieres lograr.</p></article>
-          <article><strong>02 · Proponemos</strong><p>Organizamos materiales, diseño, tecnología o producción según el proyecto.</p></article>
-          <article><strong>03 · Ejecutamos</strong><p>Coordinamos la producción, instalación o entrega de la solución.</p></article>
+        <div className={styles.projectGrid}>
+          <Link className={styles.projectCard} href="/proyectos/aviso-comercial-gran-formato">
+            <div className={styles.projectImage}><Image alt="Aviso comercial de gran formato" fill sizes="(max-width: 900px) 100vw, 45vw" src="/images/portfolio/optimized/project-15.webp" /></div>
+            <div className={styles.projectCopy}><span>Visibilidad comercial</span><h3>Aviso comercial de gran formato</h3><p>Producción visual pensada para ser clara, visible y ejecutable.</p></div>
+          </Link>
+          <Link className={styles.projectCard} href="/proyectos/textil-corporativo">
+            <div className={styles.projectImage}><Image alt="Textil corporativo personalizado" fill sizes="(max-width: 900px) 100vw, 27vw" src="/media/projects/corporate-textile/jacket-team.webp" /></div>
+            <div className={styles.projectCopy}><span>Identidad aplicada</span><h3>Textil corporativo</h3><p>Marca llevada a prendas y equipos de trabajo.</p></div>
+          </Link>
+          <Link className={styles.projectCard} href="/proyectos/credenciales-eventos">
+            <div className={styles.projectImage}><Image alt="Credenciales para eventos" fill sizes="(max-width: 900px) 100vw, 27vw" src="/images/portfolio/optimized/project-13.webp" /></div>
+            <div className={styles.projectCopy}><span>Producción corporativa</span><h3>Credenciales para eventos</h3><p>Diseño y producción listos para apoyar una operación real.</p></div>
+          </Link>
         </div>
       </section>
 
-      <section className={styles.cta}>
-        <div>
-          <p className={styles.kicker}>¿Tienes algo por resolver?</p>
-          <h2>No necesitas saber qué proveedor buscar. Cuéntanos el problema.</h2>
-          <p>Te ayudamos a convertirlo en una solución clara y realizable.</p>
+      <section className={styles.localBand}>
+        <div className={styles.localCopy}>
+          <p className={styles.sectionKicker}>Cerca para resolver mejor</p>
+          <h2>Una base local en Usme. <span>Una capacidad que no se queda solo en Usme.</span></h2>
+          <p>La cercanía facilita reuniones, visitas y coordinación cuando el proyecto lo necesita. Al mismo tiempo, DIXOY puede producir, instalar o acompañar proyectos en otros puntos de Bogotá y, según el alcance, en otras ciudades.</p>
         </div>
-        <a href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablar con DIXOY</a>
+        <div className={styles.localFacts}>
+          <article><strong>Atención con cita</strong><p>Coordinamos previamente para darte un espacio de atención más útil y enfocado.</p></article>
+          <article><strong>Proyectos puntuales o integrales</strong><p>Podemos resolver una sola necesidad o conectar varias capacidades.</p></article>
+          <article><strong>Producción + implementación</strong><p>No nos quedamos únicamente en el diseño cuando el proyecto requiere ejecución.</p></article>
+        </div>
+      </section>
+
+      <section className={styles.faq}>
+        <div className={styles.faqInner}>
+          <p className={styles.sectionKicker}>Preguntas frecuentes</p>
+          <h2>Antes de cotizar con DIXOY en Usme.</h2>
+          <div className={styles.faqGrid}>
+            <article><h3>¿Atienden negocios pequeños?</h3><p>Sí. Podemos trabajar con emprendimientos, comercios y empresas según la necesidad y el alcance del proyecto.</p></article>
+            <article><h3>¿Puedo solicitar una visita?</h3><p>Sí, cuando el proyecto lo requiere podemos coordinar una visita o reunión previa según disponibilidad.</p></article>
+            <article><h3>¿Hacen solo impresión y avisos?</h3><p>No. También trabajamos adecuación de espacios, tecnología, soluciones digitales y producción personalizada.</p></article>
+            <article><h3>¿Trabajan fuera de Usme?</h3><p>Sí. Atendemos proyectos en Bogotá y podemos evaluar alcances en otras ciudades según el tipo de trabajo.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.closing}>
+        <div className={styles.closingInner}>
+          <div><span>¿Tienes algo por resolver?</span><h2>Cuéntanos la necesidad. Nosotros te ayudamos a aterrizarla.</h2><p>Puede ser una pieza puntual o un proyecto que conecte varias áreas de DIXOY.</p></div>
+          <a href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablar con DIXOY</a>
+        </div>
       </section>
 
       <footer className={styles.footer}>
-        <Link aria-label="DIXOY" className={styles.logo} href="/">
-          <Image alt="DIXOY" height={255} src="/logos/logo-dixoy-horizontal.svg" unoptimized width={986} />
-        </Link>
-        <p>Soluciones para la imagen, el espacio y la operación de tu empresa.</p>
-        <div>
-          <Link href="/">Inicio</Link>
-          <Link href="/servicios">Servicios</Link>
-          <Link href="/bogota">Bogotá</Link>
-          <a href={whatsappLink} rel="noopener noreferrer" target="_blank">Contacto</a>
-        </div>
+        <Link aria-label="DIXOY" className={styles.logo} href="/"><Image alt="DIXOY" height={255} src="/logos/logo-dixoy-horizontal.svg" unoptimized width={986} /></Link>
+        <p>Soluciones para empresas y negocios en Usme.</p>
+        <nav><Link href="/soluciones">Soluciones</Link><Link href="/servicios">Servicios</Link><Link href="/proyectos">Proyectos</Link><Link href="/bogota">Bogotá</Link></nav>
       </footer>
     </main>
   );
