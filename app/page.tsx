@@ -1,6 +1,7 @@
 import Image from "next/image";
 import PortfolioGallery from "./PortfolioGallery";
 import ProjectsCarousel from "./ProjectsCarousel";
+import central from "./multimediaFeature.module.css";
 
 const ArrowUpRight = ({ size = 18 }: { size?: number }) => (
   <svg
@@ -179,9 +180,9 @@ export default function Home() {
               <em>avance.</em>
             </h1>
             <p className="hero-description">
-              Integramos diseño, adecuación de espacios, tecnología y soluciones
-              empresariales para construir una operación más sólida, coherente
-              y profesional.
+              Integramos diseño, producción multimedia, adecuación de espacios,
+              tecnología y soluciones empresariales para construir una operación
+              más sólida, coherente y profesional.
             </p>
             <div className="hero-actions">
               <a
@@ -220,6 +221,14 @@ export default function Home() {
             </article>
           ))}
         </section>
+        <a className={central.ribbon} href="/soluciones/multimedia">
+          <span className={central.ribbonNumber}>05</span>
+          <div>
+            <strong>Multimedia</strong>
+            <p>Video, fotografía, reels, podcast, cámaras, streaming y producción en vivo.</p>
+          </div>
+          <span className={central.ribbonLink}>Explorar multimedia <ArrowUpRight size={15} /></span>
+        </a>
       </div>
 
       <section className="services-section section-pad">
@@ -227,7 +236,7 @@ export default function Home() {
           <div>
             <p className="section-kicker">Lo que hacemos</p>
             <h2>
-              Cuatro áreas. <br />
+              Cinco áreas. <br />
               <span>Una misma visión.</span>
             </h2>
           </div>
@@ -262,6 +271,25 @@ export default function Home() {
             </article>
           ))}
         </div>
+
+        <a className={central.feature} href="/soluciones/multimedia">
+          <div className={central.featureCopy}>
+            <p className={central.featureEyebrow}>05 · Multimedia</p>
+            <h3>Contenido, cámaras y producción en vivo dentro del mismo ecosistema DIXOY.</h3>
+            <p className={central.featureText}>
+              Producimos video, fotografía y contenido para redes; grabamos entrevistas y podcast; operamos cámaras, streaming y producción técnica para eventos; y llevamos cada pieza hasta edición y postproducción.
+            </p>
+            <div className={central.chips}>
+              <span>Video y reels</span><span>Fotografía</span><span>Podcast</span><span>Streaming</span><span>Eventos</span><span>Postproducción</span>
+            </div>
+            <span className={central.featureAction}>Explorar Multimedia <ArrowUpRight size={16} /></span>
+          </div>
+          <div className={central.featureVisual}>
+            <Image alt="Equipo audiovisual preparado por DIXOY" fill sizes="(max-width: 900px) 100vw, 38vw" src="/images/portfolio/optimized/project-10.webp" />
+            <div className={central.featureLabel}><span>Producción multimedia</span><strong>De la grabación a la entrega final.</strong></div>
+          </div>
+        </a>
+
         <div className="services-overview-link">
           <a className="text-link" href="/servicios">
             Ver servicios específicos
@@ -435,7 +463,7 @@ export default function Home() {
       <footer>
         <BrandMark />
         <p>
-          Soluciones para la imagen, el espacio y la operación de tu empresa.
+          Soluciones para la imagen, el contenido, el espacio y la operación de tu empresa.
         </p>
         <div className="footer-links">
           <a href="/soluciones">Soluciones</a>
