@@ -6,7 +6,7 @@ import styles from "../hubVisual.module.css";
 export const metadata: Metadata = {
   title: "Servicios para empresas en Bogotá | DIXOY",
   description:
-    "Diseño de marca, impresión, avisos, material POP, adecuación de espacios, control de acceso y soluciones digitales para empresas en Bogotá.",
+    "Diseño de marca, impresión, avisos, material POP, producción multimedia, adecuación de espacios, control de acceso y soluciones digitales para empresas en Bogotá.",
   alternates: { canonical: "/servicios" },
 };
 
@@ -15,6 +15,7 @@ const services = [
   { title: "Impresión y gran formato", href: "/servicios/impresion-gran-formato", area: "Tu marca", description: "Producción gráfica para espacios, campañas, puntos de venta y comunicación corporativa." },
   { title: "Avisos y señalización", href: "/servicios/avisos-y-senalizacion", area: "Marca + espacio", description: "Elementos para identificar, orientar y hacer visible una empresa dentro y fuera de sus espacios." },
   { title: "Material POP", href: "/servicios/material-pop", area: "Tu marca", description: "Piezas impresas, exhibición y producción promocional para campañas, activaciones y puntos de venta." },
+  { title: "Producción multimedia", href: "/soluciones/multimedia", area: "Multimedia", description: "Video, fotografía, reels, podcast, entrevistas, streaming, cámaras, producción en vivo y postproducción." },
   { title: "Adecuación de espacios", href: "/servicios/adecuacion-de-espacios", area: "Tu espacio", description: "Intervenciones y montajes para mejorar cómo funciona y se presenta un espacio comercial o corporativo." },
   { title: "Control de acceso", href: "/servicios/control-de-acceso", area: "Tecnología", description: "Sistemas de ingreso, seguridad y control para oficinas, sedes y espacios empresariales." },
   { title: "Soluciones digitales", href: "/servicios/soluciones-digitales", area: "Tecnología", description: "Web, herramientas e integraciones digitales que ayudan a organizar, conectar y atender mejor la operación." },
@@ -42,7 +43,7 @@ export default function ServicesPage() {
             <p className={styles.eyebrow}><span />Servicios DIXOY</p>
             <h1>Necesidades concretas. <em>Soluciones que pueden crecer contigo.</em></h1>
             <p className={styles.lead}>
-              Puedes llegar por una necesidad puntual: un aviso, una impresión, una adecuación o una herramienta digital. Si el proyecto necesita más, conectamos otras capacidades sin obligarte a coordinar varios proveedores.
+              Puedes llegar por una necesidad puntual: un aviso, una impresión, una producción audiovisual, una adecuación o una herramienta digital. Si el proyecto necesita más, conectamos otras capacidades sin obligarte a coordinar varios proveedores.
             </p>
             <div className={styles.actions}>
               <Link className={styles.primary} href="/#contacto">Cuéntanos qué necesitas</Link>
@@ -56,7 +57,7 @@ export default function ServicesPage() {
               <div className={styles.visualLabel}><span>Servicio + ejecución</span><strong>De una necesidad puntual a una solución completa</strong></div>
             </div>
             <div className={styles.visualSmall}>
-              <Image alt="Adecuación de espacio corporativo" fill sizes="240px" src="/media/projects/corporate-spaces/office-overview.webp" />
+              <Image alt="Equipo audiovisual preparado por DIXOY" fill sizes="240px" src="/images/portfolio/optimized/project-10.webp" />
             </div>
             <div className={styles.visualSmall}>
               <Image alt="Textil corporativo personalizado" fill sizes="240px" src="/media/projects/corporate-textile/finished-polos.webp" />
@@ -74,7 +75,7 @@ export default function ServicesPage() {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <div><p className={styles.sectionKicker}>Servicios específicos</p><h2>Una entrada clara para cada necesidad. <span>Sin perder la visión completa.</span></h2></div>
-          <p>Cada servicio responde una búsqueda y un problema concreto. Pero no lo tratamos como una isla: si necesita diseño, producción, instalación o tecnología adicional, podemos integrarlo.</p>
+          <p>Cada servicio responde una búsqueda y un problema concreto. Pero no lo tratamos como una isla: si necesita diseño, multimedia, producción, instalación o tecnología adicional, podemos integrarlo.</p>
         </div>
 
         <div className={styles.serviceGrid}>
@@ -94,12 +95,12 @@ export default function ServicesPage() {
           <div className={styles.projectCopy}>
             <p className={styles.sectionKicker}>Más que un catálogo</p>
             <h2>Un servicio puede ser solo el punto de partida.</h2>
-            <p>Un cliente puede llegar buscando impresión y terminar necesitando instalación. Puede llegar por control de acceso y descubrir una necesidad de infraestructura. Lo importante es resolver bien el objetivo, no encajarlo a la fuerza en una categoría.</p>
+            <p>Un cliente puede llegar buscando impresión y terminar necesitando instalación. Puede llegar por un evento y necesitar cámaras, streaming y contenido posterior. Lo importante es resolver bien el objetivo, no encajarlo a la fuerza en una categoría.</p>
             <Link href="/proyectos">Ver cómo se conectan en proyectos reales</Link>
           </div>
           <div className={styles.projectImages}>
             <div><Image alt="Ambientación de punto de venta" fill sizes="50vw" src="/media/projects/point-of-sale/boru-wide.webp?v=2" /></div>
-            <div><Image alt="Credenciales para eventos" fill sizes="35vw" src="/images/portfolio/optimized/project-13.webp" /></div>
+            <div><Image alt="Equipo audiovisual especializado" fill sizes="35vw" src="/images/portfolio/optimized/project-10.webp" /></div>
           </div>
         </div>
       </section>
