@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../hubVisual.module.css";
+import media from "./multimedia.module.css";
 
 export const metadata: Metadata = {
   title: "Producción multimedia y audiovisual en Bogotá | DIXOY",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     title: "Producción multimedia y audiovisual | DIXOY",
     description:
       "Contenido, grabación, cámaras, streaming, podcast y producción audiovisual para empresas y eventos.",
-    images: ["/og-dixoy.png"],
+    images: ["/media/multimedia/multimedia-interview.webp"],
     locale: "es_CO",
     siteName: "DIXOY",
     type: "website",
@@ -65,14 +66,14 @@ export default function MultimediaPage() {
 
           <div className={styles.heroVisual}>
             <div className={styles.visualMain}>
-              <Image alt="Equipo audiovisual preparado por DIXOY" fill priority sizes="(max-width: 980px) 100vw, 44vw" src="/images/portfolio/optimized/project-10.webp" />
-              <div className={styles.visualLabel}><span>Producción multimedia</span><strong>Cámaras, contenido, streaming y operación técnica</strong></div>
+              <Image alt="Producción de entrevista multicámara realizada por DIXOY" fill priority sizes="(max-width: 980px) 100vw, 44vw" src="/media/multimedia/multimedia-interview.webp" />
+              <div className={styles.visualLabel}><span>Entrevistas + podcast</span><strong>Producción multicámara en un entorno real de grabación</strong></div>
             </div>
             <div className={styles.visualSmall}>
-              <Image alt="Registro en video de un proyecto DIXOY" fill sizes="240px" src="/media/projects/point-of-sale/boru-finished-poster.webp?v=2" />
+              <Image alt="Cobertura audiovisual de evento con cámara en gimbal" fill sizes="240px" src="/media/multimedia/multimedia-event-gimbal.webp" />
             </div>
             <div className={styles.visualSmall}>
-              <Image alt="Registro audiovisual de espacio corporativo" fill sizes="240px" src="/media/projects/corporate-spaces/office-video-poster.webp" />
+              <Image alt="Montaje de producción audiovisual con cámaras, iluminación y monitor" fill sizes="240px" src="/media/multimedia/multimedia-live-studio.webp" />
             </div>
           </div>
         </div>
@@ -102,17 +103,20 @@ export default function MultimediaPage() {
         </div>
       </section>
 
-      <section className={styles.projectBand}>
-        <div className={styles.projectInner}>
-          <div className={styles.projectCopy}>
-            <p className={styles.sectionKicker}>Experiencia técnica + mirada creativa</p>
-            <h2>No se trata solo de tener una cámara.</h2>
-            <p>Una buena producción necesita entender el mensaje, cuidar la imagen, operar bien el equipo y saber qué debe pasar después de grabar. Por eso conectamos registro, producción en vivo y postproducción dentro de una misma lógica.</p>
-            <Link href="/proyectos/integracion-equipo-audiovisual">Ver integración de equipo audiovisual</Link>
+      <section className={media.editorialBand}>
+        <div className={media.editorialInner}>
+          <div>
+            <p className={media.editorialKicker}>Más que operar equipos</p>
+            <h2>La parte técnica importa. <span>La intención detrás de cada toma también.</span></h2>
+            <p>
+              Una producción funciona cuando el mensaje, el encuadre, la operación y la entrega responden al mismo objetivo. Podemos asumir una parte puntual o conectar el proceso completo según el proyecto.
+            </p>
           </div>
-          <div className={styles.projectImages}>
-            <div><Image alt="Equipo audiovisual especializado" fill sizes="50vw" src="/images/portfolio/optimized/project-10.webp" /></div>
-            <div><Image alt="Registro en video realizado por DIXOY" fill sizes="35vw" src="/media/projects/point-of-sale/boru-finished-poster.webp?v=2" /></div>
+          <div className={media.editorialList}>
+            <article className={media.editorialItem}><span>01</span><div><strong>Preproducción y enfoque</strong><p>Definimos qué se necesita grabar, para quién, en qué formato y con qué nivel técnico.</p></div></article>
+            <article className={media.editorialItem}><span>02</span><div><strong>Cámaras y operación</strong><p>Trabajamos con configuraciones fijas, móviles o multicámara según la dinámica del contenido o evento.</p></div></article>
+            <article className={media.editorialItem}><span>03</span><div><strong>Producción en vivo</strong><p>Integramos cámaras, transmisión y soporte técnico cuando el contenido debe suceder en tiempo real.</p></div></article>
+            <article className={media.editorialItem}><span>04</span><div><strong>Edición y adaptación</strong><p>Convertimos el material en piezas listas para redes, presentación, archivo o campañas.</p></div></article>
           </div>
         </div>
       </section>
