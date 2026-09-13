@@ -84,10 +84,10 @@ export default function MultimediaPage() {
             </div>
             <div className={media.heroSideImage}>
               <Image
-                alt="Producción multicámara para entrevista"
+                alt="Detalle técnico de cámara en gimbal durante producción audiovisual"
                 fill
                 sizes="260px"
-                src="/media/multimedia/multimedia-interview.webp"
+                src="/media/multimedia/multimedia-gimbal-detail.webp"
               />
             </div>
           </div>
