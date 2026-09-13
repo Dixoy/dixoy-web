@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Producción multimedia, escenografía y audiovisual | DIXOY",
     description:
       "Contenido, cámaras, streaming, podcast, escenografía y producción técnica para empresas y eventos.",
-    images: ["/media/multimedia/multimedia-home-event.webp"],
+    images: ["/media/multimedia/multimedia-event-gimbal.webp"],
     locale: "es_CO",
     siteName: "DIXOY",
     type: "website",
@@ -74,7 +74,7 @@ export default function MultimediaPage() {
                 fill
                 priority
                 sizes="(max-width: 900px) 100vw, 52vw"
-                src="/media/multimedia/multimedia-home-event.webp"
+                src="/media/multimedia/multimedia-event-gimbal.webp"
               />
               <div className={media.frameCorners} aria-hidden="true" />
               <div className={media.imageCaption}>
@@ -158,26 +158,10 @@ export default function MultimediaPage() {
         </div>
 
         <div className={media.productionRail}>
-          <article>
-            <span>PRE</span>
-            <h3>Preproducción</h3>
-            <p>Objetivo, formato, guion, referencias, recursos y plan técnico.</p>
-          </article>
-          <article>
-            <span>SET</span>
-            <h3>Espacio y escena</h3>
-            <p>Escenografía, gráfica, iluminación, mobiliario y disposición de cámaras.</p>
-          </article>
-          <article>
-            <span>REC</span>
-            <h3>Producción</h3>
-            <p>Grabación, fotografía, operación multicámara, streaming y cobertura.</p>
-          </article>
-          <article>
-            <span>POST</span>
-            <h3>Entrega</h3>
-            <p>Edición, adaptación, piezas cortas, archivos finales y publicación.</p>
-          </article>
+          <article><span>PRE</span><h3>Preproducción</h3><p>Objetivo, formato, guion, referencias, recursos y plan técnico.</p></article>
+          <article><span>SET</span><h3>Espacio y escena</h3><p>Escenografía, gráfica, iluminación, mobiliario y disposición de cámaras.</p></article>
+          <article><span>REC</span><h3>Producción</h3><p>Grabación, fotografía, operación multicámara, streaming y cobertura.</p></article>
+          <article><span>POST</span><h3>Entrega</h3><p>Edición, adaptación, piezas cortas, archivos finales y publicación.</p></article>
         </div>
       </section>
 
