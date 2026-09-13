@@ -171,8 +171,8 @@ export default function MultimediaPage() {
           <div><span>INTERVIEW / PODCAST</span><strong>Formato, set y operación trabajando como una sola producción.</strong></div>
         </div>
         <div className={media.gallerySmall}>
-          <Image alt="Cámara en producción de evento" fill sizes="(max-width: 900px) 100vw, 36vw" src="/media/multimedia/multimedia-event-gimbal.webp" />
-          <div><span>CAMERA / LIVE</span><strong>Producción móvil para eventos y contenidos en vivo.</strong></div>
+          <Image alt="Detalle de cámara preparada para producción audiovisual" fill sizes="(max-width: 900px) 100vw, 36vw" src="/media/multimedia/multimedia-camera-detail.webp" />
+          <div><span>CAMERA / DETAIL</span><strong>Configuración técnica preparada según las necesidades de cada producción.</strong></div>
         </div>
       </section>
 
