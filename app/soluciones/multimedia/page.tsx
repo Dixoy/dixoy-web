@@ -5,15 +5,15 @@ import styles from "../../hubVisual.module.css";
 import media from "./multimedia.module.css";
 
 export const metadata: Metadata = {
-  title: "Producción multimedia y audiovisual en Bogotá | DIXOY",
+  title: "Producción multimedia, escenografía y audiovisual en Bogotá | DIXOY",
   description:
-    "Video, fotografía, reels, podcast, entrevistas, streaming, cámaras, producción en vivo, cobertura y postproducción para empresas y eventos en Bogotá.",
+    "Video, fotografía, reels, podcast, entrevistas, streaming, producción en vivo, escenografía, iluminación y montaje audiovisual para empresas y eventos en Bogotá.",
   alternates: { canonical: "/soluciones/multimedia" },
   openGraph: {
-    title: "Producción multimedia y audiovisual | DIXOY",
+    title: "Producción multimedia, escenografía y audiovisual | DIXOY",
     description:
-      "Contenido, grabación, cámaras, streaming, podcast y producción audiovisual para empresas y eventos.",
-    images: ["/media/multimedia/multimedia-interview.webp"],
+      "Contenido, cámaras, streaming, podcast, escenografía y producción técnica para empresas y eventos.",
+    images: ["/media/multimedia/multimedia-home-event.webp"],
     locale: "es_CO",
     siteName: "DIXOY",
     type: "website",
@@ -25,19 +25,19 @@ const whatsappLink = `https://wa.me/573118072144?text=${encodeURIComponent(
   "Hola DIXOY, quiero cotizar un proyecto multimedia o audiovisual para mi empresa o evento.",
 )}`;
 
-const capabilities = [
-  { title: "Video y contenido para redes", description: "Grabación y edición de reels, videos promocionales, piezas para campañas y contenido pensado para medios digitales." },
-  { title: "Fotografía", description: "Registro de productos, equipos, espacios, eventos y contenido corporativo con una intención visual coherente." },
-  { title: "Podcast, entrevistas y testimonios", description: "Producción de formatos conversacionales y contenidos de mayor profundidad para marcas, equipos y comunidades." },
-  { title: "Streaming y producción en vivo", description: "Operación de cámaras, transmisión, coordinación técnica y soporte audiovisual para contenidos y eventos en directo." },
-  { title: "Cobertura de eventos", description: "Registro audiovisual, cámaras y apoyo de producción para eventos corporativos, institucionales y experiencias en vivo." },
-  { title: "Edición y postproducción", description: "Montaje, corrección, adaptación de formatos, piezas cortas y entrega final lista para publicación o presentación." },
+const services = [
+  ["01", "Video y contenido", "Reels, campañas, videos promocionales, testimonios y piezas pensadas para cada plataforma."],
+  ["02", "Fotografía", "Producto, eventos, equipos, espacios y contenido corporativo con intención visual."],
+  ["03", "Podcast y entrevistas", "Formatos conversacionales, testimoniales y contenidos seriados con producción técnica."],
+  ["04", "Streaming y en vivo", "Operación de cámaras, transmisión, señal, monitoreo y soporte durante el evento."],
+  ["05", "Escenografía y set", "Fondos, mobiliario, gráfica, ambientación e integración visual del espacio donde ocurre la producción."],
+  ["06", "Edición y postproducción", "Montaje, corrección, adaptación de formatos y entregables listos para publicar o presentar."],
 ];
 
 export default function MultimediaPage() {
   return (
-    <main className={styles.page}>
-      <header className={styles.header}>
+    <main className={`${styles.page} ${media.page}`}>
+      <header className={`${styles.header} ${media.header}`}>
         <Link aria-label="DIXOY, inicio" className={styles.logo} href="/">
           <Image alt="DIXOY" height={255} priority src="/logos/logo-dixoy-horizontal.svg" unoptimized width={986} />
         </Link>
@@ -50,92 +50,155 @@ export default function MultimediaPage() {
         <a className={styles.cta} href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablemos →</a>
       </header>
 
-      <section className={styles.heroShell}>
-        <div className={styles.hero}>
-          <div>
-            <p className={styles.eyebrow}><span />05 · Multimedia</p>
-            <h1>Contenido que comunica. <em>Producción que funciona en cámara y en vivo.</em></h1>
-            <p className={styles.lead}>
-              DIXOY conecta grabación, cámaras, fotografía, edición, streaming y producción técnica para crear contenido y acompañar eventos desde la preparación hasta la entrega final.
+      <section className={media.hero}>
+        <div className={media.heroGrid}>
+          <div className={media.heroCopy}>
+            <p className={media.kicker}>05 · Multimedia / DIXOY</p>
+            <h1>
+              No solo grabamos.
+              <span>Diseñamos lo que ocurre frente y detrás de cámara.</span>
+            </h1>
+            <p className={media.heroLead}>
+              Contenido, cámaras, streaming, escenografía, iluminación y producción técnica conectados dentro de un mismo proyecto.
             </p>
-            <div className={styles.actions}>
-              <a className={styles.primary} href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablar de mi producción</a>
-              <Link className={styles.secondary} href="/proyectos/integracion-equipo-audiovisual">Ver experiencia audiovisual</Link>
+            <div className={media.heroActions}>
+              <a href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablar de mi producción</a>
+              <Link href="#espacio">Ver escenografía y espacio</Link>
             </div>
           </div>
 
-          <div className={styles.heroVisual}>
-            <div className={styles.visualMain}>
-              <Image alt="Producción de entrevista multicámara realizada por DIXOY" fill priority sizes="(max-width: 980px) 100vw, 44vw" src="/media/multimedia/multimedia-interview.webp" />
-              <div className={styles.visualLabel}><span>Entrevistas + podcast</span><strong>Producción multicámara en un entorno real de grabación</strong></div>
+          <div className={media.heroVisual}>
+            <div className={media.heroMainImage}>
+              <Image
+                alt="Producción audiovisual en evento"
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 52vw"
+                src="/media/multimedia/multimedia-home-event.webp"
+              />
+              <div className={media.frameCorners} aria-hidden="true" />
+              <div className={media.imageCaption}>
+                <span>LIVE / EVENTOS</span>
+                <strong>Cámara, señal y producción en contexto real.</strong>
+              </div>
             </div>
-            <div className={styles.visualSmall}>
-              <Image alt="Cobertura audiovisual de evento con cámara en gimbal" fill sizes="240px" src="/media/multimedia/multimedia-event-gimbal.webp" />
-            </div>
-            <div className={styles.visualSmall}>
-              <Image alt="Montaje de producción audiovisual con cámaras, iluminación y monitor" fill sizes="240px" src="/media/multimedia/multimedia-live-studio.webp" />
+            <div className={media.heroSideImage}>
+              <Image
+                alt="Producción multicámara para entrevista"
+                fill
+                sizes="260px"
+                src="/media/multimedia/multimedia-interview.webp"
+              />
             </div>
           </div>
         </div>
 
-        <div className={styles.proofStrip}>
-          <article><span>01</span><strong>Preparamos</strong><p>Definimos formato, objetivo, recursos y necesidades técnicas de la producción.</p></article>
-          <article><span>02</span><strong>Producimos</strong><p>Grabamos, operamos cámaras, iluminación, sonido o transmisión según el alcance.</p></article>
-          <article><span>03</span><strong>Entregamos</strong><p>Editamos, adaptamos y dejamos el contenido listo para publicar, presentar o archivar.</p></article>
+        <div className={media.signalBar}>
+          <span>CAPTURE</span><i />
+          <span>SPACE</span><i />
+          <span>LIGHT</span><i />
+          <span>LIVE</span><i />
+          <span>POST</span>
         </div>
       </section>
 
-      <section className={styles.section}>
-        <div className={styles.sectionHead}>
-          <div><p className={styles.sectionKicker}>Producción multimedia</p><h2>De un reel a una transmisión en vivo. <span>La producción se adapta al objetivo.</span></h2></div>
-          <p>No trabajamos un único formato. Podemos entrar por una grabación puntual, una serie de contenidos, un podcast, una cobertura o una producción técnica más completa.</p>
+      <section className={media.intro}>
+        <div>
+          <p className={media.sectionKicker}>Una línea completa</p>
+          <h2>La cámara es solo una parte del sistema.</h2>
         </div>
-
-        <div className={styles.serviceGrid}>
-          {capabilities.map((capability) => (
-            <article className={styles.serviceCard} key={capability.title}>
-              <small>Multimedia</small>
-              <h3>{capability.title}</h3>
-              <p>{capability.description}</p>
-              <span>Producción según alcance</span>
-            </article>
-          ))}
-        </div>
+        <p>
+          Una buena producción también depende del espacio, la luz, la gráfica, el sonido, el flujo técnico y la forma en que todo se coordina. Por eso Multimedia en DIXOY se conecta naturalmente con nuestras capacidades de marca, espacios y tecnología.
+        </p>
       </section>
 
-      <section className={media.editorialBand}>
-        <div className={media.editorialInner}>
-          <div>
-            <p className={media.editorialKicker}>Más que operar equipos</p>
-            <h2>La parte técnica importa. <span>La intención detrás de cada toma también.</span></h2>
-            <p>
-              Una producción funciona cuando el mensaje, el encuadre, la operación y la entrega responden al mismo objetivo. Podemos asumir una parte puntual o conectar el proceso completo según el proyecto.
-            </p>
+      <section className={media.serviceMatrix}>
+        {services.map(([number, title, description]) => (
+          <article key={number}>
+            <span>{number}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section className={media.spaceSection} id="espacio">
+        <div className={media.spaceVisual}>
+          <Image
+            alt="Montaje audiovisual con cámaras e iluminación"
+            fill
+            sizes="(max-width: 900px) 100vw, 62vw"
+            src="/media/multimedia/multimedia-live-studio.webp"
+          />
+          <div className={media.spaceGrid} aria-hidden="true" />
+          <div className={media.spaceBadge}>SET / 01</div>
+        </div>
+
+        <div className={media.spaceCopy}>
+          <p className={media.sectionKicker}>Escenografía + espacio</p>
+          <h2>El espacio también produce.</h2>
+          <p>
+            El fondo, el mobiliario, la gráfica, la iluminación y la circulación cambian por completo cómo se percibe un contenido o un evento. Podemos diseñar y montar esa capa física para que la producción no dependa de improvisar el lugar.
+          </p>
+          <div className={media.spacePoints}>
+            <div><span>01</span><strong>Concepto visual</strong><p>Definimos el lenguaje del set según marca, contenido y audiencia.</p></div>
+            <div><span>02</span><strong>Escenografía</strong><p>Fondos, mobiliario, gráfica, elementos especiales y ambientación.</p></div>
+            <div><span>03</span><strong>Luz y cámara</strong><p>Diseñamos posiciones, profundidad, iluminación y operación técnica.</p></div>
+            <div><span>04</span><strong>Montaje</strong><p>Coordinamos instalación, pruebas y desmontaje cuando el proyecto lo requiere.</p></div>
           </div>
-          <div className={media.editorialList}>
-            <article className={media.editorialItem}><span>01</span><div><strong>Preproducción y enfoque</strong><p>Definimos qué se necesita grabar, para quién, en qué formato y con qué nivel técnico.</p></div></article>
-            <article className={media.editorialItem}><span>02</span><div><strong>Cámaras y operación</strong><p>Trabajamos con configuraciones fijas, móviles o multicámara según la dinámica del contenido o evento.</p></div></article>
-            <article className={media.editorialItem}><span>03</span><div><strong>Producción en vivo</strong><p>Integramos cámaras, transmisión y soporte técnico cuando el contenido debe suceder en tiempo real.</p></div></article>
-            <article className={media.editorialItem}><span>04</span><div><strong>Edición y adaptación</strong><p>Convertimos el material en piezas listas para redes, presentación, archivo o campañas.</p></div></article>
-          </div>
         </div>
       </section>
 
-      <section className={styles.section}>
-        <div className={styles.sectionHead}>
-          <div><p className={styles.sectionKicker}>Para qué puede servir</p><h2>Contenido para comunicar. <span>Producción para hacer que ocurra.</span></h2></div>
-          <p>La línea multimedia puede trabajar sola o conectarse con marca, tecnología, espacios y producción de eventos cuando el proyecto lo necesita.</p>
+      <section className={media.productionSection}>
+        <div className={media.productionTitle}>
+          <p className={media.sectionKicker}>De la idea a la señal</p>
+          <h2>Una producción puede empezar en una hoja, en un espacio o directamente en cámara.</h2>
         </div>
-        <div className={styles.serviceGrid}>
-          <article className={styles.serviceCard}><small>Marcas</small><h3>Contenido comercial</h3><p>Reels, campañas, producto, testimonios, entrevistas y piezas audiovisuales para comunicación de marca.</p><span>Video + fotografía + edición</span></article>
-          <article className={styles.serviceCard}><small>Eventos</small><h3>Producción y cobertura</h3><p>Cámaras, registro, streaming, operación técnica y contenido posterior para eventos y experiencias presenciales.</p><span>En vivo + postproducción</span></article>
-          <article className={styles.serviceCard}><small>Formatos</small><h3>Podcast y contenidos seriados</h3><p>Producciones que requieren continuidad, identidad visual, grabación y edición para construir una presencia constante.</p><span>Grabación + edición + adaptación</span></article>
+
+        <div className={media.productionRail}>
+          <article>
+            <span>PRE</span>
+            <h3>Preproducción</h3>
+            <p>Objetivo, formato, guion, referencias, recursos y plan técnico.</p>
+          </article>
+          <article>
+            <span>SET</span>
+            <h3>Espacio y escena</h3>
+            <p>Escenografía, gráfica, iluminación, mobiliario y disposición de cámaras.</p>
+          </article>
+          <article>
+            <span>REC</span>
+            <h3>Producción</h3>
+            <p>Grabación, fotografía, operación multicámara, streaming y cobertura.</p>
+          </article>
+          <article>
+            <span>POST</span>
+            <h3>Entrega</h3>
+            <p>Edición, adaptación, piezas cortas, archivos finales y publicación.</p>
+          </article>
         </div>
       </section>
 
-      <section className={styles.closing}>
-        <div><h2>¿Tienes algo que grabar, transmitir o producir?</h2><p>Cuéntanos qué quieres comunicar, dónde debe verse y qué nivel de producción necesita. Te ayudamos a aterrizar el formato y el alcance.</p></div>
-        <a className={styles.primary} href={whatsappLink} rel="noopener noreferrer" target="_blank">Cotizar producción multimedia</a>
+      <section className={media.gallerySection}>
+        <div className={media.galleryLarge}>
+          <Image alt="Producción multicámara y entrevista" fill sizes="(max-width: 900px) 100vw, 58vw" src="/media/multimedia/multimedia-interview.webp" />
+          <div><span>INTERVIEW / PODCAST</span><strong>Formato, set y operación trabajando como una sola producción.</strong></div>
+        </div>
+        <div className={media.gallerySmall}>
+          <Image alt="Cámara en producción de evento" fill sizes="(max-width: 900px) 100vw, 36vw" src="/media/multimedia/multimedia-event-gimbal.webp" />
+          <div><span>CAMERA / LIVE</span><strong>Producción móvil para eventos y contenidos en vivo.</strong></div>
+        </div>
+      </section>
+
+      <section className={media.closing}>
+        <div>
+          <p className={media.sectionKicker}>¿Qué quieres producir?</p>
+          <h2>Podemos empezar por el contenido, el evento o el espacio.</h2>
+          <p>Cuéntanos qué quieres comunicar y dónde debe ocurrir. Construimos el alcance técnico y visual alrededor de ese objetivo.</p>
+        </div>
+        <a href={whatsappLink} rel="noopener noreferrer" target="_blank">Cotizar producción multimedia →</a>
       </section>
 
       <footer className={styles.footer}>
