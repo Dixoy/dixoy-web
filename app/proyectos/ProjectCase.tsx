@@ -20,12 +20,15 @@ export default function ProjectCase({ category, title, intro, cover, images, ser
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <Link className={styles.brand} href="/">DIXOY</Link>
+        <Link aria-label="DIXOY, inicio" className={styles.brand} href="/">
+          <Image alt="DIXOY" height={255} priority src="/logos/logo-dixoy-horizontal.svg" unoptimized width={986} />
+        </Link>
         <nav className={styles.nav} aria-label="Navegación de proyectos">
-          <Link href="/proyectos">Proyectos</Link>
-          <Link href="/servicios">Servicios</Link>
           <Link href="/soluciones">Soluciones</Link>
-          <Link className={styles.cta} href="/#contacto">Hablemos</Link>
+          <Link href="/servicios">Servicios</Link>
+          <Link href="/proyectos">Proyectos</Link>
+          <Link href="/#nosotros">Nosotros</Link>
+          <Link className={styles.cta} href="/#contacto">Hablemos ↗</Link>
         </nav>
       </header>
 
