@@ -285,7 +285,7 @@ export default function Home() {
             <span className={central.featureAction}>Explorar Multimedia <ArrowUpRight size={16} /></span>
           </div>
           <div className={central.featureVisual}>
-            <Image alt="Producción audiovisual en evento" fill sizes="(max-width: 900px) 100vw, 38vw" src="/media/multimedia/multimedia-home-event-hq.jpg" />
+            <Image alt="Producción audiovisual en evento" fill sizes="(max-width: 900px) 100vw, 38vw" src="/media/multimedia/multimedia-home-event-v2.avif" />
             <div className={central.featureLabel}><span>Producción multimedia</span><strong>De la grabación a la entrega final.</strong></div>
           </div>
         </a>
