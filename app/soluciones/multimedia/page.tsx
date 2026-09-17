@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Producción multimedia, escenografía y audiovisual | DIXOY",
     description:
       "Contenido, cámaras, streaming, podcast, escenografía y producción técnica para empresas y eventos.",
-    images: ["/media/multimedia/multimedia-event-gimbal.webp"],
+    images: ["/media/multimedia/multimedia-event-gimbal-v2.avif"],
     locale: "es_CO",
     siteName: "DIXOY",
     type: "website",
@@ -74,7 +74,7 @@ export default function MultimediaPage() {
                 fill
                 priority
                 sizes="(max-width: 900px) 100vw, 52vw"
-                src="/media/multimedia/multimedia-event-gimbal.webp"
+                src="/media/multimedia/multimedia-event-gimbal-v2.avif"
               />
               <div className={media.frameCorners} aria-hidden="true" />
               <div className={media.imageCaption}>
@@ -87,7 +87,7 @@ export default function MultimediaPage() {
                 alt="Detalle técnico de cámara en gimbal durante producción audiovisual"
                 fill
                 sizes="260px"
-                src="/media/multimedia/multimedia-gimbal-detail.webp"
+                src="/media/multimedia/multimedia-gimbal-detail-v2.avif"
               />
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function MultimediaPage() {
             alt="Montaje audiovisual con cámaras e iluminación"
             fill
             sizes="(max-width: 900px) 100vw, 62vw"
-            src="/media/multimedia/multimedia-live-studio.webp"
+            src="/media/multimedia/multimedia-live-studio-v2.avif"
           />
           <div className={media.spaceGrid} aria-hidden="true" />
           <div className={media.spaceBadge}>SET / 01</div>
@@ -167,11 +167,11 @@ export default function MultimediaPage() {
 
       <section className={media.gallerySection}>
         <div className={media.galleryLarge}>
-          <Image alt="Producción multicámara y entrevista" fill sizes="(max-width: 900px) 100vw, 58vw" src="/media/multimedia/multimedia-interview.webp" />
+          <Image alt="Producción multicámara y entrevista" fill sizes="(max-width: 900px) 100vw, 58vw" src="/media/multimedia/multimedia-interview-v2.avif" />
           <div><span>INTERVIEW / PODCAST</span><strong>Formato, set y operación trabajando como una sola producción.</strong></div>
         </div>
         <div className={media.gallerySmall}>
-          <Image alt="Detalle de cámara preparada para producción audiovisual" fill sizes="(max-width: 900px) 100vw, 36vw" src="/media/multimedia/multimedia-camera-detail.webp" />
+          <Image alt="Detalle de cámara preparada para producción audiovisual" fill sizes="(max-width: 900px) 100vw, 36vw" src="/media/multimedia/multimedia-camera-detail-v2.avif" />
           <div><span>CAMERA / DETAIL</span><strong>Configuración técnica preparada según las necesidades de cada producción.</strong></div>
         </div>
       </section>
