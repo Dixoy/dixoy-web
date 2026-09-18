@@ -34,7 +34,7 @@ export default function ServicesPage() {
           <Link href="/proyectos">Proyectos</Link>
           <Link href="/bogota">Bogotá</Link>
         </nav>
-        <Link className={styles.cta} href="/#contacto">Hablemos →</Link>
+        <Link className={styles.cta} href="/solicitar?origen=servicios">Solicitar →</Link>
       </header>
 
       <section className={styles.heroShell}>
@@ -46,7 +46,7 @@ export default function ServicesPage() {
               Puedes llegar por una necesidad puntual: un aviso, una impresión, una producción audiovisual, una adecuación o una herramienta digital. Si el proyecto necesita más, conectamos otras capacidades sin obligarte a coordinar varios proveedores.
             </p>
             <div className={styles.actions}>
-              <Link className={styles.primary} href="/#contacto">Cuéntanos qué necesitas</Link>
+              <Link className={styles.primary} href="/solicitar?origen=servicios">Iniciar una solicitud</Link>
               <Link className={styles.secondary} href="/soluciones">Ver cómo trabaja DIXOY</Link>
             </div>
           </div>
@@ -107,12 +107,12 @@ export default function ServicesPage() {
 
       <section className={styles.closing}>
         <div><h2>¿No ves exactamente lo que necesitas?</h2><p>No pasa nada. Cuéntanos el objetivo y te ayudamos a construir el alcance correcto, aunque combine varias áreas o requiera algo especial.</p></div>
-        <Link className={styles.primary} href="/#contacto">Hablar con DIXOY</Link>
+        <Link className={styles.primary} href="/solicitar?origen=servicios">Crear solicitud</Link>
       </section>
 
       <footer className={styles.footer}>
         <span>© 2026 DIXOY · Servicios para empresas</span>
-        <nav><Link href="/">Inicio</Link><Link href="/soluciones">Soluciones</Link><Link href="/proyectos">Proyectos</Link><Link href="/usme">Usme</Link></nav>
+        <nav><Link href="/">Inicio</Link><Link href="/soluciones">Soluciones</Link><Link href="/solicitar?origen=servicios">Solicitar</Link><Link href="/proyectos">Proyectos</Link></nav>
       </footer>
     </main>
   );
