@@ -64,10 +64,18 @@ function guessCategory(service: string) {
   return "";
 }
 
+function createSubmissionId() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return `req-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
+}
+
 export default function RequestFlow() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<RequestData>(initialData);
   const [requestId, setRequestId] = useState("");
+  const [submissionId, setSubmissionId] = useState("");
   const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -78,6 +86,13 @@ export default function RequestFlow() {
     const service = params.get("servicio") || "";
     const origin = params.get("origen") || "web";
     const saved = window.localStorage.getItem("dixoy-request-draft");
+    const savedSubmissionId = window.localStorage.getItem("dixoy-request-submission-id");
+    const currentSubmissionId = savedSubmissionId || createSubmissionId();
+
+    setSubmissionId(currentSubmissionId);
+    if (!savedSubmissionId) {
+      window.localStorage.setItem("dixoy-request-submission-id", currentSubmissionId);
+    }
 
     if (saved) {
       try {
@@ -169,12 +184,19 @@ export default function RequestFlow() {
       return;
     }
 
+    const currentSubmissionId = submissionId || createSubmissionId();
+    if (!submissionId) {
+      setSubmissionId(currentSubmissionId);
+      window.localStorage.setItem("dixoy-request-submission-id", currentSubmissionId);
+    }
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
+          submissionId: currentSubmissionId,
           sourcePath: window.location.pathname,
           website,
         }),
@@ -202,6 +224,7 @@ export default function RequestFlow() {
         JSON.stringify({ id: result.code, createdAt: new Date().toISOString(), ...data }),
       );
       window.localStorage.removeItem("dixoy-request-draft");
+      window.localStorage.removeItem("dixoy-request-submission-id");
       registerLeadEvent();
     } catch {
       activateFallback();
@@ -231,10 +254,13 @@ export default function RequestFlow() {
           <button
             className={styles.primaryButton}
             onClick={() => {
+              const nextSubmissionId = createSubmissionId();
               setRequestId("");
+              setSubmissionId(nextSubmissionId);
               setStep(1);
               setData(initialData);
               setFallbackActive(false);
+              window.localStorage.setItem("dixoy-request-submission-id", nextSubmissionId);
             }}
             type="button"
           >
@@ -397,7 +423,7 @@ export default function RequestFlow() {
               <label>
                 <span>Correo</span>
                 <input inputMode="email" onChange={(event) => update("email", event.target.value)} type="email" value={data.email} />
-                {!validEmail && <small>Revisa el formato del correo.</small>}
+                {!validEmail && <small className={styles.fieldError}>Revisa el formato del correo.</small>}
               </label>
             </div>
             <fieldset className={styles.contactChoice}>
@@ -447,7 +473,7 @@ export default function RequestFlow() {
               <div><span>Contacto</span><strong>{data.name}</strong></div>
               <div><span>Teléfono</span><strong>{data.phone}</strong></div>
             </div>
-            {submitError && <p role="alert">{submitError}</p>}
+            {submitError && <p className={styles.submitError} role="alert">{submitError}</p>}
             <button className={styles.prepareButton} disabled={isSubmitting} onClick={submitRequest} type="button">
               {isSubmitting ? "Enviando…" : "Enviar solicitud →"}
             </button>
@@ -462,8 +488,7 @@ export default function RequestFlow() {
             <button
               className={styles.nextButton}
               disabled={!canContinue}
-              onClick={() => setStep((value) => Math.min(4, value + 1))
-              }
+              onClick={() => setStep((value) => Math.min(4, value + 1))}
               type="button"
             >
               Continuar →
