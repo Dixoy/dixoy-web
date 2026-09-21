@@ -18,6 +18,12 @@ type RequestData = {
   origin: string;
 };
 
+type ApiResponse = {
+  ok?: boolean;
+  code?: string;
+  error?: string;
+};
+
 const categories = [
   "Diseño y marca",
   "Impresión y gran formato",
@@ -62,6 +68,10 @@ export default function RequestFlow() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<RequestData>(initialData);
   const [requestId, setRequestId] = useState("");
+  const [website, setWebsite] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [fallbackActive, setFallbackActive] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -115,27 +125,22 @@ export default function RequestFlow() {
       .join("\n");
   }, [data]);
 
+  const validEmail = !data.email.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim());
   const canContinue =
     step === 1
       ? Boolean(data.category)
       : step === 2
         ? Boolean(data.description.trim())
         : step === 3
-          ? Boolean(data.name.trim() && data.phone.trim())
+          ? Boolean(data.name.trim() && data.phone.trim() && validEmail)
           : true;
 
   const update = (field: keyof RequestData, value: string) => {
     setData((current) => ({ ...current, [field]: value }));
+    setSubmitError("");
   };
 
-  const prepareRequest = () => {
-    const id = `DX-${Date.now().toString(36).toUpperCase().slice(-6)}`;
-    setRequestId(id);
-    window.localStorage.setItem(
-      "dixoy-request-last",
-      JSON.stringify({ id, createdAt: new Date().toISOString(), ...data }),
-    );
-
+  const registerLeadEvent = () => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: "generate_lead",
@@ -145,27 +150,113 @@ export default function RequestFlow() {
     });
   };
 
+  const activateFallback = () => {
+    setFallbackActive(true);
+    setSubmitError("");
+  };
+
+  const submitRequest = async () => {
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError("");
+    setFallbackActive(false);
+
+    const endpoint = process.env.NEXT_PUBLIC_DIXAPP_REQUESTS_API?.trim();
+    if (!endpoint) {
+      activateFallback();
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          sourcePath: window.location.pathname,
+          website,
+        }),
+      });
+
+      const result = (await response.json().catch(() => ({}))) as ApiResponse;
+
+      if (!response.ok) {
+        if (response.status >= 500 || response.status === 403) {
+          activateFallback();
+          return;
+        }
+        setSubmitError(result.error || "Revisa la información e intenta nuevamente.");
+        return;
+      }
+
+      if (!result.ok || !result.code) {
+        activateFallback();
+        return;
+      }
+
+      setRequestId(result.code);
+      window.localStorage.setItem(
+        "dixoy-request-last",
+        JSON.stringify({ id: result.code, createdAt: new Date().toISOString(), ...data }),
+      );
+      window.localStorage.removeItem("dixoy-request-draft");
+      registerLeadEvent();
+    } catch {
+      activateFallback();
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const whatsappHref = `https://wa.me/573118072144?text=${encodeURIComponent(
-    `Hola DIXOY, preparé la solicitud ${requestId || ""}.\n\n${summary}`,
+    `Hola DIXOY. Intenté enviar una solicitud desde dixoy.co y quiero continuar por WhatsApp.\n\n${summary}`,
   )}`;
 
   const emailHref = `mailto:somos@dixoy.co?subject=${encodeURIComponent(
-    `Solicitud DIXOY ${requestId || ""} - ${data.category}`,
-  )}&body=${encodeURIComponent(`${summary}\n\nCódigo: ${requestId}`)}`;
+    `Solicitud DIXOY - ${data.category}`,
+  )}&body=${encodeURIComponent(summary)}`;
 
   if (requestId) {
     return (
       <section className={styles.successShell}>
         <div className={styles.successCard}>
           <span className={styles.successMark}>✓</span>
-          <p className={styles.eyebrow}>Solicitud preparada</p>
+          <p className={styles.eyebrow}>Solicitud recibida</p>
           <h2>{requestId}</h2>
           <p>
-            Ya organizamos la información principal. Elige cómo enviarla a DIXOY para continuar con la revisión comercial.
+            La solicitud ya quedó registrada en DIXOY. Conserva este código como referencia mientras revisamos el proyecto.
+          </p>
+          <button
+            className={styles.primaryButton}
+            onClick={() => {
+              setRequestId("");
+              setStep(1);
+              setData(initialData);
+              setFallbackActive(false);
+            }}
+            type="button"
+          >
+            Crear otra solicitud
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  if (fallbackActive) {
+    return (
+      <section className={styles.successShell}>
+        <div className={styles.successCard}>
+          <p className={styles.eyebrow}>Continuemos por otro canal</p>
+          <h2>Tu información sigue aquí.</h2>
+          <p>
+            No pudimos registrar la solicitud automáticamente en este momento. Puedes enviarnos el mismo resumen por WhatsApp o correo sin volver a escribirlo.
           </p>
           <div className={styles.deliveryActions}>
             <a className={styles.primaryButton} href={whatsappHref} rel="noopener noreferrer" target="_blank">
-              Enviar por WhatsApp
+              Continuar por WhatsApp
             </a>
             <a className={styles.secondaryButton} href={emailHref}>
               Enviar por correo
@@ -174,12 +265,12 @@ export default function RequestFlow() {
           <button
             className={styles.textButton}
             onClick={() => {
-              setRequestId("");
-              setStep(1);
+              setFallbackActive(false);
+              setStep(4);
             }}
             type="button"
           >
-            Editar solicitud
+            Intentar de nuevo
           </button>
         </div>
       </section>
@@ -306,6 +397,7 @@ export default function RequestFlow() {
               <label>
                 <span>Correo</span>
                 <input inputMode="email" onChange={(event) => update("email", event.target.value)} type="email" value={data.email} />
+                {!validEmail && <small>Revisa el formato del correo.</small>}
               </label>
             </div>
             <fieldset className={styles.contactChoice}>
@@ -322,6 +414,18 @@ export default function RequestFlow() {
                 </label>
               ))}
             </fieldset>
+            <label
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}
+            >
+              <span>Sitio web</span>
+              <input
+                autoComplete="off"
+                onChange={(event) => setWebsite(event.target.value)}
+                tabIndex={-1}
+                value={website}
+              />
+            </label>
           </div>
         )}
 
@@ -343,21 +447,23 @@ export default function RequestFlow() {
               <div><span>Contacto</span><strong>{data.name}</strong></div>
               <div><span>Teléfono</span><strong>{data.phone}</strong></div>
             </div>
-            <button className={styles.prepareButton} onClick={prepareRequest} type="button">
-              Preparar solicitud →
+            {submitError && <p role="alert">{submitError}</p>}
+            <button className={styles.prepareButton} disabled={isSubmitting} onClick={submitRequest} type="button">
+              {isSubmitting ? "Enviando…" : "Enviar solicitud →"}
             </button>
           </div>
         )}
 
         <div className={styles.formNav}>
-          <button disabled={step === 1} onClick={() => setStep((value) => Math.max(1, value - 1))} type="button">
+          <button disabled={step === 1 || isSubmitting} onClick={() => setStep((value) => Math.max(1, value - 1))} type="button">
             ← Atrás
           </button>
           {step < 4 && (
             <button
               className={styles.nextButton}
               disabled={!canContinue}
-              onClick={() => setStep((value) => Math.min(4, value + 1))}
+              onClick={() => setStep((value) => Math.min(4, value + 1))
+              }
               type="button"
             >
               Continuar →
