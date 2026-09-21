@@ -71,6 +71,25 @@ function createSubmissionId() {
   return `req-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
 }
 
+function requestEndpoint() {
+  const configured = process.env.NEXT_PUBLIC_DIXAPP_REQUESTS_API?.trim();
+  if (configured) return configured;
+
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    const isPreview = hostname === "localhost"
+      || hostname === "127.0.0.1"
+      || hostname === "dixoy-web.pages.dev"
+      || hostname.endsWith(".dixoy-web.pages.dev");
+
+    if (isPreview) {
+      return "https://staging.app.dixoy.co/api/public/solicitudes";
+    }
+  }
+
+  return "https://app.dixoy.co/api/public/solicitudes";
+}
+
 export default function RequestFlow() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<RequestData>(initialData);
@@ -141,14 +160,13 @@ export default function RequestFlow() {
   }, [data]);
 
   const validEmail = !data.email.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim());
-  const canContinue =
-    step === 1
-      ? Boolean(data.category)
-      : step === 2
-        ? Boolean(data.description.trim())
-        : step === 3
-          ? Boolean(data.name.trim() && data.phone.trim() && validEmail)
-          : true;
+  const canContinue = step === 1
+    ? Boolean(data.category)
+    : step === 2
+      ? Boolean(data.description.trim())
+      : step === 3
+        ? Boolean(data.name.trim() && data.phone.trim() && validEmail)
+        : true;
 
   const update = (field: keyof RequestData, value: string) => {
     setData((current) => ({ ...current, [field]: value }));
@@ -177,7 +195,6 @@ export default function RequestFlow() {
     setSubmitError("");
     setFallbackActive(false);
 
-    const endpoint = process.env.NEXT_PUBLIC_DIXAPP_REQUESTS_API?.trim()\n      || "https://app.dixoy.co/api/public/solicitudes";\n
     const currentSubmissionId = submissionId || createSubmissionId();
     if (!submissionId) {
       setSubmissionId(currentSubmissionId);
@@ -185,13 +202,13 @@ export default function RequestFlow() {
     }
 
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch(requestEndpoint(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
           submissionId: currentSubmissionId,
-          sourcePath: window.location.pathname,
+          sourcePath: `${window.location.pathname}${window.location.search}`,
           website,
         }),
       });
