@@ -94,9 +94,7 @@ export default function RequestFlow() {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("dixoy-request-draft", JSON.stringify(data));
-    }
+    window.localStorage.setItem("dixoy-request-draft", JSON.stringify(data));
   }, [data]);
 
   const summary = useMemo(() => {
@@ -369,10 +367,4 @@ export default function RequestFlow() {
       </div>
     </section>
   );
-}
-
-declare global {
-  interface Window {
-    dataLayer: Array<Record<string, unknown>>;
-  }
 }
