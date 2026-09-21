@@ -1,0 +1,69 @@
+name: Smoke solicitudes preview
+
+on:
+  push:
+    branches:
+      - smoke/solicitudes-preview
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Probar formulario contra DixApp staging
+        env:
+          PREVIEW_URL: https://feat-solicitudes-v1.dixoy-web.pages.dev/solicitar?servicio=Producci%C3%B3n%20multimedia&origen=smoke-preview
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+
+            await page.addInitScript(() => {
+              localStorage.removeItem('dixoy-request-draft');
+              localStorage.removeItem('dixoy-request-last');
+              localStorage.setItem('dixoy-request-submission-id', 'dixoy-preview-browser-smoke-v1');
+            });
+
+            await page.goto(process.env.PREVIEW_URL, { waitUntil: 'networkidle', timeout: 60000 });
+            await page.getByText('Tu solicitud').first().waitFor({ timeout: 30000 });
+
+            await page.getByRole('button', { name: 'Continuar →' }).click();
+            await page.locator('textarea').fill('Prueba automática desde la página preview de dixoy.co hacia DixApp staging.');
+            await page.getByPlaceholder('Bogotá, sede, evento...').fill('Bogotá');
+            await page.getByRole('button', { name: 'Continuar →' }).click();
+
+            await page.getByLabel('Nombre *').fill('Prueba Web DIXOY');
+            await page.getByLabel('WhatsApp / teléfono *').fill('3000000002');
+            await page.getByLabel('Correo').fill('smoke-preview@dixoy.co');
+            await page.getByRole('button', { name: 'Continuar →' }).click();
+
+            await page.getByRole('button', { name: 'Enviar solicitud →' }).click();
+            await page.getByText('Solicitud recibida').waitFor({ timeout: 30000 });
+
+            const code = (await page.locator('h2').filter({ hasText: /^DX-[A-F0-9]{6}$/ }).first().textContent())?.trim();
+            if (!code || !/^DX-[A-F0-9]{6}$/.test(code)) {
+              throw new Error(`No se recibió un código DX válido. Valor: ${code}`);
+            }
+
+            console.log(`Flujo web OK: ${code}`);
+            await browser.close();
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
