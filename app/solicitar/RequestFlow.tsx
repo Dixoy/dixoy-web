@@ -177,13 +177,7 @@ export default function RequestFlow() {
     setSubmitError("");
     setFallbackActive(false);
 
-    const endpoint = process.env.NEXT_PUBLIC_DIXAPP_REQUESTS_API?.trim();
-    if (!endpoint) {
-      activateFallback();
-      setIsSubmitting(false);
-      return;
-    }
-
+    const endpoint = process.env.NEXT_PUBLIC_DIXAPP_REQUESTS_API?.trim()\n      || "https://app.dixoy.co/api/public/solicitudes";\n
     const currentSubmissionId = submissionId || createSubmissionId();
     if (!submissionId) {
       setSubmissionId(currentSubmissionId);
