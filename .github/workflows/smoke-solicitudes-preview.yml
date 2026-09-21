@@ -49,7 +49,7 @@ jobs:
 
             await page.getByLabel('Nombre *').fill('Prueba Web DIXOY');
             await page.getByLabel('WhatsApp / teléfono *').fill('3000000002');
-            await page.getByLabel('Correo').fill('smoke-preview@dixoy.co');
+            await page.getByRole('textbox', { name: 'Correo' }).fill('smoke-preview@dixoy.co');
             await page.getByRole('button', { name: 'Continuar →' }).click();
 
             await page.getByRole('button', { name: 'Enviar solicitud →' }).click();
