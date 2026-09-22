@@ -25,6 +25,8 @@ const whatsappLink = `https://wa.me/573118072144?text=${encodeURIComponent(
   "Hola DIXOY, quiero cotizar un proyecto multimedia o audiovisual para mi empresa o evento.",
 )}`;
 
+const requestLink = "/solicitar?servicio=Producci%C3%B3n%20multimedia&origen=multimedia";
+
 const services = [
   ["01", "Video y contenido", "Reels, campañas, videos promocionales, testimonios y piezas pensadas para cada plataforma."],
   ["02", "Fotografía", "Producto, eventos, equipos, espacios y contenido corporativo con intención visual."],
@@ -62,7 +64,7 @@ export default function MultimediaPage() {
               Contenido, cámaras, streaming, escenografía, iluminación y producción técnica conectados dentro de un mismo proyecto.
             </p>
             <div className={media.heroActions}>
-              <a href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablar de mi producción</a>
+              <Link href={requestLink}>Solicitar producción</Link>
               <Link href="#espacio">Ver escenografía y espacio</Link>
             </div>
           </div>
@@ -182,12 +184,12 @@ export default function MultimediaPage() {
           <h2>Podemos empezar por el contenido, el evento o el espacio.</h2>
           <p>Cuéntanos qué quieres comunicar y dónde debe ocurrir. Construimos el alcance técnico y visual alrededor de ese objetivo.</p>
         </div>
-        <a href={whatsappLink} rel="noopener noreferrer" target="_blank">Cotizar producción multimedia →</a>
+        <Link href={requestLink}>Crear solicitud multimedia →</Link>
       </section>
 
       <footer className={styles.footer}>
         <span>© 2026 DIXOY · Producción multimedia</span>
-        <nav><Link href="/">Inicio</Link><Link href="/soluciones">Soluciones</Link><Link href="/servicios">Servicios</Link><Link href="/proyectos">Proyectos</Link></nav>
+        <nav><Link href="/">Inicio</Link><Link href="/soluciones">Soluciones</Link><Link href="/servicios">Servicios</Link><Link href={requestLink}>Solicitar</Link><Link href="/proyectos">Proyectos</Link></nav>
       </footer>
     </main>
   );
