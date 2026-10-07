@@ -29,6 +29,7 @@ export default function PortfolioGallery() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
+  const isOpen = active !== null;
 
   const openImage = (index: number) => {
     previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -36,7 +37,7 @@ export default function PortfolioGallery() {
   };
 
   useEffect(() => {
-    if (active === null) return;
+    if (!isOpen) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
@@ -64,7 +65,7 @@ export default function PortfolioGallery() {
       window.removeEventListener("keydown", onKeyDown);
       previousFocusRef.current?.focus();
     };
-  }, [active === null]);
+  }, [isOpen]);
 
   return (
     <>
