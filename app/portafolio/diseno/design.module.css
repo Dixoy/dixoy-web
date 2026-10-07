@@ -636,3 +636,80 @@
     }
   }
 }
+
+/* Galería de piezas independientes: sin navegación a casos comerciales */
+.workButton {
+  background: transparent;
+  border: 0;
+  cursor: zoom-in;
+  font: inherit;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.workButton:focus-visible {
+  outline: 3px solid var(--portfolio-orange);
+  outline-offset: 5px;
+}
+
+.lightbox {
+  background: rgba(2, 13, 25, .95);
+  color: #fff;
+  display: grid;
+  inset: 0;
+  padding: clamp(12px, 3vw, 40px);
+  place-items: center;
+  position: fixed;
+  z-index: 9999;
+}
+
+.lightboxBackdrop {
+  background: transparent;
+  border: 0;
+  cursor: zoom-out;
+  inset: 0;
+  position: absolute;
+}
+
+.lightboxPanel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100%;
+  max-height: 1100px;
+  max-width: 1500px;
+  position: relative;
+  width: 100%;
+}
+
+.lightboxTop, .lightboxBottom {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.lightboxTop { font-size: 12px; }
+.lightboxTop button, .lightboxBottom button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  padding: 9px 16px;
+}
+
+.lightboxImage { min-height: 0; position: relative; }
+.lightboxImage img { object-fit: contain; }
+
+.lightboxBottom { gap: 14px; }
+.lightboxBottom div { display: grid; gap: 5px; text-align: center; }
+.lightboxBottom strong { font-size: 13px; font-weight: 600; }
+.lightboxBottom span { color: rgba(255,255,255,.6); font-size: 11px; }
+
+@media (max-width: 600px) {
+  .lightbox { padding: 12px; }
+  .lightboxBottom strong { font-size: 11px; }
+  .lightboxBottom button { font-size: 10px; padding: 8px; }
+}
