@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import styles from "./design.module.css";
 
 const works = [
-  { image: "/media/portfolio/design/nova-prime-fachada.webp", title: "Nova Prime Studio — Fachada gráfica", category: "SPA · Diseño aplicado", size: "hero" },
-  { image: "/media/portfolio/design/boru-campana.webp", title: "Ború — Campaña gráfica", category: "Publicidad · Diseño gráfico", size: "portrait" },
-  { image: "/media/portfolio/design/nova-prime-qr.webp", title: "Nova Prime Studio — QR personalizado", category: "SPA · Comunicación visual", size: "square" },
-  { image: "/media/portfolio/design/nova-prime-identidad.webp", title: "Nova Prime Studio — Identidad aplicada", category: "SPA · Gráfica para vitrinas", size: "landscape" },
-  { image: "/media/portfolio/design/boru-pared-01.webp", title: "Ború — Diseño mural", category: "Publicidad · Diseño aplicado", size: "wide" },
-  { image: "/media/portfolio/design/nova-prime-floral.webp", title: "Nova Prime Studio — Composición floral", category: "SPA · Diseño ornamental", size: "compact" },
-  { image: "/media/portfolio/design/boru-pared-02.webp", title: "Ború — Gráfica de marca", category: "Publicidad · Diseño gráfico", size: "landscape" },
-  { image: "/media/portfolio/design/nova-prime-interior.webp", title: "Nova Prime Studio — Diseño en el espacio", category: "SPA · Diseño aplicado", size: "square" },
+  { image: "/media/portfolio/design/nova-prime-fachada.jpg", title: "Nova Prime Studio — Fachada gráfica", category: "SPA · Diseño aplicado", size: "hero" },
+  { image: "/media/portfolio/design/boru-campana.png", title: "Ború — Campaña gráfica", category: "Publicidad · Diseño gráfico", size: "portrait" },
+  { image: "/media/portfolio/design/nova-prime-qr.jpg", title: "Nova Prime Studio — QR personalizado", category: "SPA · Comunicación visual", size: "square" },
+  { image: "/media/portfolio/design/nova-prime-identidad.jpg", title: "Nova Prime Studio — Identidad aplicada", category: "SPA · Gráfica para vitrinas", size: "landscape" },
+  { image: "/media/portfolio/design/boru-pared-01.png", title: "Ború — Diseño mural", category: "Publicidad · Diseño aplicado", size: "wide" },
+  { image: "/media/portfolio/design/nova-prime-floral.jpg", title: "Nova Prime Studio — Composición floral", category: "SPA · Diseño ornamental", size: "compact" },
+  { image: "/media/portfolio/design/boru-pared-02.png", title: "Ború — Gráfica de marca", category: "Publicidad · Diseño gráfico", size: "landscape" },
+  { image: "/media/portfolio/design/nova-prime-interior.jpg", title: "Nova Prime Studio — Diseño en el espacio", category: "SPA · Diseño aplicado", size: "square" },
 ] as const;
 
 const sizeClass = {
