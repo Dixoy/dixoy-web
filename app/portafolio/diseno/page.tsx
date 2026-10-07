@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./design.module.css";
+import PortfolioGallery from "./PortfolioGallery";
 
 export const metadata: Metadata = {
   title: "Portafolio de diseño | DIXOY",
@@ -24,60 +25,6 @@ export const metadata: Metadata = {
     url: "https://dixoy.co/portafolio/diseno",
   },
 };
-
-const work = [
-  {
-    href: "/proyectos/ambientacion-punto-de-venta",
-    title: "Ambientación de punto de venta",
-    category: "Diseño aplicado · Espacios",
-    image: "/media/projects/point-of-sale/boru-cover.webp",
-    size: "hero",
-  },
-  {
-    href: "/proyectos/textil-corporativo",
-    title: "Textil corporativo",
-    category: "Diseño aplicado · Marca",
-    image: "/media/projects/corporate-textile/creative-shirt.webp",
-    size: "portrait",
-  },
-  {
-    href: "/proyectos/credenciales-eventos",
-    title: "Credenciales para eventos",
-    category: "Diseño gráfico · Producción",
-    image: "/images/portfolio/optimized/project-13.webp",
-    size: "square",
-  },
-  {
-    href: "/proyectos/privacidad-visual-oficinas",
-    title: "Gráfica para espacios corporativos",
-    category: "Comunicación visual · Espacios",
-    image: "/media/projects/corporate-spaces/office-wide.webp",
-    size: "landscape",
-  },
-  {
-    href: "/proyectos/aviso-comercial-gran-formato",
-    title: "Comunicación de gran formato",
-    category: "Diseño aplicado · Producción",
-    image: "/images/portfolio/optimized/project-15.webp",
-    size: "wide",
-  },
-  {
-    href: "/proyectos/textil-corporativo",
-    title: "Piezas de marca en producción",
-    category: "Identidad aplicada · Textil",
-    image: "/media/projects/corporate-textile/printed-totes.webp",
-    size: "compact",
-  },
-] as const;
-
-const sizeClass = {
-  hero: styles.heroCard,
-  portrait: styles.portraitCard,
-  square: styles.squareCard,
-  landscape: styles.landscapeCard,
-  wide: styles.wideCard,
-  compact: styles.compactCard,
-} as const;
 
 const Arrow = () => (
   <svg aria-hidden="true" fill="none" viewBox="0 0 24 24">
@@ -153,35 +100,8 @@ export default function DesignPortfolioPage() {
         </h2>
       </section>
 
-      <section aria-label="Selección de trabajos de diseño" className={styles.gallery}>
-        {work.map((item, index) => (
-          <Link
-            className={`${styles.work} ${sizeClass[item.size]}`}
-            href={item.href}
-            key={`${item.title}-${index}`}
-          >
-            <figure className={styles.media}>
-              <Image
-                alt={item.title}
-                fill
-                sizes={
-                  item.size === "hero" || item.size === "wide"
-                    ? "(max-width: 760px) 100vw, 66vw"
-                    : "(max-width: 760px) 100vw, 42vw"
-                }
-                src={item.image}
-              />
-              <span className={styles.view}>
-                Ver proyecto <Arrow />
-              </span>
-            </figure>
-            <div className={styles.caption}>
-              <h3>{item.title}</h3>
-              <p>{item.category}</p>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-            </div>
-          </Link>
-        ))}
+      <section aria-label="Selección de trabajos de diseño">
+        <PortfolioGallery />
       </section>
 
       <section className={styles.next}>
@@ -192,9 +112,8 @@ export default function DesignPortfolioPage() {
           </h2>
         </div>
         <p>
-          Esta primera selección reúne trabajos que ya forman parte del archivo
-          visual de DIXOY. Nuevos casos se incorporarán como historias completas,
-          con concepto, proceso y aplicaciones.
+          Explora piezas gráficas de Ború y Nova Prime Studio. Cada imagen
+          puede ampliarse para apreciar sus detalles, sin salir de la galería.
         </p>
       </section>
 
