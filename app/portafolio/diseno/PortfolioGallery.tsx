@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./design.module.css";
 
 const works = [
@@ -26,17 +26,45 @@ const sizeClass = {
 
 export default function PortfolioGallery() {
   const [active, setActive] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  const openImage = (index: number) => {
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setActive(index);
+  };
 
   useEffect(() => {
     if (active === null) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setActive(null);
       if (event.key === "ArrowRight") setActive((current) => current === null ? null : (current + 1) % works.length);
       if (event.key === "ArrowLeft") setActive((current) => current === null ? null : (current + works.length - 1) % works.length);
+      if (event.key === "Tab") {
+        const buttons = dialogRef.current?.querySelectorAll<HTMLButtonElement>("button:not([disabled])");
+        if (!buttons?.length) return;
+        const first = buttons[0];
+        const last = buttons[buttons.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [active]);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+      previousFocusRef.current?.focus();
+    };
+  }, [active === null]);
 
   return (
     <>
@@ -46,11 +74,11 @@ export default function PortfolioGallery() {
             aria-label={`Ampliar: ${item.title}`}
             className={`${styles.work} ${styles.workButton} ${sizeClass[item.size]}`}
             key={item.image}
-            onClick={() => setActive(index)}
+            onClick={() => openImage(index)}
             type="button"
           >
             <figure className={styles.media}>
-              <Image alt={item.title} fill sizes="(max-width: 760px) 100vw, 66vw" src={item.image} />
+              <Image alt={item.title} fill sizes={item.size === "hero" || item.size === "wide" ? "(max-width: 900px) 100vw, 66vw" : "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 42vw"} src={item.image} />
               <span className={styles.view}>Ampliar imagen ↗</span>
             </figure>
             <div className={styles.caption}>
@@ -63,12 +91,12 @@ export default function PortfolioGallery() {
       </div>
 
       {active !== null && (
-        <div aria-label="Imagen ampliada del portafolio" aria-modal="true" className={styles.lightbox} role="dialog">
+        <div aria-label="Imagen ampliada del portafolio" aria-modal="true" className={styles.lightbox} ref={dialogRef} role="dialog">
           <button aria-label="Cerrar imagen" className={styles.lightboxBackdrop} onClick={() => setActive(null)} type="button" />
           <div className={styles.lightboxPanel}>
             <div className={styles.lightboxTop}>
               <span>{String(active + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")}</span>
-              <button onClick={() => setActive(null)} type="button">Cerrar ✕</button>
+              <button onClick={() => setActive(null)} ref={closeButtonRef} type="button">Cerrar ✕</button>
             </div>
             <div className={styles.lightboxImage}>
               <Image alt={works[active].title} fill priority sizes="100vw" src={works[active].image} />
