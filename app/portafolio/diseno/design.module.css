@@ -621,7 +621,7 @@
   .canvasPiece figcaption { padding: 10px 2px 20px; }
   .brandEndMark { margin-top: 15px; }
   .next { padding-top: 60px; padding-bottom: 65px; }
-  .closing { border-radius: 16px; gap: 30px; margin: 0 16px 60px; padding: 36px 25px; }
+  .closing { border-radius: 16px; gap: 30px; margin: 0 16px 60px; min-height: 0; padding: 36px 25px; }
   .closing p { font-size: 32px; }
   .closing a { justify-self: start; }
 }
