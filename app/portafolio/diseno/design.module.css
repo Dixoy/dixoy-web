@@ -556,6 +556,11 @@
   text-transform: uppercase;
 }
 .brandEndMark span:last-child { font-size: 25px; font-weight: 300; }
+/* Composición neutra por defecto para incorporar futuras marcas. */
+.brandStory:not(.brandBoru):not(.brandNova) .canvasPiece1 { grid-column: span 12; }
+.brandStory:not(.brandBoru):not(.brandNova) .canvasPiece1 .canvasImage { aspect-ratio: 2 / 1; }
+.brandStory:not(.brandBoru):not(.brandNova) .canvasPiece:nth-child(n+2) { grid-column: span 6; }
+.brandStory:not(.brandBoru):not(.brandNova) .canvasPiece:nth-child(n+2) .canvasImage { aspect-ratio: 1.15 / 1; }
 /* Discreet contact card instead of a full-bleed orange section. */
 .closing {
   align-items: center;
@@ -596,6 +601,7 @@
   .brandHeading h2 { font-size: clamp(53px, 14vw, 88px); }
   .brandIntro { font-size: 16px; }
   .brandCanvas { gap: 3px; }
+  .brandStory:not(.brandBoru):not(.brandNova) .canvasPiece,
   .brandBoru .canvasPiece1,
   .brandBoru .canvasPiece2,
   .brandBoru .canvasPiece3,
