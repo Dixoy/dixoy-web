@@ -625,3 +625,17 @@
   .closing p { font-size: 32px; }
   .closing a { justify-self: start; }
 }
+
+/* Láminas completas del PDF: no recortar ni fragmentar la composición original. */
+.brandBoard {
+  --story-bg: #f8f8f6;
+  --story-ink: #202a33;
+  --story-accent: #69737d;
+}
+.brandBoard .brandCanvas { display: block; }
+.brandBoard .canvasPiece { width: 100%; }
+.brandBoard .canvasImage { background: transparent; height: auto; overflow: visible; }
+.brandBoard .canvasPiece figcaption { padding-top: 18px; }
+@media (max-width: 600px) {
+  .brandBoard .canvasImage { width: 100%; }
+}
