@@ -15,6 +15,7 @@ type PortfolioBrand = {
   /** Keep unpublished until the corresponding PDF board is uploaded to GitHub. */
   published?: boolean;
   board?: boolean;
+  boardHeight?: number;
   images: { src: string; alt: string; label: string }[];
 };
 
@@ -81,6 +82,7 @@ const brands: PortfolioBrand[] = [
   },
   {
     slug: "corason",
+    boardHeight: 3552,
     number: "03",
     name: "Corason",
     type: "Identidad visual / Presentación de marca",
@@ -91,6 +93,7 @@ const brands: PortfolioBrand[] = [
   },
   {
     slug: "nitro",
+    boardHeight: 3280,
     number: "04",
     name: "Nitro",
     type: "Identidad visual / Presentación de marca",
@@ -101,6 +104,7 @@ const brands: PortfolioBrand[] = [
   },
   {
     slug: "saeyut",
+    boardHeight: 6394,
     number: "05",
     name: "Saeyut",
     type: "Identidad visual / Presentación de marca",
@@ -111,6 +115,7 @@ const brands: PortfolioBrand[] = [
   },
   {
     slug: "terrado",
+    boardHeight: 4261,
     number: "06",
     name: "Terrado",
     type: "Identidad visual / Presentación de marca",
@@ -151,12 +156,23 @@ export default function PortfolioGallery() {
                 key={item.src}
               >
                 <div className={styles.canvasImage}>
-                  <Image
-                    alt={item.alt}
-                    fill
-                    sizes={index === 0 ? "(max-width: 760px) 100vw, 90vw" : "(max-width: 760px) 100vw, 55vw"}
-                    src={item.src}
-                  />
+                  {brand.board ? (
+                    <Image
+                      alt={item.alt}
+                      height={brand.boardHeight ?? 3600}
+                      sizes="(max-width: 760px) 100vw, 90vw"
+                      src={item.src}
+                      style={{ display: "block", height: "auto", width: "100%" }}
+                      width={1600}
+                    />
+                  ) : (
+                    <Image
+                      alt={item.alt}
+                      fill
+                      sizes={index === 0 ? "(max-width: 760px) 100vw, 90vw" : "(max-width: 760px) 100vw, 55vw"}
+                      src={item.src}
+                    />
+                  )}
                 </div>
                 <figcaption>
                   <span>{String(index + 1).padStart(2, "0")}</span>
