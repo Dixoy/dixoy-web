@@ -112,8 +112,8 @@ export default function DesignPortfolioPage() {
           </h2>
         </div>
         <p>
-          Explora piezas gráficas de Ború y Nova Prime Studio. Cada imagen
-          puede ampliarse para apreciar sus detalles, sin salir de la galería.
+          Cada marca tiene su propio espacio visual. Iremos sumando nuevas
+          composiciones a este recorrido, sin interrumpir la experiencia.
         </p>
       </section>
 
