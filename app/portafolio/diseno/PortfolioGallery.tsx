@@ -1,115 +1,133 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 import styles from "./design.module.css";
 
-const works = [
-  { image: "/media/portfolio/design/nova-prime-fachada.jpg", title: "Nova Prime Studio — Fachada gráfica", category: "SPA · Diseño aplicado", size: "hero" },
-  { image: "/media/portfolio/design/boru-campana.png", title: "Ború — Campaña gráfica", category: "Publicidad · Diseño gráfico", size: "portrait" },
-  { image: "/media/portfolio/design/nova-prime-qr.jpg", title: "Nova Prime Studio — QR personalizado", category: "SPA · Comunicación visual", size: "square" },
-  { image: "/media/portfolio/design/nova-prime-identidad.jpg", title: "Nova Prime Studio — Identidad aplicada", category: "SPA · Gráfica para vitrinas", size: "landscape" },
-  { image: "/media/portfolio/design/boru-pared-01.png", title: "Ború — Diseño mural", category: "Publicidad · Diseño aplicado", size: "wide" },
-  { image: "/media/portfolio/design/nova-prime-floral.jpg", title: "Nova Prime Studio — Composición floral", category: "SPA · Diseño ornamental", size: "compact" },
-  { image: "/media/portfolio/design/boru-pared-02.png", title: "Ború — Gráfica de marca", category: "Publicidad · Diseño gráfico", size: "landscape" },
-  { image: "/media/portfolio/design/nova-prime-interior.jpg", title: "Nova Prime Studio — Diseño en el espacio", category: "SPA · Diseño aplicado", size: "square" },
-] as const;
-
-const sizeClass = {
-  hero: styles.heroCard,
-  portrait: styles.portraitCard,
-  square: styles.squareCard,
-  landscape: styles.landscapeCard,
-  wide: styles.wideCard,
-  compact: styles.compactCard,
+/**
+ * Un proyecto = una composición editorial. Para ampliar el portafolio,
+ * añade otra entrada al final del arreglo con sus imágenes reales.
+ */
+type PortfolioBrand = {
+  slug: string;
+  number: string;
+  name: string;
+  type: string;
+  intro: string;
+  theme: "boru" | "nova";
+  images: { src: string; alt: string; label: string }[];
 };
 
+const brands: PortfolioBrand[] = [
+  {
+    slug: "boru",
+    number: "01",
+    name: "Ború",
+    type: "Diseño gráfico / Comunicación de marca",
+    intro: "Una identidad que se expresa en mensajes, composiciones y gráfica de gran formato.",
+    theme: "boru",
+    images: [
+      {
+        src: "/media/portfolio/design/boru-campana.png",
+        alt: "Diseño de campaña gráfica de Ború",
+        label: "Campaña gráfica",
+      },
+      {
+        src: "/media/portfolio/design/boru-pared-01.png",
+        alt: "Primera composición de gráfica de pared de Ború",
+        label: "Gráfica de gran formato",
+      },
+      {
+        src: "/media/portfolio/design/boru-pared-02.png",
+        alt: "Segunda composición gráfica de pared de Ború",
+        label: "Sistema visual",
+      },
+    ],
+  },
+  {
+    slug: "nova-prime",
+    number: "02",
+    name: "Nova Prime Studio",
+    type: "Diseño aplicado / Espacios comerciales",
+    intro: "Un lenguaje ornamental que conecta la identidad del estudio con sus vitrinas y espacios interiores.",
+    theme: "nova",
+    images: [
+      {
+        src: "/media/portfolio/design/nova-prime-fachada.jpg",
+        alt: "Vitrina de Nova Prime Studio con diseño floral y gráfica informativa",
+        label: "Vitrina exterior",
+      },
+      {
+        src: "/media/portfolio/design/nova-prime-identidad.jpg",
+        alt: "Identidad de Nova Prime Studio aplicada en el vidrio",
+        label: "Identidad aplicada",
+      },
+      {
+        src: "/media/portfolio/design/nova-prime-qr.jpg",
+        alt: "Código QR personalizado en la gráfica de la fachada",
+        label: "Detalle gráfico",
+      },
+      {
+        src: "/media/portfolio/design/nova-prime-floral.jpg",
+        alt: "Composición floral blanca sobre vidrio vista desde el interior",
+        label: "Composición ornamental",
+      },
+      {
+        src: "/media/portfolio/design/nova-prime-interior.jpg",
+        alt: "Interior del SPA con diseño floral aplicado al ventanal",
+        label: "Diseño en contexto",
+      },
+    ],
+  },
+];
+
 export default function PortfolioGallery() {
-  const [active, setActive] = useState<number | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const previousFocusRef = useRef<HTMLElement | null>(null);
-  const isOpen = active !== null;
-
-  const openImage = (index: number) => {
-    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    setActive(index);
-  };
-
-  useEffect(() => {
-    if (!isOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setActive(null);
-      if (event.key === "ArrowRight") setActive((current) => current === null ? null : (current + 1) % works.length);
-      if (event.key === "ArrowLeft") setActive((current) => current === null ? null : (current + works.length - 1) % works.length);
-      if (event.key === "Tab") {
-        const buttons = dialogRef.current?.querySelectorAll<HTMLButtonElement>("button:not([disabled])");
-        if (!buttons?.length) return;
-        const first = buttons[0];
-        const last = buttons[buttons.length - 1];
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-      previousFocusRef.current?.focus();
-    };
-  }, [isOpen]);
-
   return (
-    <>
-      <div className={styles.gallery}>
-        {works.map((item, index) => (
-          <button
-            aria-label={`Ampliar: ${item.title}`}
-            className={`${styles.work} ${styles.workButton} ${sizeClass[item.size]}`}
-            key={item.image}
-            onClick={() => openImage(index)}
-            type="button"
-          >
-            <figure className={styles.media}>
-              <Image alt={item.title} fill sizes={item.size === "hero" || item.size === "wide" ? "(max-width: 900px) 100vw, 66vw" : "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 42vw"} src={item.image} />
-              <span className={styles.view}>Ampliar imagen ↗</span>
-            </figure>
-            <div className={styles.caption}>
-              <h3>{item.title}</h3>
-              <p>{item.category}</p>
-              <span>{String(index + 1).padStart(2, "0")}</span>
+    <div className={styles.editorialPortfolio}>
+      {brands.map((brand) => (
+        <article
+          aria-labelledby={`portfolio-${brand.slug}`}
+          className={`${styles.brandStory} ${brand.theme === "boru" ? styles.brandBoru : styles.brandNova}`}
+          id={brand.slug}
+          key={brand.slug}
+        >
+          <div className={styles.brandHeading}>
+            <div className={styles.brandIndex}>
+              <span>Proyecto / {brand.number}</span>
+              <span>DIXOY · Portafolio</span>
             </div>
-          </button>
-        ))}
-      </div>
-
-      {active !== null && (
-        <div aria-label="Imagen ampliada del portafolio" aria-modal="true" className={styles.lightbox} ref={dialogRef} role="dialog">
-          <button aria-label="Cerrar imagen" className={styles.lightboxBackdrop} onClick={() => setActive(null)} type="button" />
-          <div className={styles.lightboxPanel}>
-            <div className={styles.lightboxTop}>
-              <span>{String(active + 1).padStart(2, "0")} / {String(works.length).padStart(2, "0")}</span>
-              <button onClick={() => setActive(null)} ref={closeButtonRef} type="button">Cerrar ✕</button>
-            </div>
-            <div className={styles.lightboxImage}>
-              <Image alt={works[active].title} fill priority sizes="100vw" src={works[active].image} />
-            </div>
-            <div className={styles.lightboxBottom}>
-              <button aria-label="Imagen anterior" onClick={() => setActive((active + works.length - 1) % works.length)} type="button">← Anterior</button>
-              <div><strong>{works[active].title}</strong><span>{works[active].category}</span></div>
-              <button aria-label="Imagen siguiente" onClick={() => setActive((active + 1) % works.length)} type="button">Siguiente →</button>
+            <div className={styles.brandHeadingMain}>
+              <h2 id={`portfolio-${brand.slug}`}>{brand.name}</h2>
+              <div>
+                <p className={styles.brandType}>{brand.type}</p>
+                <p className={styles.brandIntro}>{brand.intro}</p>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </>
+          <div className={styles.brandCanvas}>
+            {brand.images.map((item, index) => (
+              <figure
+                className={`${styles.canvasPiece} ${styles[`canvasPiece${index + 1}`]}`}
+                key={item.src}
+              >
+                <div className={styles.canvasImage}>
+                  <Image
+                    alt={item.alt}
+                    fill
+                    sizes={index === 0 ? "(max-width: 760px) 100vw, 90vw" : "(max-width: 760px) 100vw, 55vw"}
+                    src={item.src}
+                  />
+                </div>
+                <figcaption>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  {item.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div aria-hidden="true" className={styles.brandEndMark}>
+            <span>{brand.name}</span>
+            <span>—</span>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }
