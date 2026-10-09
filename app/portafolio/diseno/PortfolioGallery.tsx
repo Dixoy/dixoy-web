@@ -11,7 +11,7 @@ type PortfolioBrand = {
   name: string;
   type: string;
   intro: string;
-  theme: "boru" | "nova";
+  theme?: "boru" | "nova";
   images: { src: string; alt: string; label: string }[];
 };
 
@@ -84,7 +84,7 @@ export default function PortfolioGallery() {
       {brands.map((brand) => (
         <article
           aria-labelledby={`portfolio-${brand.slug}`}
-          className={`${styles.brandStory} ${brand.theme === "boru" ? styles.brandBoru : styles.brandNova}`}
+          className={`${styles.brandStory} ${brand.theme === "boru" ? styles.brandBoru : brand.theme === "nova" ? styles.brandNova : ""}`}
           id={brand.slug}
           key={brand.slug}
         >
