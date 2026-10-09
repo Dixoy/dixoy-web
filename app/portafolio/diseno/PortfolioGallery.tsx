@@ -23,7 +23,7 @@ const brands: PortfolioBrand[] = [
   {
     slug: "corason",
     boardHeight: 3552,
-    number: "0-2",
+    number: "01",
     name: "Corason",
     type: "Identidad visual / Presentación de marca",
     intro: "Identidad y aplicaciones reunidas en una composición gráfica.",
@@ -34,7 +34,7 @@ const brands: PortfolioBrand[] = [
   {
     slug: "nitro",
     boardHeight: 3280,
-    number: "0-2",
+    number: "02",
     name: "Nitro",
     type: "Identidad visual / Presentación de marca",
     intro: "Una composición de marca con elementos de identidad y sus aplicaciones.",
@@ -45,7 +45,7 @@ const brands: PortfolioBrand[] = [
   {
     slug: "saeyut",
     boardHeight: 6394,
-    number: "0-2",
+    number: "03",
     name: "Saeyut",
     type: "Identidad visual / Presentación de marca",
     intro: "Una presentación extensa de identidad y lenguaje gráfico.",
@@ -56,7 +56,7 @@ const brands: PortfolioBrand[] = [
   {
     slug: "terrado",
     boardHeight: 4261,
-    number: "0-2",
+    number: "04",
     name: "Terrado",
     type: "Identidad visual / Presentación de marca",
     intro: "Una propuesta visual presentada como un único recorrido editorial.",
