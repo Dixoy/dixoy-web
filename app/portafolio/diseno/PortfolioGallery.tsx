@@ -12,6 +12,9 @@ type PortfolioBrand = {
   type: string;
   intro: string;
   theme?: "boru" | "nova";
+  /** Keep unpublished until the corresponding PDF board is uploaded to GitHub. */
+  published?: boolean;
+  board?: boolean;
   images: { src: string; alt: string; label: string }[];
 };
 
@@ -76,15 +79,55 @@ const brands: PortfolioBrand[] = [
       },
     ],
   },
+  {
+    slug: "corason",
+    number: "03",
+    name: "Corason",
+    type: "Identidad visual / Presentación de marca",
+    intro: "Identidad y aplicaciones reunidas en una composición gráfica.",
+    board: true,
+    published: false,
+    images: [{ src: "/media/portfolio/design/corason-mostrario.jpg", alt: "Mostrario editorial de identidad visual Corason", label: "Identidad y aplicaciones" }],
+  },
+  {
+    slug: "nitro",
+    number: "04",
+    name: "Nitro",
+    type: "Identidad visual / Presentación de marca",
+    intro: "Una composición de marca con elementos de identidad y sus aplicaciones.",
+    board: true,
+    published: false,
+    images: [{ src: "/media/portfolio/design/nitro-mostrario.jpg", alt: "Mostrario editorial de identidad visual Nitro", label: "Identidad y aplicaciones" }],
+  },
+  {
+    slug: "saeyut",
+    number: "05",
+    name: "Saeyut",
+    type: "Identidad visual / Presentación de marca",
+    intro: "Una presentación extensa de identidad y lenguaje gráfico.",
+    board: true,
+    published: false,
+    images: [{ src: "/media/portfolio/design/saeyut-mostrario.jpg", alt: "Mostrario editorial de identidad visual Saeyut", label: "Identidad y aplicaciones" }],
+  },
+  {
+    slug: "terrado",
+    number: "06",
+    name: "Terrado",
+    type: "Identidad visual / Presentación de marca",
+    intro: "Una propuesta visual presentada como un único recorrido editorial.",
+    board: true,
+    published: false,
+    images: [{ src: "/media/portfolio/design/terrado-mostrario.jpg", alt: "Mostrario editorial de identidad visual Terrado", label: "Identidad y aplicaciones" }],
+  },
 ];
 
 export default function PortfolioGallery() {
   return (
     <div className={styles.editorialPortfolio}>
-      {brands.map((brand) => (
+      {brands.filter((brand) => brand.published !== false).map((brand) => (
         <article
           aria-labelledby={`portfolio-${brand.slug}`}
-          className={`${styles.brandStory} ${brand.theme === "boru" ? styles.brandBoru : brand.theme === "nova" ? styles.brandNova : ""}`}
+          className={`${styles.brandStory} ${brand.theme === "boru" ? styles.brandBoru : brand.theme === "nova" ? styles.brandNova : ""} ${brand.board ? styles.brandBoard : ""}`}
           id={brand.slug}
           key={brand.slug}
         >
