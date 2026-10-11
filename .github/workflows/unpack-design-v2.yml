@@ -4,13 +4,14 @@ on:
   push:
     branches:
       - feat/design-portfolio-v1
+    paths:
+      - .github/workflows/unpack-design-v2.yml
 
 permissions:
   contents: write
 
 jobs:
   unpack:
-    if: github.event.head_commit.message == 'ci: unpack design v2 package'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
