@@ -111,12 +111,29 @@
   color: var(--portfolio-orange);
 }
 
+.heroTitleHeading {
+  min-width: 0;
+}
+
+.heroSignature {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(12px, 1.1vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 24px 0 0;
+}
+
+.heroSignature span {
+  color: rgba(255, 255, 255, 0.52);
+  font-weight: 400;
+}
+
 .heroIntro {
   display: grid;
   gap: 55px;
   grid-template-columns: 0.75fr 1fr;
   margin-left: 25%;
-  margin-top: 86px;
+  margin-top: 66px;
   max-width: 870px;
 }
 
@@ -369,10 +386,20 @@
     font-size: clamp(80px, 25vw, 130px);
   }
 
+  .heroSignature {
+    font-size: 12px;
+    margin-top: 18px;
+  }
+
+  .heroSignature span {
+    display: block;
+    margin-top: 4px;
+  }
+
   .heroIntro {
     gap: 20px;
     grid-template-columns: 1fr;
-    margin-top: 70px;
+    margin-top: 50px;
   }
 
   .heroIntro p:first-child {
