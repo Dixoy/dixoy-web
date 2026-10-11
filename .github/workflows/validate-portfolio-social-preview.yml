@@ -21,6 +21,9 @@ jobs:
         run: |
           find out -type f -path '*portafolio/diseno*' | sort
           test -f out/portafolio/diseno.html
-          find out -type f -name 'opengraph-image*' | grep -q .
+          test -s out/portafolio/diseno/opengraph-image.png
+          test -s out/portafolio/diseno/twitter-image.png
+          file out/portafolio/diseno/opengraph-image.png
           grep -q 'property="og:image"' out/portafolio/diseno.html
+          grep -q 'https://dixoy.co/portafolio/diseno/opengraph-image.png' out/portafolio/diseno.html
           grep -o 'property="og:image"[^>]*' out/portafolio/diseno.html
