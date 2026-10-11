@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require("node:fs");
 
 const galleryPath = "app/portafolio/diseno/PortfolioGallery.tsx";
