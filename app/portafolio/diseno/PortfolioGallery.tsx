@@ -83,6 +83,69 @@ export default function PortfolioGallery() {
         </div>
       </section>
 
+
+      <section className={styles.baru} aria-labelledby="baru-heading" id="fruteria-baru">
+        <div className={styles.baruIntro}>
+          <div>
+            <p className={styles.eyebrow}>Diseño gráfico · Visualización 3D</p>
+            <h2 id="baru-heading">Diseñar lo que <em>imaginamos.</em></h2>
+          </div>
+          <div className={styles.baruSummary}>
+            <strong>Frutería Barú</strong>
+            <p>Gráfica comercial, diseño de espacios y renders 3D.</p>
+          </div>
+        </div>
+
+        <figure className={styles.baruHero}>
+          <Image src={`${root}baru-render-espacio.webp`} alt="Render 3D del espacio de Frutería Barú con murales ilustrados y gráfica comercial" width={1200} height={654} sizes="(max-width: 760px) 100vw, 90vw" />
+          <figcaption>Visualización 3D / Propuesta del espacio</figcaption>
+        </figure>
+
+        <div className={styles.baruDesigns}>
+          <div className={styles.baruDesignHeading}>
+            <span className={styles.eyebrow}>Gráfica del espacio</span>
+            <p>Color, ilustración y una identidad que se extiende por las paredes.</p>
+          </div>
+          <figure className={styles.baruOrange}>
+            <Image src={`${root}baru-diseno-naranja.webp`} alt="Diseño original de mural naranja con ilustraciones de comida para Frutería Barú" width={2400} height={440} sizes="(max-width: 760px) 100vw, 90vw" />
+          </figure>
+          <figure className={styles.baruIllustrated}>
+            <Image src={`${root}baru-diseno-ilustrado.webp`} alt="Diseño original de mural con ilustraciones de alimentos para Frutería Barú" width={2400} height={537} sizes="(max-width: 760px) 100vw, 90vw" />
+          </figure>
+        </div>
+
+        <div className={styles.baruDetails}>
+          <figure className={styles.baruGreen}>
+            <Image src={`${root}baru-diseno-verde.webp`} alt="Diseño original del muro verde y logotipo aplicado de Frutería Barú" width={1900} height={430} sizes="(max-width: 760px) 100vw, 54vw" />
+            <figcaption>Diseño gráfico / Identidad aplicada</figcaption>
+          </figure>
+          <figure className={styles.baruRender}>
+            <Image src={`${root}baru-render-marca.webp`} alt="Render 3D de la pared verde con la gráfica de Frutería Barú" width={1175} height={669} sizes="(max-width: 760px) 100vw, 35vw" />
+            <figcaption>Visualización 3D</figcaption>
+          </figure>
+        </div>
+
+        <div className={styles.baruFinal}>
+          <div className={styles.baruMenus}>
+            <div className={styles.baruMenuText}>
+              <p className={styles.eyebrow}>Diseño editorial</p>
+              <h3>Hasta el último detalle.</h3>
+              <p>Cartas de comida que mantienen el lenguaje visual del espacio.</p>
+            </div>
+            <figure>
+              <Image src={`${root}baru-carta-frescos.webp`} alt="Carta de bebidas, fresas y postres diseñada para Frutería Barú" width={469} height={625} sizes="(max-width: 760px) 46vw, 18vw" />
+            </figure>
+            <figure>
+              <Image src={`${root}baru-carta-salchipapas.webp`} alt="Carta de comidas y salchipapas diseñada para Frutería Barú" width={469} height={625} sizes="(max-width: 760px) 46vw, 18vw" />
+            </figure>
+          </div>
+          <figure className={styles.baruReal}>
+            <Image src={`${root}baru-real-espacio.webp`} alt="Fotografía real del espacio de Frutería Barú con la gráfica instalada" width={1024} height={768} sizes="(max-width: 760px) 100vw, 32vw" />
+            <figcaption>Aplicación real / Frutería Barú</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <section className={styles.identity} aria-labelledby="identity-heading" id="identidad-visual">
         <div className={styles.identityIntro}>
           <p className={styles.eyebrow}>Identidad visual</p>
