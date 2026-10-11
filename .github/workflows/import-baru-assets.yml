@@ -54,18 +54,14 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Verify portfolio page and assets
+      - name: Verify portfolio page and exported assets
         run: |
-          python3 -m http.server 4173 --directory out >/tmp/baru-http.log 2>&1 &
-          server_pid=$!
-          trap 'kill "$server_pid"' EXIT
-          for attempt in {1..20}; do
-            if curl -fsS http://127.0.0.1:4173/portafolio/diseno >/tmp/portfolio-design.html; then
-              break
-            fi
-            sleep 1
-          done
-          test -s /tmp/portfolio-design.html
+          if test -f out/portafolio/diseno/index.html; then
+            page=out/portafolio/diseno/index.html
+          else
+            page=out/portafolio/diseno.html
+          fi
+          test -s "$page"
 
           for file in \
             baru-carta-frescos.webp \
@@ -77,10 +73,10 @@ jobs:
             baru-render-espacio.webp \
             baru-render-marca.webp
           do
-            grep -Fq "$file" /tmp/portfolio-design.html
-            curl -fsSI "http://127.0.0.1:4173/media/portfolio/design/$file" >/tmp/headers
-            grep -Eiq '^HTTP/.* 200' /tmp/headers
-            grep -Eiq '^Content-Type: image/webp' /tmp/headers
+            grep -Fq "$file" "$page"
+            exported="out/media/portfolio/design/$file"
+            test -s "$exported"
+            test "$(file --brief --mime-type "$exported")" = "image/webp"
           done
 
       - name: Commit assets and remove temporary files
