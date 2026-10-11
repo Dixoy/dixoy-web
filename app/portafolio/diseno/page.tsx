@@ -92,29 +92,8 @@ export default function DesignPortfolioPage() {
         </div>
       </section>
 
-      <section className={styles.statement}>
-        <p>Diseño en DIXOY</p>
-        <h2>
-          No diseñamos piezas aisladas. Construimos lenguajes visuales que
-          pueden vivir en una marca, un espacio, una prenda o una experiencia.
-        </h2>
-      </section>
-
       <section aria-label="Selección de trabajos de diseño">
         <PortfolioGallery />
-      </section>
-
-      <section className={styles.next}>
-        <div>
-          <p>El portafolio seguirá creciendo.</p>
-          <h2>
-            Identidad, campañas, editorial, digital y diseño aplicado.
-          </h2>
-        </div>
-        <p>
-          Cada marca tiene su propio espacio visual. Iremos sumando nuevas
-          composiciones a este recorrido, sin interrumpir la experiencia.
-        </p>
       </section>
 
       <section className={styles.closing}>

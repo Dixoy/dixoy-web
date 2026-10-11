@@ -1,215 +1,105 @@
+"use client";
+
 import Image from "next/image";
-import styles from "./design.module.css";
+import { useState } from "react";
+import styles from "./portfolio-flow.module.css";
 
-/**
- * Un proyecto = una composición editorial. Para ampliar el portafolio,
- * añade otra entrada al final del arreglo con sus imágenes reales.
- */
-type PortfolioBrand = {
-  slug: string;
-  number: string;
-  name: string;
-  type: string;
-  intro: string;
-  theme?: "boru" | "nova";
-  /** Keep unpublished until the corresponding PDF board is uploaded to GitHub. */
-  published?: boolean;
-  board?: boolean;
-  boardHeight?: number;
-  sourceUrl?: string;
-  images: { src: string; alt: string; label: string }[];
-};
+const root = "/media/portfolio/design/";
+const instagram = "https://www.instagram.com/p/C5ZnCk4J4sa/";
 
-const brands: PortfolioBrand[] = [
-  {
-    slug: "mci-tampa",
-    number: "01",
-    name: "MCI Tampa Bay",
-    type: "Diseño gráfico / Campaña para redes sociales",
-    intro: "Piezas bilingües y anuncios digitales para comunicar una nueva sede, presentados en su contexto de publicación.",
-    board: true,
-    boardHeight: 1067,
-    // Activar únicamente cuando mci-tampa-social.jpg esté subido a la rama.
-    published: true,
-    sourceUrl: "https://www.instagram.com/p/C5ZnCk4J4sa/",
-    images: [{
-      src: "/media/portfolio/design/mci-tampa-social.jpg",
-      alt: "Presentación editorial de publicaciones para MCI Tampa Bay, con captura de Instagram y piezas en español e inglés",
-      label: "Campaña digital / Publicaciones para redes",
-    }],
-  },
-  {
-    slug: "corason",
-    boardHeight: 3552,
-    number: "02",
-    name: "Corason",
-    type: "Identidad visual / Presentación de marca",
-    intro: "Identidad y aplicaciones reunidas en una composición gráfica.",
-    board: true,
-    published: true,
-    images: [{ src: "/media/portfolio/design/corason-mostrario.jpg", alt: "Mostrario editorial de identidad visual Corason", label: "Identidad y aplicaciones" }],
-  },
-  {
-    slug: "nitro",
-    boardHeight: 3280,
-    number: "03",
-    name: "Nitro",
-    type: "Identidad visual / Presentación de marca",
-    intro: "Una composición de marca con elementos de identidad y sus aplicaciones.",
-    board: true,
-    published: true,
-    images: [{ src: "/media/portfolio/design/nitro-mostrario.jpg", alt: "Mostrario editorial de identidad visual Nitro", label: "Identidad y aplicaciones" }],
-  },
-  {
-    slug: "saeyut",
-    boardHeight: 6394,
-    number: "04",
-    name: "Saeyut",
-    type: "Identidad visual / Presentación de marca",
-    intro: "Una presentación extensa de identidad y lenguaje gráfico.",
-    board: true,
-    published: true,
-    images: [{ src: "/media/portfolio/design/saeyut-mostrario.jpg", alt: "Mostrario editorial de identidad visual Saeyut", label: "Identidad y aplicaciones" }],
-  },
-  {
-    slug: "terrado",
-    boardHeight: 4261,
-    number: "05",
-    name: "Terrado",
-    type: "Identidad visual / Presentación de marca",
-    intro: "Una propuesta visual presentada como un único recorrido editorial.",
-    board: true,
-    published: true,
-    images: [{ src: "/media/portfolio/design/terrado-mostrario.jpg", alt: "Mostrario editorial de identidad visual Terrado", label: "Identidad y aplicaciones" }],
-  },
-  {
-    slug: "boru",
-    number: "06",
-    name: "Ború",
-    type: "Diseño gráfico / Comunicación de marca",
-    intro: "Una identidad que se expresa en mensajes, composiciones y gráfica de gran formato.",
-    theme: "boru",
-    images: [
-      {
-        src: "/media/portfolio/design/boru-campana.png",
-        alt: "Diseño de campaña gráfica de Ború",
-        label: "Campaña gráfica",
-      },
-      {
-        src: "/media/portfolio/design/boru-pared-01.png",
-        alt: "Primera composición de gráfica de pared de Ború",
-        label: "Gráfica de gran formato",
-      },
-      {
-        src: "/media/portfolio/design/boru-pared-02.png",
-        alt: "Segunda composición gráfica de pared de Ború",
-        label: "Sistema visual",
-      },
-    ],
-  },
-  {
-    slug: "nova-prime",
-    number: "07",
-    name: "Nova Prime Studio",
-    type: "Diseño aplicado / Espacios comerciales",
-    intro: "Un lenguaje ornamental que conecta la identidad del estudio con sus vitrinas y espacios interiores.",
-    theme: "nova",
-    images: [
-      {
-        src: "/media/portfolio/design/nova-prime-fachada.jpg",
-        alt: "Vitrina de Nova Prime Studio con diseño floral y gráfica informativa",
-        label: "Vitrina exterior",
-      },
-      {
-        src: "/media/portfolio/design/nova-prime-identidad.jpg",
-        alt: "Identidad de Nova Prime Studio aplicada en el vidrio",
-        label: "Identidad aplicada",
-      },
-      {
-        src: "/media/portfolio/design/nova-prime-qr.jpg",
-        alt: "Código QR personalizado en la gráfica de la fachada",
-        label: "Detalle gráfico",
-      },
-      {
-        src: "/media/portfolio/design/nova-prime-floral.jpg",
-        alt: "Composición floral blanca sobre vidrio vista desde el interior",
-        label: "Composición ornamental",
-      },
-      {
-        src: "/media/portfolio/design/nova-prime-interior.jpg",
-        alt: "Interior del SPA con diseño floral aplicado al ventanal",
-        label: "Diseño en contexto",
-      },
-    ],
-  },
+const socialVersions = [
+  { src: `${root}tampa-nueva-casa-es.webp`, alt: "MCI tiene nueva casa en Tampa, pieza gráfica en español", language: "Español" },
+  { src: `${root}tampa-nueva-casa-en.webp`, alt: "MCI has a new house in Tampa, social media design in English", language: "English" },
+];
+
+const identities = [
+  { name: "Corason", image: `${root}corason-mostrario.jpg`, width: 1600, height: 3552 },
+  { name: "Nitro", image: `${root}nitro-mostrario.jpg`, width: 1600, height: 3280 },
+  { name: "Saeyut", image: `${root}saeyut-mostrario.jpg`, width: 1600, height: 6394 },
+  { name: "Terrado", image: `${root}terrado-mostrario.jpg`, width: 1600, height: 4261 },
 ];
 
 export default function PortfolioGallery() {
+  const [version, setVersion] = useState(0);
+  const current = socialVersions[version];
+
   return (
-    <div className={styles.editorialPortfolio}>
-      {brands.filter((brand) => brand.published !== false).map((brand) => (
-        <article
-          aria-labelledby={`portfolio-${brand.slug}`}
-          className={`${styles.brandStory} ${brand.theme === "boru" ? styles.brandBoru : brand.theme === "nova" ? styles.brandNova : ""} ${brand.board ? styles.brandBoard : ""}`}
-          id={brand.slug}
-          key={brand.slug}
-        >
-          <div className={styles.brandHeading}>
-            <div className={styles.brandIndex}>
-              <span>Proyecto / {brand.number}</span>
-              <span>DIXOY · Portafolio</span>
-            </div>
-            <div className={styles.brandHeadingMain}>
-              <h2 id={`portfolio-${brand.slug}`}>{brand.name}</h2>
-              <div>
-                <p className={styles.brandType}>{brand.type}</p>
-                <p className={styles.brandIntro}>{brand.intro}</p>
-                {brand.sourceUrl && (
-                  <a className={styles.brandSourceLink} href={brand.sourceUrl} rel="noopener noreferrer" target="_blank">
-                    Ver publicación real ↗
-                  </a>
-                )}
+    <div className={styles.flow}>
+      <section className={styles.social} aria-labelledby="social-heading" id="diseno-redes">
+        <div className={styles.intro}>
+          <p className={styles.eyebrow}>Diseño para redes sociales</p>
+          <h2 id="social-heading">Ideas que <em>conectan.</em></h2>
+          <p>Mensajes que se convierten en experiencias visuales.</p>
+        </div>
+
+        <div className={styles.projectMeta}>
+          <span>MCI Tampa Bay</span>
+          <span>Comunicación digital · Español / Inglés</span>
+          <a href={instagram} target="_blank" rel="noopener noreferrer">Ver publicación real ↗</a>
+        </div>
+
+        <div className={styles.socialGrid}>
+          <figure className={styles.mainPoster}>
+            <Image src={`${root}tampa-nueva-ubicacion.webp`} alt="Diseño original de MCI Tampa Bay para anunciar su nueva ubicación" width={1080} height={1350} sizes="(max-width: 760px) 100vw, 50vw" />
+            <figcaption>Una nueva ubicación. Una nueva etapa.</figcaption>
+          </figure>
+          <div className={styles.socialAside}>
+            <div className={styles.languageHead}>
+              <span>Una idea, dos idiomas.</span>
+              <div role="group" aria-label="Idioma de la publicación" className={styles.languageToggle}>
+                {socialVersions.map((item, index) => (
+                  <button key={item.language} type="button" aria-pressed={version === index} onClick={() => setVersion(index)}>{item.language}</button>
+                ))}
               </div>
             </div>
+            <figure className={styles.languagePoster}>
+              <Image key={current.src} src={current.src} alt={current.alt} width={1080} height={1080} sizes="(max-width: 760px) 100vw, 48vw" />
+              <figcaption>Adaptación de mensaje / {current.language}</figcaption>
+            </figure>
           </div>
-          <div className={styles.brandCanvas}>
-            {brand.images.map((item, index) => (
-              <figure
-                className={`${styles.canvasPiece} ${styles[`canvasPiece${index + 1}`]}`}
-                key={item.src}
-              >
-                <div className={styles.canvasImage}>
-                  {brand.board ? (
-                    <Image
-                      alt={item.alt}
-                      height={brand.boardHeight ?? 3600}
-                      sizes="(max-width: 760px) 100vw, 90vw"
-                      src={item.src}
-                      style={{ display: "block", height: "auto", width: "100%" }}
-                      width={1600}
-                    />
-                  ) : (
-                    <Image
-                      alt={item.alt}
-                      fill
-                      sizes={index === 0 ? "(max-width: 760px) 100vw, 90vw" : "(max-width: 760px) 100vw, 55vw"}
-                      src={item.src}
-                    />
-                  )}
-                </div>
-                <figcaption>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  {item.label}
-                </figcaption>
-              </figure>
-            ))}
+        </div>
+
+        <div className={styles.wideStory}>
+          <p>El mismo mensaje.<br /><strong>Distintas formas de llegar.</strong></p>
+          <Image src={`${root}tampa-portada-facebook.webp`} alt="Portada horizontal para Facebook de MCI Tampa Bay" width={851} height={315} sizes="(max-width: 760px) 100vw, 80vw" />
+        </div>
+
+        <div className={styles.moreSocial}>
+          <div className={styles.moreText}>
+            <span className={styles.eyebrow}>Más allá de una campaña</span>
+            <h3>Comunicar también es acompañar.</h3>
+            <p>Diseños para momentos, encuentros y comunidad.</p>
           </div>
-          <div aria-hidden="true" className={styles.brandEndMark}>
-            <span>{brand.name}</span>
-            <span>—</span>
+          <div className={styles.supportingPair}>
+            <figure>
+              <Image src={`${root}tampa-dia-padre.webp`} alt="Publicación de MCI Tampa Bay por el Día del Padre" width={1152} height={2048} sizes="(max-width: 760px) 45vw, 22vw" />
+              <figcaption>Fechas especiales</figcaption>
+            </figure>
+            <figure>
+              <Image src={`${root}tampa-bienvenido.webp`} alt="Composición tipográfica Bienvenido, esta es tu casa, para MCI Tampa Bay" width={1132} height={1778} sizes="(max-width: 760px) 45vw, 22vw" />
+              <figcaption>Comunidad</figcaption>
+            </figure>
           </div>
-        </article>
-      ))}
+        </div>
+      </section>
+
+      <section className={styles.identity} aria-labelledby="identity-heading" id="identidad-visual">
+        <div className={styles.identityIntro}>
+          <p className={styles.eyebrow}>Identidad visual</p>
+          <h2 id="identity-heading">Marcas con <em>carácter.</em></h2>
+          <p>Cada identidad tiene una forma propia de expresarse.</p>
+        </div>
+        <div className={styles.identityGrid}>
+          {identities.map((item, index) => (
+            <figure className={styles.identityCard} key={item.name}>
+              <div className={styles.identityArt}>
+                <Image src={item.image} alt={`Diseño de identidad visual y aplicaciones de ${item.name}`} width={item.width} height={item.height} sizes="(max-width: 760px) 100vw, 45vw" />
+              </div>
+              <figcaption><span>{String(index + 1).padStart(2, "0")}</span><strong>{item.name}</strong><a href={item.image} target="_blank" rel="noopener noreferrer" aria-label={`Ver composición completa de ${item.name}`}>Ver composición ↗</a></figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
