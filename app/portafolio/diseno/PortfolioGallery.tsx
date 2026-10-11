@@ -16,6 +16,7 @@ type PortfolioBrand = {
   published?: boolean;
   board?: boolean;
   boardHeight?: number;
+  sourceUrl?: string;
   images: { src: string; alt: string; label: string }[];
 };
 
@@ -124,6 +125,23 @@ const brands: PortfolioBrand[] = [
       },
     ],
   },
+  {
+    slug: "mci-tampa",
+    number: "07",
+    name: "MCI Tampa Bay",
+    type: "Diseño gráfico / Campaña para redes sociales",
+    intro: "Piezas bilingües y anuncios digitales para comunicar una nueva sede, presentados en su contexto de publicación.",
+    board: true,
+    boardHeight: 1067,
+    // Activar únicamente cuando mci-tampa-social.jpg esté subido a la rama.
+    published: false,
+    sourceUrl: "https://www.instagram.com/p/C5ZnCk4J4sa/",
+    images: [{
+      src: "/media/portfolio/design/mci-tampa-social.jpg",
+      alt: "Presentación editorial de publicaciones para MCI Tampa Bay, con captura de Instagram y piezas en español e inglés",
+      label: "Campaña digital / Publicaciones para redes",
+    }],
+  },
 ];
 
 export default function PortfolioGallery() {
@@ -146,6 +164,11 @@ export default function PortfolioGallery() {
               <div>
                 <p className={styles.brandType}>{brand.type}</p>
                 <p className={styles.brandIntro}>{brand.intro}</p>
+                {brand.sourceUrl && (
+                  <a className={styles.brandSourceLink} href={brand.sourceUrl} rel="noopener noreferrer" target="_blank">
+                    Ver publicación real ↗
+                  </a>
+                )}
               </div>
             </div>
           </div>
