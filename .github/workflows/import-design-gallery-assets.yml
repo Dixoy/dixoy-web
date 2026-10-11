@@ -99,7 +99,7 @@ jobs:
 
       - name: Verify desktop and mobile gallery interactions
         run: |
-          npx serve -s out -l 4173 >/tmp/design-gallery-server.log 2>&1 &
+          npx serve out -l 4173 >/tmp/design-gallery-server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
 
