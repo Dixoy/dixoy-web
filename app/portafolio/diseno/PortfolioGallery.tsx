@@ -89,6 +89,41 @@ export default function PortfolioGallery() {
           <h2 id="identity-heading">Marcas con <em>carácter.</em></h2>
           <p>Cada identidad tiene una forma propia de expresarse.</p>
         </div>
+        <article className={styles.zooriFeature} aria-labelledby="zoori-title" id="zoori">
+          <div className={styles.zooriHero}>
+            <div className={styles.zooriMark}>
+              <Image
+                src={`${root}zoori-logo.webp`}
+                alt="Logotipo original de ZOORI, clínica veterinaria, en dorado sobre azul"
+                width={1100}
+                height={1100}
+                sizes="(max-width: 760px) 100vw, 48vw"
+              />
+            </div>
+            <div className={styles.zooriCopy}>
+              <span className={styles.zooriLabel}>Identidad creada desde cero por DIXOY</span>
+              <h3 id="zoori-title">ZOORI<span>.</span></h3>
+              <p>Una identidad creada desde su esencia.</p>
+              <span className={styles.zooriServices}>Naming · Logotipo · Sistema visual · Aplicaciones</span>
+              <div className={styles.zooriPalette} aria-label="Colores de la identidad ZOORI">
+                <span title="Azul clínico profundo" style={{ background: "#0E2A47" }} />
+                <span title="Dorado mate" style={{ background: "#C9A24D" }} />
+                <span title="Blanco clínico" style={{ background: "#F4F6F8" }} />
+                <span title="Gris técnico" style={{ background: "#6B7280" }} />
+              </div>
+            </div>
+          </div>
+          <div className={styles.zooriDetails}>
+            <figure>
+              <Image src={`${root}zoori-aplicaciones.webp`} alt="Aplicaciones de la identidad ZOORI en tarjetas, uniforme, material corporativo y elementos de marca" width={1574} height={886} sizes="(max-width: 760px) 100vw, 65vw" />
+              <figcaption>La marca en su entorno.</figcaption>
+            </figure>
+            <figure>
+              <Image src={`${root}zoori-variaciones.webp`} alt="Versiones corporativas y negativas del logotipo ZOORI" width={1574} height={886} sizes="(max-width: 760px) 100vw, 35vw" />
+              <figcaption>Un sistema visual consistente.</figcaption>
+            </figure>
+          </div>
+        </article>
         <div className={styles.identityGrid}>
           {identities.map((item, index) => (
             <figure className={styles.identityCard} key={item.name}>
