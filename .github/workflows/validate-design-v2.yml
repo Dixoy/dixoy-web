@@ -1,5 +1,5 @@
 name: Validate design portfolio v2
-# Validation revision 4
+# Validation revision 5
 on:
   push:
     branches:
@@ -49,10 +49,21 @@ jobs:
           exit 1
       - name: Check desktop and mobile
         run: npx playwright test .codex-tests/design-v2.spec.js --reporter=line
+      - name: Emit compact screenshot previews
+        if: always()
+        shell: bash
+        run: |
+          for shot in test-results/design-*.jpg; do
+            [ -f "$shot" ] || continue
+            echo "SCREENSHOT_BASE64_BEGIN $(basename "$shot")"
+            base64 -w0 "$shot"
+            echo
+            echo "SCREENSHOT_BASE64_END $(basename "$shot")"
+          done
       - name: Upload viewport screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: design-v2-screenshots
-          path: test-results/design-*.png
+          path: test-results/design-*.jpg
           if-no-files-found: warn
