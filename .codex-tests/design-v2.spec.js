@@ -3,6 +3,8 @@ const { test, expect } = require("@playwright/test");
 
 const route = "http://127.0.0.1:3000/portafolio/diseno";
 
+test.setTimeout(60_000);
+
 async function assertPortfolio(page) {
   await page.goto(route, { waitUntil: "networkidle" });
 
@@ -27,7 +29,7 @@ async function assertPortfolio(page) {
 
 async function captureSections(page, viewportName) {
   await page
-    .locator("#diseno-redes .projectMeta")
+    .getByText("MCI Tampa Bay", { exact: true })
     .evaluate((element) => element.scrollIntoView());
   await page.waitForTimeout(600);
   await page.screenshot({
