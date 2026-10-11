@@ -5,24 +5,24 @@ import styles from "./design.module.css";
 import PortfolioGallery from "./PortfolioGallery";
 
 export const metadata: Metadata = {
-  title: "Portafolio de diseño | DIXOY",
+  title: "Portafolio Julián Bonilla - DIXOY",
   description:
-    "Selección de diseño, identidad, comunicación visual y aplicaciones desarrolladas por DIXOY para marcas, espacios, eventos y productos.",
+    "Diseño gráfico, identidad visual y proyectos creativos. Una selección de trabajos de Julián Bonilla para DIXOY.",
   alternates: { canonical: "/portafolio/diseno" },
   openGraph: {
-    title: "Portafolio de diseño | DIXOY",
+    title: "Portafolio Julián Bonilla - DIXOY",
     description:
-      "Una selección visual de proyectos de diseño y comunicación desarrollados por DIXOY.",
-    images: [
-      {
-        alt: "Portafolio de diseño DIXOY",
-        height: 630,
-        url: "/og-dixoy.png",
-        width: 1200,
-      },
-    ],
+      "Diseño gráfico, identidad visual y proyectos creativos. Una selección de trabajos de Julián Bonilla para DIXOY.",
+    locale: "es_CO",
+    siteName: "DIXOY",
     type: "website",
     url: "https://dixoy.co/portafolio/diseno",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portafolio Julián Bonilla - DIXOY",
+    description:
+      "Diseño gráfico, identidad visual y proyectos creativos de Julián Bonilla para DIXOY.",
   },
 };
 
