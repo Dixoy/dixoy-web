@@ -1,34 +1,28 @@
-name: Import and validate Baru assets
+name: Import Baru assets
 
 on:
   push:
     branches:
-      - feat/design-portfolio-v1
-    paths:
-      - .github/workflows/import-baru-assets.yml
+      - "feat/design-portfolio-v1"
 
 permissions:
   contents: write
 
 jobs:
-  import-and-validate:
-    if: github.event.head_commit.message == 'chore: add temporary Baru asset workflow'
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out requested branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          ref: feat/design-portfolio-v1
+          ref: "feat/design-portfolio-v1"
           fetch-depth: 0
 
-      - name: Validate and extract only the eight WEBP files
-        shell: bash
+      - name: Extract eight WEBP assets
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile
 
-          archive = Path("BARU-imagenes-para-PR15.zip")
           expected = [
               "public/media/portfolio/design/baru-carta-frescos.webp",
               "public/media/portfolio/design/baru-carta-salchipapas.webp",
@@ -40,26 +34,18 @@ jobs:
               "public/media/portfolio/design/baru-render-marca.webp",
           ]
 
-          with ZipFile(archive) as package:
-              entries = sorted(
-                  info.filename.replace("\\", "/")
-                  for info in package.infolist()
-                  if not info.is_dir()
-              )
+          with ZipFile("BARU-imagenes-para-PR15.zip") as package:
+              entries = sorted(i.filename.replace("\\", "/") for i in package.infolist() if not i.is_dir())
               if entries != expected:
-                  raise SystemExit(
-                      "El ZIP no contiene exactamente las ocho rutas esperadas.\n"
-                      f"Esperadas: {expected}\nEncontradas: {entries}"
-                  )
-
-              for relative in expected:
-                  payload = package.read(relative)
-                  if len(payload) < 12 or payload[:4] != b"RIFF" or payload[8:12] != b"WEBP":
-                      raise SystemExit(f"No es un WEBP valido: {relative}")
-                  destination = Path(relative)
-                  destination.parent.mkdir(parents=True, exist_ok=True)
-                  destination.write_bytes(payload)
-                  print(f"{relative}: {len(payload)} bytes")
+                  raise SystemExit(f"Unexpected ZIP entries: {entries}")
+              for name in expected:
+                  data = package.read(name)
+                  if len(data) < 12 or data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+                      raise SystemExit(f"Invalid WEBP: {name}")
+                  target = Path(name)
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(data)
+                  print(name, len(data))
           PY
 
       - name: Install dependencies
@@ -68,44 +54,50 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Verify page references and exported images
-        shell: bash
+      - name: Verify portfolio page and assets
         run: |
           python3 -m http.server 4173 --directory out >/tmp/baru-http.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
           for attempt in {1..20}; do
-            if curl -fsS http://127.0.0.1:4173/portafolio/diseno >/tmp/portfolio-design.html; then
-              break
-            fi
+            curl -fsS http://127.0.0.1:4173/portafolio/diseno >/tmp/portfolio-design.html && break
             sleep 1
           done
+          test -s /tmp/portfolio-design.html
 
-          files=(
-            baru-carta-frescos.webp
-            baru-carta-salchipapas.webp
-            baru-diseno-ilustrado.webp
-            baru-diseno-naranja.webp
-            baru-diseno-verde.webp
-            baru-real-espacio.webp
-            baru-render-espacio.webp
+          for file in \
+            baru-carta-frescos.webp \
+            baru-carta-salchipapas.webp \
+            baru-diseno-ilustrado.webp \
+            baru-diseno-naranja.webp \
+            baru-diseno-verde.webp \
+            baru-real-espacio.webp \
+            baru-render-espacio.webp \
             baru-render-marca.webp
-          )
-
-          for file in "${files[@]}"; do
+          do
             grep -Fq "$file" /tmp/portfolio-design.html
-            headers=$(curl -fsSI "http://127.0.0.1:4173/media/portfolio/design/$file")
-            printf '%s\n' "$headers" | grep -Eiq '^HTTP/.* 200'
-            printf '%s\n' "$headers" | grep -Eiq '^Content-Type: image/webp'
+            curl -fsSI "http://127.0.0.1:4173/media/portfolio/design/$file" >/tmp/headers
+            grep -Eiq '^HTTP/.* 200' /tmp/headers
+            grep -Eiq '^Content-Type: image/webp' /tmp/headers
           done
 
-      - name: Commit only the requested assets
-        shell: bash
+      - name: Commit assets and remove temporary files
         run: |
-          git add --             public/media/portfolio/design/baru-carta-frescos.webp             public/media/portfolio/design/baru-carta-salchipapas.webp             public/media/portfolio/design/baru-diseno-ilustrado.webp             public/media/portfolio/design/baru-diseno-naranja.webp             public/media/portfolio/design/baru-diseno-verde.webp             public/media/portfolio/design/baru-real-espacio.webp             public/media/portfolio/design/baru-render-espacio.webp             public/media/portfolio/design/baru-render-marca.webp
-          git rm -- BARU-imagenes-para-PR15.zip
+          git add public/media/portfolio/design/baru-*.webp
+          git rm BARU-imagenes-para-PR15.zip
+          git rm .github/workflows/import-baru-assets.yml
 
-          expected=$(printf '%s\n'             BARU-imagenes-para-PR15.zip             public/media/portfolio/design/baru-carta-frescos.webp             public/media/portfolio/design/baru-carta-salchipapas.webp             public/media/portfolio/design/baru-diseno-ilustrado.webp             public/media/portfolio/design/baru-diseno-naranja.webp             public/media/portfolio/design/baru-diseno-verde.webp             public/media/portfolio/design/baru-real-espacio.webp             public/media/portfolio/design/baru-render-espacio.webp             public/media/portfolio/design/baru-render-marca.webp | sort)
+          expected=$(printf '%s\n' \
+            .github/workflows/import-baru-assets.yml \
+            BARU-imagenes-para-PR15.zip \
+            public/media/portfolio/design/baru-carta-frescos.webp \
+            public/media/portfolio/design/baru-carta-salchipapas.webp \
+            public/media/portfolio/design/baru-diseno-ilustrado.webp \
+            public/media/portfolio/design/baru-diseno-naranja.webp \
+            public/media/portfolio/design/baru-diseno-verde.webp \
+            public/media/portfolio/design/baru-real-espacio.webp \
+            public/media/portfolio/design/baru-render-espacio.webp \
+            public/media/portfolio/design/baru-render-marca.webp | sort)
           actual=$(git diff --cached --name-only | sort)
           test "$actual" = "$expected"
 
