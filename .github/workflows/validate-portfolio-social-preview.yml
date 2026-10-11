@@ -1,0 +1,29 @@
+name: Validate portfolio social preview
+
+on:
+  pull_request:
+    paths:
+      - "app/portafolio/diseno/**"
+      - ".github/workflows/validate-portfolio-social-preview.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Check generated Open Graph asset
+        run: |
+          find out -type f -path '*portafolio/diseno*' | sort
+          test -f out/portafolio/diseno.html
+          test -s out/portafolio/diseno/opengraph-image.png
+          test -s out/portafolio/diseno/twitter-image.png
+          file out/portafolio/diseno/opengraph-image.png
+          grep -q 'property="og:image"' out/portafolio/diseno.html
+          grep -q 'https://dixoy.co/portafolio/diseno/opengraph-image.png' out/portafolio/diseno.html
+          grep -o 'property="og:image"[^>]*' out/portafolio/diseno.html
