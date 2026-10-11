@@ -88,3 +88,40 @@
   .zooriDetails { gap: 30px; grid-template-columns: 1fr; }
   .zooriDetails figure:nth-child(2) { margin-top: 0; }
 }
+
+
+/* Barú: una pausa visual centrada en diseño gráfico y render 3D. */
+.baru { background: #f6f5f1; padding: clamp(70px, 9vw, 130px) max(24px, calc((100vw - 1380px) / 2)) clamp(75px, 9vw, 125px); }
+.baruIntro { align-items: end; display: grid; gap: 50px; grid-template-columns: minmax(0, 1fr) 245px; margin-bottom: clamp(45px, 6vw, 85px); }
+.baruIntro h2 { font-size: clamp(56px, 8.7vw, 128px); font-weight: 650; letter-spacing: -.075em; line-height: .92; margin: 18px 0 0; max-width: 1100px; }
+.baruIntro h2 em { color: #e87827; font-style: normal; }
+.baruSummary strong { font-size: 19px; letter-spacing: -.035em; }
+.baruSummary p { color: #6b777f; font-size: 13px; line-height: 1.5; margin: 8px 0 0; }
+.baruHero img { border-radius: 5px; }
+.baruDesigns { margin-top: clamp(60px, 8vw, 120px); }
+.baruDesignHeading { align-items: end; display: flex; gap: 20px; justify-content: space-between; margin-bottom: 24px; }
+.baruDesignHeading p { font-size: clamp(17px, 2.1vw, 28px); letter-spacing: -.045em; line-height: 1.2; margin: 0; max-width: 560px; }
+.baruOrange, .baruIllustrated { background: #fff; border-radius: 5px; overflow: hidden; }
+.baruOrange img, .baruIllustrated img { object-fit: contain; }
+.baruIllustrated { margin-top: 12px !important; }
+.baruDetails { align-items: center; display: grid; gap: clamp(24px, 5vw, 70px); grid-template-columns: 1.15fr .85fr; margin-top: clamp(65px, 8vw, 110px); }
+.baruGreen img { background: #e5ede1; border-radius: 4px; }
+.baruRender img { border-radius: 4px; }
+.baruFinal { align-items: end; display: grid; gap: clamp(28px, 5vw, 80px); grid-template-columns: 1.25fr .75fr; margin-top: clamp(75px, 10vw, 145px); }
+.baruMenus { align-items: end; display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.baruMenuText { grid-column: 1 / -1; margin-bottom: 14px; }
+.baruMenuText h3 { font-size: clamp(30px, 4.5vw, 58px); font-weight: 650; letter-spacing: -.06em; line-height: 1.05; margin: 12px 0; }
+.baruMenuText > p:last-child { color: #6b777f; font-size: 14px; margin: 0; }
+.baruMenus figure { min-width: 0; }
+.baruMenus img { border-radius: 4px; }
+.baruReal { align-self: end; }
+.baruReal img { border-radius: 4px; }
+@media (max-width: 760px) {
+  .baru { padding-left: 18px; padding-right: 18px; }
+  .baruIntro { align-items: start; gap: 22px; grid-template-columns: 1fr; }
+  .baruIntro h2 { font-size: clamp(54px, 13.7vw, 90px); }
+  .baruDesignHeading { align-items: start; flex-direction: column; gap: 12px; }
+  .baruDetails, .baruFinal { grid-template-columns: 1fr; }
+  .baruDetails { gap: 35px; }
+  .baruReal { max-width: 78%; justify-self: end; }
+}
