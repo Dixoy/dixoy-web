@@ -1,0 +1,65 @@
+name: Import ZOORI web images
+on:
+  push:
+    branches:
+      - feat/design-portfolio-v1
+    paths:
+      - .github/workflows/import-zoori-images.yml
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/design-portfolio-v1
+          fetch-depth: 0
+      - name: Validate and extract only ZOORI assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="ZOORI-imagenes-web-PR15.zip"
+          expected=(
+            "public/media/portfolio/design/zoori-logo.webp"
+            "public/media/portfolio/design/zoori-aplicaciones.webp"
+            "public/media/portfolio/design/zoori-variaciones.webp"
+          )
+
+          mapfile -t webp_files < <(unzip -Z1 "$archive" | tr -d '\r' | grep -E '\.webp$')
+          if [ "${#webp_files[@]}" -ne 3 ]; then
+            echo "Expected exactly 3 WEBP files; found ${#webp_files[@]}"
+            printf '%s\n' "${webp_files[@]}"
+            exit 1
+          fi
+
+          for path in "${expected[@]}"; do
+            if ! printf '%s\n' "${webp_files[@]}" | grep -Fxq "$path"; then
+              echo "Missing expected archive path: $path"
+              exit 1
+            fi
+          done
+
+          unzip -q "$archive" "${expected[@]}" -d .
+          for path in "${expected[@]}"; do
+            test -s "$path"
+            file "$path" | grep -qi 'webp'
+          done
+
+          git add -- "${expected[@]}"
+          mapfile -t staged < <(git diff --cached --name-only)
+          if [ "${#staged[@]}" -ne 3 ]; then
+            echo "Only the three ZOORI WEBP files may be staged."
+            printf '%s\n' "${staged[@]}"
+            exit 1
+          fi
+
+      - name: Commit assets
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "feat: add ZOORI portfolio images"
+          git push origin HEAD:feat/design-portfolio-v1
