@@ -74,7 +74,10 @@ export default function DesignPortfolioPage() {
 
         <div className={styles.heroTitle}>
           <p>Selección / 2026</p>
-          <h1>Diseño<span>.</span></h1>
+          <div className={styles.heroTitleHeading}>
+            <h1>Diseño<span>.</span></h1>
+            <p className={styles.heroSignature}>Julián Bonilla <span>· Dirección de diseño</span></p>
+          </div>
         </div>
 
         <div className={styles.heroIntro}>
