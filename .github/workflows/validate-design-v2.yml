@@ -1,5 +1,5 @@
 name: Validate design portfolio v2
-# Validation revision 3
+# Validation revision 4
 on:
   push:
     branches:
@@ -37,7 +37,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Start production server
         run: |
-          npm run start -- --hostname 127.0.0.1 > /tmp/dixoy-next.log 2>&1 &
+          npx --yes serve@14.2.5 out --listen 3000 --no-clipboard > /tmp/dixoy-next.log 2>&1 &
           echo $! > /tmp/dixoy-next.pid
           for attempt in {1..45}; do
             if curl --fail --silent http://127.0.0.1:3000/portafolio/diseno > /dev/null; then
