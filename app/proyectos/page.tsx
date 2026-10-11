@@ -30,6 +30,7 @@ export default function ProjectsPage() {
           <Link href="/soluciones">Soluciones</Link>
           <Link href="/servicios">Servicios</Link>
           <Link href="/proyectos">Proyectos</Link>
+          <Link href="/portafolio/diseno">Portafolio</Link>
           <Link href="/#nosotros">Nosotros</Link>
           <Link className={styles.cta} href="/#contacto">Hablemos ↗</Link>
         </nav>
