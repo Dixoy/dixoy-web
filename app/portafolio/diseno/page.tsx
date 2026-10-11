@@ -15,6 +15,12 @@ export const metadata: Metadata = {
       "Diseño gráfico, identidad visual y proyectos creativos. Una selección de trabajos de Julián Bonilla para DIXOY.",
     locale: "es_CO",
     siteName: "DIXOY",
+    images: [{
+      url: "https://dixoy.co/portafolio/diseno/opengraph-image.png",
+      width: 1200,
+      height: 630,
+      alt: "Diseño. Julián Bonilla · Dirección de diseño",
+    }],
     type: "website",
     url: "https://dixoy.co/portafolio/diseno",
   },
@@ -23,6 +29,7 @@ export const metadata: Metadata = {
     title: "Portafolio Julián Bonilla - DIXOY",
     description:
       "Diseño gráfico, identidad visual y proyectos creativos de Julián Bonilla para DIXOY.",
+    images: ["https://dixoy.co/portafolio/diseno/opengraph-image.png"],
   },
 };
 
