@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { test, expect } = require("@playwright/test");
 
 const route = "http://127.0.0.1:3000/portafolio/diseno";
