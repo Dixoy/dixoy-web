@@ -1,0 +1,244 @@
+name: Import and validate design gallery assets
+
+on:
+  push:
+    branches:
+      - "feat/design-portfolio-v1"
+
+permissions:
+  contents: write
+
+jobs:
+  validate-gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out requested branch
+        uses: actions/checkout@v4
+        with:
+          ref: "feat/design-portfolio-v1"
+          fetch-depth: 0
+
+      - name: Extract exactly fourteen WEBP assets
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+
+          expected = [
+              "public/media/portfolio/design/galeria-arepas-publicidad.webp",
+              "public/media/portfolio/design/galeria-cafe-progreso.webp",
+              "public/media/portfolio/design/galeria-carrera-4k.webp",
+              "public/media/portfolio/design/galeria-chimelo-grafica.webp",
+              "public/media/portfolio/design/galeria-chori-banner.webp",
+              "public/media/portfolio/design/galeria-chori-picante.webp",
+              "public/media/portfolio/design/galeria-empaque-corporativo.webp",
+              "public/media/portfolio/design/galeria-globo-rojo.webp",
+              "public/media/portfolio/design/galeria-interior-3d.webp",
+              "public/media/portfolio/design/galeria-itf-vitrina.webp",
+              "public/media/portfolio/design/galeria-motos-banner.webp",
+              "public/media/portfolio/design/galeria-nova-prime-floral.webp",
+              "public/media/portfolio/design/galeria-nova-prime-servicios.webp",
+              "public/media/portfolio/design/galeria-pinza-grill.webp",
+          ]
+
+          with ZipFile("DISENO-galeria-PR15.zip") as package:
+              entries = sorted(i.filename.replace("\\", "/") for i in package.infolist() if not i.is_dir())
+              if entries != expected:
+                  raise SystemExit(f"Unexpected ZIP entries: {entries}")
+              for name in expected:
+                  data = package.read(name)
+                  if len(data) < 12 or data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+                      raise SystemExit(f"Invalid WEBP: {name}")
+                  target = Path(name)
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(data)
+                  print(name, len(data))
+          PY
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify exported references and image files
+        run: |
+          if test -f out/portafolio/diseno/index.html; then
+            page=out/portafolio/diseno/index.html
+          else
+            page=out/portafolio/diseno.html
+          fi
+          test -s "$page"
+
+          for file in \
+            galeria-arepas-publicidad.webp \
+            galeria-cafe-progreso.webp \
+            galeria-carrera-4k.webp \
+            galeria-chimelo-grafica.webp \
+            galeria-chori-banner.webp \
+            galeria-chori-picante.webp \
+            galeria-empaque-corporativo.webp \
+            galeria-globo-rojo.webp \
+            galeria-interior-3d.webp \
+            galeria-itf-vitrina.webp \
+            galeria-motos-banner.webp \
+            galeria-nova-prime-floral.webp \
+            galeria-nova-prime-servicios.webp \
+            galeria-pinza-grill.webp
+          do
+            grep -Fq "$file" "$page"
+            exported="out/media/portfolio/design/$file"
+            test -s "$exported"
+            test "$(file --brief --mime-type "$exported")" = "image/webp"
+          done
+
+      - name: Install browser verification tools
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1 serve@14.2.5
+          npx playwright install --with-deps chromium
+
+      - name: Verify desktop and mobile gallery interactions
+        run: |
+          npx serve -s out -l 4173 >/tmp/design-gallery-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/portafolio/diseno >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:4173/portafolio/diseno >/dev/null
+
+          node <<'JS'
+          const { chromium } = require("playwright");
+
+          const expected = [
+            "galeria-carrera-4k.webp",
+            "galeria-globo-rojo.webp",
+            "galeria-nova-prime-floral.webp",
+            "galeria-arepas-publicidad.webp",
+            "galeria-cafe-progreso.webp",
+            "galeria-interior-3d.webp",
+            "galeria-chori-banner.webp",
+            "galeria-empaque-corporativo.webp",
+            "galeria-chimelo-grafica.webp",
+            "galeria-pinza-grill.webp",
+            "galeria-nova-prime-servicios.webp",
+            "galeria-motos-banner.webp",
+            "galeria-itf-vitrina.webp",
+            "galeria-chori-picante.webp",
+          ];
+
+          async function verify(viewport, label) {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage({ viewportSize: viewport });
+            const failedImages = [];
+            page.on("response", response => {
+              if (
+                response.url().includes("/media/portfolio/design/galeria-") &&
+                response.status() >= 400
+              ) failedImages.push(`${response.status()} ${response.url()}`);
+            });
+
+            await page.goto("http://127.0.0.1:4173/portafolio/diseno", {
+              waitUntil: "networkidle",
+              timeout: 90000,
+            });
+
+            const section = page.locator("#galeria-diseno");
+            await section.scrollIntoViewIfNeeded();
+            const tiles = section.locator("button");
+            if (await tiles.count() !== 14) {
+              throw new Error(`${label}: expected 14 gallery buttons`);
+            }
+
+            const images = section.locator("img");
+            if (await images.count() !== 14) {
+              throw new Error(`${label}: expected 14 gallery images`);
+            }
+
+            for (let index = 0; index < 14; index += 1) {
+              const image = images.nth(index);
+              await image.scrollIntoViewIfNeeded();
+              await image.waitFor({ state: "visible" });
+              await page.waitForFunction(
+                element => element.complete && element.naturalWidth > 0,
+                await image.elementHandle(),
+                { timeout: 30000 }
+              );
+              const source = await image.getAttribute("src");
+              if (!source || !source.includes(expected[index])) {
+                throw new Error(`${label}: unexpected source at ${index}: ${source}`);
+              }
+            }
+
+            if (failedImages.length) {
+              throw new Error(`${label}: failed images: ${failedImages.join(", ")}`);
+            }
+
+            const overflow = await page.evaluate(
+              () => document.documentElement.scrollWidth > document.documentElement.clientWidth
+            );
+            if (overflow) throw new Error(`${label}: horizontal overflow`);
+
+            await tiles.first().click();
+            const dialog = page.getByRole("dialog");
+            await dialog.waitFor({ state: "visible" });
+            await page.getByText("1 / 14", { exact: true }).waitFor();
+
+            await page.getByRole("button", { name: "Imagen siguiente" }).click();
+            await page.getByText("2 / 14", { exact: true }).waitFor();
+
+            await page.keyboard.press("ArrowLeft");
+            await page.getByText("1 / 14", { exact: true }).waitFor();
+
+            await page.getByRole("button", { name: "Imagen anterior" }).click();
+            await page.getByText("14 / 14", { exact: true }).waitFor();
+
+            await page.keyboard.press("Escape");
+            await dialog.waitFor({ state: "hidden" });
+            await browser.close();
+            console.log(`${label}: gallery, images, lightbox and navigation OK`);
+          }
+
+          (async () => {
+            await verify({ width: 1440, height: 1000 }, "desktop");
+            await verify({ width: 390, height: 844 }, "mobile");
+          })().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
+          JS
+
+      - name: Commit assets and remove temporary files
+        run: |
+          git add public/media/portfolio/design/galeria-*.webp
+          git rm DISENO-galeria-PR15.zip
+          git rm .github/workflows/import-design-gallery-assets.yml
+
+          expected=$(printf '%s\n' \
+            .github/workflows/import-design-gallery-assets.yml \
+            DISENO-galeria-PR15.zip \
+            public/media/portfolio/design/galeria-arepas-publicidad.webp \
+            public/media/portfolio/design/galeria-cafe-progreso.webp \
+            public/media/portfolio/design/galeria-carrera-4k.webp \
+            public/media/portfolio/design/galeria-chimelo-grafica.webp \
+            public/media/portfolio/design/galeria-chori-banner.webp \
+            public/media/portfolio/design/galeria-chori-picante.webp \
+            public/media/portfolio/design/galeria-empaque-corporativo.webp \
+            public/media/portfolio/design/galeria-globo-rojo.webp \
+            public/media/portfolio/design/galeria-interior-3d.webp \
+            public/media/portfolio/design/galeria-itf-vitrina.webp \
+            public/media/portfolio/design/galeria-motos-banner.webp \
+            public/media/portfolio/design/galeria-nova-prime-floral.webp \
+            public/media/portfolio/design/galeria-nova-prime-servicios.webp \
+            public/media/portfolio/design/galeria-pinza-grill.webp | sort)
+          actual=$(git diff --cached --name-only | sort)
+          test "$actual" = "$expected"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "feat: add design gallery images"
+          git push origin HEAD:feat/design-portfolio-v1
