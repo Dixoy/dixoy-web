@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./portfolio-flow.module.css";
 
 const root = "/media/portfolio/design/";
@@ -19,8 +19,135 @@ const identities = [
   { name: "Terrado", image: `${root}terrado-mostrario.jpg`, width: 1600, height: 4261 },
 ];
 
+
+const galleryItems = [
+  {
+    "src": "galeria-carrera-4k.webp",
+    "title": "Carrera 4K",
+    "category": "Diseño para eventos",
+    "width": 1303,
+    "height": 2000,
+    "ratio": 0.77
+  },
+  {
+    "src": "galeria-globo-rojo.webp",
+    "title": "Globo Rojo",
+    "category": "Identidad gráfica",
+    "width": 1684,
+    "height": 1684,
+    "ratio": 1
+  },
+  {
+    "src": "galeria-nova-prime-floral.webp",
+    "title": "Nova Prime Studio",
+    "category": "Gráfica decorativa",
+    "width": 1293,
+    "height": 1216,
+    "ratio": 0.92
+  },
+  {
+    "src": "galeria-arepas-publicidad.webp",
+    "title": "Arepas rellenas",
+    "category": "Publicidad gastronómica",
+    "width": 1800,
+    "height": 754,
+    "ratio": 1.45
+  },
+  {
+    "src": "galeria-cafe-progreso.webp",
+    "title": "Café El Progreso",
+    "category": "Etiquetas y empaque",
+    "width": 762,
+    "height": 1374,
+    "ratio": 0.7
+  },
+  {
+    "src": "galeria-interior-3d.webp",
+    "title": "Espacio interior",
+    "category": "Visualización 3D",
+    "width": 1528,
+    "height": 1029,
+    "ratio": 1.25
+  },
+  {
+    "src": "galeria-chori-banner.webp",
+    "title": "Chori Sanmi",
+    "category": "Publicidad exterior",
+    "width": 500,
+    "height": 2000,
+    "ratio": 0.67
+  },
+  {
+    "src": "galeria-empaque-corporativo.webp",
+    "title": "Empaque corporativo",
+    "category": "Diseño estructural",
+    "width": 1214,
+    "height": 1660,
+    "ratio": 0.78
+  },
+  {
+    "src": "galeria-chimelo-grafica.webp",
+    "title": "Chimelo",
+    "category": "Publicidad comercial",
+    "width": 1333,
+    "height": 2000,
+    "ratio": 0.79
+  },
+  {
+    "src": "galeria-pinza-grill.webp",
+    "title": "La Pinza Grill",
+    "category": "Cartas y comunicación",
+    "width": 1800,
+    "height": 874,
+    "ratio": 1.4
+  },
+  {
+    "src": "galeria-nova-prime-servicios.webp",
+    "title": "Nova Prime Studio",
+    "category": "Gráfica de servicios",
+    "width": 762,
+    "height": 2000,
+    "ratio": 0.65
+  },
+  {
+    "src": "galeria-motos-banner.webp",
+    "title": "Lavadero de motos",
+    "category": "Señalización publicitaria",
+    "width": 471,
+    "height": 2000,
+    "ratio": 0.66
+  },
+  {
+    "src": "galeria-itf-vitrina.webp",
+    "title": "Idear tu Estilo",
+    "category": "Diseño para vitrinas",
+    "width": 1800,
+    "height": 684,
+    "ratio": 1.5
+  },
+  {
+    "src": "galeria-chori-picante.webp",
+    "title": "Chori Sanmi",
+    "category": "Diseño promocional",
+    "width": 1590,
+    "height": 2000,
+    "ratio": 0.82
+  }
+];
+
 export default function PortfolioGallery() {
   const [version, setVersion] = useState(0);
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState<number | null>(null);
+  useEffect(() => {
+    if (activeGalleryIndex === null) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveGalleryIndex(null);
+      if (event.key === "ArrowRight") setActiveGalleryIndex(index => index === null ? null : (index + 1) % galleryItems.length);
+      if (event.key === "ArrowLeft") setActiveGalleryIndex(index => index === null ? null : (index + galleryItems.length - 1) % galleryItems.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeGalleryIndex]);
   const current = socialVersions[version];
 
   return (
@@ -198,6 +325,44 @@ export default function PortfolioGallery() {
           ))}
         </div>
       </section>
+
+      <section className={styles.gallery} aria-labelledby="gallery-heading" id="galeria-diseno">
+        <div className={styles.galleryIntro}>
+          <p className={styles.eyebrow}>Una selección de trabajos</p>
+          <h2 id="gallery-heading">Diseño en todas <em>sus formas.</em></h2>
+          <p>Distintas ideas. Diferentes maneras de expresarlas.</p>
+        </div>
+        <div className={styles.galleryMasonry}>
+          {galleryItems.map((item, index) => (
+            <figure className={styles.galleryTile} key={item.src}>
+              <button className={styles.galleryTileButton} type="button" onClick={() => setActiveGalleryIndex(index)} aria-label={`Ampliar ${item.title}: ${item.category}`}>
+                <span className={styles.galleryTileImage} style={{ aspectRatio: item.ratio }}>
+                  <Image src={`${root}${item.src}`} alt={`${item.title} — ${item.category}`} width={item.width} height={item.height} sizes="(max-width: 600px) 48vw, (max-width: 980px) 32vw, 24vw" />
+                </span>
+                <span className={styles.galleryTileCaption}><strong>{item.title}</strong><small>{item.category}</small></span>
+              </button>
+            </figure>
+          ))}
+        </div>
+      </section>
+      {activeGalleryIndex !== null && (
+        <div className={styles.galleryLightbox} role="presentation" onClick={() => setActiveGalleryIndex(null)}>
+          <div className={styles.galleryLightboxPanel} role="dialog" aria-modal="true" aria-label={galleryItems[activeGalleryIndex].title} onClick={event => event.stopPropagation()}>
+            <div className={styles.galleryLightboxTop}>
+              <span>{galleryItems[activeGalleryIndex].title} <small>· {galleryItems[activeGalleryIndex].category}</small></span>
+              <button type="button" onClick={() => setActiveGalleryIndex(null)} autoFocus aria-label="Cerrar imagen ampliada">Cerrar ×</button>
+            </div>
+            <div className={styles.galleryLightboxImage}>
+              <Image src={`${root}${galleryItems[activeGalleryIndex].src}`} alt={`${galleryItems[activeGalleryIndex].title} — ${galleryItems[activeGalleryIndex].category}`} width={galleryItems[activeGalleryIndex].width} height={galleryItems[activeGalleryIndex].height} sizes="95vw" />
+            </div>
+            <div className={styles.galleryLightboxControls}>
+              <button type="button" onClick={() => setActiveGalleryIndex((activeGalleryIndex + galleryItems.length - 1) % galleryItems.length)} aria-label="Imagen anterior">← Anterior</button>
+              <span>{activeGalleryIndex + 1} / {galleryItems.length}</span>
+              <button type="button" onClick={() => setActiveGalleryIndex((activeGalleryIndex + 1) % galleryItems.length)} aria-label="Imagen siguiente">Siguiente →</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
