@@ -1,0 +1,57 @@
+name: Validate design portfolio v2
+on:
+  push:
+    branches:
+      - feat/design-portfolio-v1
+    paths:
+      - .github/workflows/validate-design-v2.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/design-portfolio-v1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Validate component contracts
+        run: node .codex-tests/component-contracts.js
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npx tsc --noEmit
+      - name: Build
+        run: npm run build
+      - name: Install Playwright
+        run: |
+          npm install --no-save --package-lock=false @playwright/test@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start production server
+        run: |
+          npm run start -- --hostname 127.0.0.1 > /tmp/dixoy-next.log 2>&1 &
+          echo $! > /tmp/dixoy-next.pid
+          for attempt in {1..45}; do
+            if curl --fail --silent http://127.0.0.1:3000/portafolio/diseno > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/dixoy-next.log
+          exit 1
+      - name: Check desktop and mobile
+        run: npx playwright test .codex-tests/design-v2.spec.js --reporter=line
+      - name: Upload viewport screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-v2-screenshots
+          path: test-results/design-*.png
+          if-no-files-found: warn
