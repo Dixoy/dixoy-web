@@ -639,3 +639,16 @@
 @media (max-width: 600px) {
   .brandBoard .canvasImage { width: 100%; }
 }
+
+/* Enlace verificable a la publicación original cuando exista. */
+.brandSourceLink {
+  color: var(--story-ink);
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 650;
+  margin-top: 16px;
+  text-decoration: underline;
+  text-decoration-color: var(--story-accent);
+  text-underline-offset: 5px;
+}
+.brandSourceLink:hover { opacity: .72; }
