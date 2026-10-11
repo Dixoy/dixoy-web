@@ -25,20 +25,36 @@ async function assertPortfolio(page) {
   expect(hasHorizontalOverflow).toBe(false);
 }
 
+async function captureSections(page, viewportName) {
+  await page
+    .locator("#diseno-redes .projectMeta")
+    .evaluate((element) => element.scrollIntoView());
+  await page.waitForTimeout(600);
+  await page.screenshot({
+    path: `test-results/design-${viewportName}-mci.jpg`,
+    type: "jpeg",
+    quality: 32,
+  });
+
+  await page
+    .locator("#identidad-visual")
+    .evaluate((element) => element.scrollIntoView());
+  await page.waitForTimeout(800);
+  await page.screenshot({
+    path: `test-results/design-${viewportName}-identity.jpg`,
+    type: "jpeg",
+    quality: 32,
+  });
+}
+
 test("portfolio renders on desktop", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await assertPortfolio(page);
-  await page.screenshot({
-    path: "test-results/design-desktop.png",
-    fullPage: true,
-  });
+  await captureSections(page, "desktop");
 });
 
 test("portfolio renders on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await assertPortfolio(page);
-  await page.screenshot({
-    path: "test-results/design-mobile.png",
-    fullPage: true,
-  });
+  await captureSections(page, "mobile");
 });
