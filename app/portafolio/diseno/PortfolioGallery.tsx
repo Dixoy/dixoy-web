@@ -28,7 +28,7 @@ const brands: PortfolioBrand[] = [
     type: "Identidad visual / Presentación de marca",
     intro: "Identidad y aplicaciones reunidas en una composición gráfica.",
     board: true,
-    published: false,
+    published: true,
     images: [{ src: "/media/portfolio/design/corason-mostrario.jpg", alt: "Mostrario editorial de identidad visual Corason", label: "Identidad y aplicaciones" }],
   },
   {
@@ -39,7 +39,7 @@ const brands: PortfolioBrand[] = [
     type: "Identidad visual / Presentación de marca",
     intro: "Una composición de marca con elementos de identidad y sus aplicaciones.",
     board: true,
-    published: false,
+    published: true,
     images: [{ src: "/media/portfolio/design/nitro-mostrario.jpg", alt: "Mostrario editorial de identidad visual Nitro", label: "Identidad y aplicaciones" }],
   },
   {
@@ -50,7 +50,7 @@ const brands: PortfolioBrand[] = [
     type: "Identidad visual / Presentación de marca",
     intro: "Una presentación extensa de identidad y lenguaje gráfico.",
     board: true,
-    published: false,
+    published: true,
     images: [{ src: "/media/portfolio/design/saeyut-mostrario.jpg", alt: "Mostrario editorial de identidad visual Saeyut", label: "Identidad y aplicaciones" }],
   },
   {
@@ -61,7 +61,7 @@ const brands: PortfolioBrand[] = [
     type: "Identidad visual / Presentación de marca",
     intro: "Una propuesta visual presentada como un único recorrido editorial.",
     board: true,
-    published: false,
+    published: true,
     images: [{ src: "/media/portfolio/design/terrado-mostrario.jpg", alt: "Mostrario editorial de identidad visual Terrado", label: "Identidad y aplicaciones" }],
   },
   {
