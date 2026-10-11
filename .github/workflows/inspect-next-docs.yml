@@ -1,0 +1,33 @@
+name: Inspect Next.js guides
+on:
+  push:
+    branches:
+      - feat/design-portfolio-v1
+    paths:
+      - .github/workflows/inspect-next-docs.yml
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/design-portfolio-v1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Read relevant bundled guides
+        shell: bash
+        run: |
+          echo "NEXT_VERSION=$(node -p "require('next/package.json').version")"
+          find node_modules/next/dist/docs -type f | sort | grep -Ei '/(css|image|use-client|client-components)\.(md|mdx)$' | tee /tmp/relevant-next-docs.txt
+          while IFS= read -r guide; do
+            echo "::group::$guide"
+            sed -n '1,320p' "$guide"
+            echo "::endgroup::"
+          done < /tmp/relevant-next-docs.txt
