@@ -19,6 +19,8 @@ jobs:
       - run: npm run build
       - name: Check generated Open Graph asset
         run: |
-          test -f out/portafolio/diseno/index.html
-          find out/portafolio/diseno -maxdepth 2 -type f | sort
-          grep -o 'property="og:image"[^>]*' out/portafolio/diseno/index.html || true
+          find out -type f -path '*portafolio/diseno*' | sort
+          test -f out/portafolio/diseno.html
+          find out -type f -name 'opengraph-image*' | grep -q .
+          grep -q 'property="og:image"' out/portafolio/diseno.html
+          grep -o 'property="og:image"[^>]*' out/portafolio/diseno.html
