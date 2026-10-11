@@ -125,3 +125,42 @@
   .baruDetails { gap: 35px; }
   .baruReal { max-width: 78%; justify-self: end; }
 }
+
+
+/* Editorial gallery of varied work. */
+.gallery { background: #f7f7f4; padding: clamp(80px, 10vw, 150px) max(24px, calc((100vw - 1380px) / 2)) clamp(95px, 12vw, 165px); }
+.galleryIntro { margin: 0 0 clamp(42px, 6vw, 85px); max-width: 1000px; }
+.galleryIntro h2 { font-size: clamp(56px, 9vw, 128px); font-weight: 650; letter-spacing: -.077em; line-height: .95; margin: 18px 0 25px; }
+.galleryIntro h2 em { color: #e66e2d; font-style: normal; }
+.galleryIntro > p:last-child { color: #63707b; font-size: clamp(15px, 1.7vw, 21px); }
+.galleryMasonry { column-count: 4; column-gap: clamp(9px, 1.5vw, 20px); }
+.galleryTile { break-inside: avoid; display: inline-block; margin: 0 0 clamp(9px, 1.5vw, 20px) !important; vertical-align: top; width: 100%; }
+.galleryTileButton { background: #fff; border: 0; border-radius: 4px; color: #102b42; cursor: zoom-in; display: block; overflow: hidden; padding: 0; text-align: left; width: 100%; }
+.galleryTileImage { background: #e9e9e6; display: block; overflow: hidden; width: 100%; }
+.galleryTileImage img { height: 100%; object-fit: cover; transition: transform 400ms ease; width: 100%; }
+.galleryTileButton:hover img { transform: scale(1.045); }
+.galleryTileCaption { display: flex; flex-direction: column; gap: 5px; padding: 13px 14px 15px; }
+.galleryTileCaption strong { font-size: 12px; font-weight: 700; }
+.galleryTileCaption small { color: #71808b; font-size: 11px; }
+.galleryTileButton:focus-visible, .galleryLightbox button:focus-visible { outline: 3px solid #e66e2d; outline-offset: 3px; }
+.galleryLightbox { align-items: center; background: #07131dec; display: flex; inset: 0; justify-content: center; padding: 14px; position: fixed; z-index: 9999; }
+.galleryLightboxPanel { background: #f7f7f4; border-radius: 7px; display: flex; flex-direction: column; max-height: calc(100dvh - 28px); max-width: 1080px; min-width: 0; overflow: hidden; width: 100%; }
+.galleryLightboxTop, .galleryLightboxControls { align-items: center; display: flex; gap: 14px; justify-content: space-between; padding: 12px 18px; }
+.galleryLightboxTop span { font-size: 13px; font-weight: 750; }
+.galleryLightboxTop small { color: #6c7b84; font-size: 11px; font-weight: 400; }
+.galleryLightbox button { background: transparent; border: 0; color: #173149; cursor: pointer; font: inherit; font-size: 12px; font-weight: 650; padding: 9px; }
+.galleryLightboxImage { align-items: center; display: flex; flex: 1; justify-content: center; min-height: 0; overflow: auto; padding: 0 16px; }
+.galleryLightboxImage img { height: auto; max-height: calc(100dvh - 145px); object-fit: contain; width: auto; }
+.galleryLightboxControls span { color: #6c7b84; font-size: 11px; }
+@media (max-width: 980px) { .galleryMasonry { column-count: 3; } }
+@media (max-width: 600px) {
+  .gallery { padding-left: 18px; padding-right: 18px; }
+  .galleryIntro h2 { font-size: clamp(51px, 12.5vw, 75px); }
+  .galleryMasonry { column-count: 2; column-gap: 10px; }
+  .galleryTile { margin-bottom: 10px !important; }
+  .galleryTileCaption { padding: 10px; }
+  .galleryTileCaption strong { font-size: 11px; }
+  .galleryTileCaption small { font-size: 10px; }
+  .galleryLightboxTop small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .galleryTileImage img { transition: none; } }
