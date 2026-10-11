@@ -21,13 +21,13 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Read relevant bundled guides
+      - name: Read relevant bundled CSS guide
         shell: bash
         run: |
           echo "NEXT_VERSION=$(node -p "require('next/package.json').version")"
-          find node_modules/next/dist/docs -type f | sort | grep -Ei '/(css|image|use-client|client-components)\.(md|mdx)$' | tee /tmp/relevant-next-docs.txt
+          find node_modules/next/dist/docs/01-app -type f | sort | grep -Ei '(css|style)' | tee /tmp/css-guides.txt
           while IFS= read -r guide; do
             echo "::group::$guide"
-            sed -n '1,320p' "$guide"
+            sed -n '1,360p' "$guide"
             echo "::endgroup::"
-          done < /tmp/relevant-next-docs.txt
+          done < /tmp/css-guides.txt
