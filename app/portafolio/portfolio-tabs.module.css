@@ -1,0 +1,5 @@
+.tabs { display: flex; gap: 6px; padding: 16px max(22px, calc((100vw - 1380px) / 2)); background: #071f35; border-top: 1px solid #ffffff1a; }
+.tabs a { color: #c2cbd3; border: 1px solid transparent; border-radius: 999px; padding: 10px 20px; font-size: 12px; }
+.tabs a[aria-current="page"] { color: #fff; background: #ffffff10; border-color: #ffffff35; }
+.tabs a:hover { color: #fff; }
+.tabs a:focus-visible { outline: 2px solid #ed6b1d; outline-offset: 3px; }

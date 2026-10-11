@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./design.module.css";
 import PortfolioGallery from "./PortfolioGallery";
+import PortfolioTabs from "../PortfolioTabs";
 
 export const metadata: Metadata = {
   title: "Portafolio Julián Bonilla - DIXOY",
@@ -72,6 +73,8 @@ export default function DesignPortfolioPage() {
           </Link>
         </nav>
       </header>
+
+      <PortfolioTabs active="diseno" />
 
       <section className={styles.hero}>
         <div className={styles.heroMeta}>

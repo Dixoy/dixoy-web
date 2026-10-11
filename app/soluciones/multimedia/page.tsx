@@ -63,7 +63,7 @@ export default function MultimediaPage() {
             </p>
             <div className={media.heroActions}>
               <a href={whatsappLink} rel="noopener noreferrer" target="_blank">Hablar de mi producción</a>
-              <Link href="#espacio">Ver escenografía y espacio</Link>
+              <Link href="/portafolio/filmaker">Ver portafolio Filmmaker</Link>
             </div>
           </div>
 
