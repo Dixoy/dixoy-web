@@ -8,8 +8,11 @@ const gallery = fs.readFileSync(galleryPath, "utf8");
 const css = fs.readFileSync(cssPath, "utf8");
 const page = fs.readFileSync(pagePath, "utf8");
 
+if (!gallery.includes("MCI Tampa Bay")) {
+  throw new Error("MCI Tampa Bay project is missing");
+}
+
 const requiredOrder = [
-  "MCI Tampa Bay",
   '{ name: "Corason"',
   '{ name: "Nitro"',
   '{ name: "Saeyut"',
