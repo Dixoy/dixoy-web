@@ -22,9 +22,26 @@ type PortfolioBrand = {
 
 const brands: PortfolioBrand[] = [
   {
+    slug: "mci-tampa",
+    number: "01",
+    name: "MCI Tampa Bay",
+    type: "Diseño gráfico / Campaña para redes sociales",
+    intro: "Piezas bilingües y anuncios digitales para comunicar una nueva sede, presentados en su contexto de publicación.",
+    board: true,
+    boardHeight: 1067,
+    // Activar únicamente cuando mci-tampa-social.jpg esté subido a la rama.
+    published: true,
+    sourceUrl: "https://www.instagram.com/p/C5ZnCk4J4sa/",
+    images: [{
+      src: "/media/portfolio/design/mci-tampa-social.jpg",
+      alt: "Presentación editorial de publicaciones para MCI Tampa Bay, con captura de Instagram y piezas en español e inglés",
+      label: "Campaña digital / Publicaciones para redes",
+    }],
+  },
+  {
     slug: "corason",
     boardHeight: 3552,
-    number: "01",
+    number: "02",
     name: "Corason",
     type: "Identidad visual / Presentación de marca",
     intro: "Identidad y aplicaciones reunidas en una composición gráfica.",
@@ -35,7 +52,7 @@ const brands: PortfolioBrand[] = [
   {
     slug: "nitro",
     boardHeight: 3280,
-    number: "02",
+    number: "03",
     name: "Nitro",
     type: "Identidad visual / Presentación de marca",
     intro: "Una composición de marca con elementos de identidad y sus aplicaciones.",
@@ -46,7 +63,7 @@ const brands: PortfolioBrand[] = [
   {
     slug: "saeyut",
     boardHeight: 6394,
-    number: "03",
+    number: "04",
     name: "Saeyut",
     type: "Identidad visual / Presentación de marca",
     intro: "Una presentación extensa de identidad y lenguaje gráfico.",
@@ -57,7 +74,7 @@ const brands: PortfolioBrand[] = [
   {
     slug: "terrado",
     boardHeight: 4261,
-    number: "04",
+    number: "05",
     name: "Terrado",
     type: "Identidad visual / Presentación de marca",
     intro: "Una propuesta visual presentada como un único recorrido editorial.",
@@ -67,7 +84,7 @@ const brands: PortfolioBrand[] = [
   },
   {
     slug: "boru",
-    number: "05",
+    number: "06",
     name: "Ború",
     type: "Diseño gráfico / Comunicación de marca",
     intro: "Una identidad que se expresa en mensajes, composiciones y gráfica de gran formato.",
@@ -92,7 +109,7 @@ const brands: PortfolioBrand[] = [
   },
   {
     slug: "nova-prime",
-    number: "06",
+    number: "07",
     name: "Nova Prime Studio",
     type: "Diseño aplicado / Espacios comerciales",
     intro: "Un lenguaje ornamental que conecta la identidad del estudio con sus vitrinas y espacios interiores.",
@@ -124,23 +141,6 @@ const brands: PortfolioBrand[] = [
         label: "Diseño en contexto",
       },
     ],
-  },
-  {
-    slug: "mci-tampa",
-    number: "07",
-    name: "MCI Tampa Bay",
-    type: "Diseño gráfico / Campaña para redes sociales",
-    intro: "Piezas bilingües y anuncios digitales para comunicar una nueva sede, presentados en su contexto de publicación.",
-    board: true,
-    boardHeight: 1067,
-    // Activar únicamente cuando mci-tampa-social.jpg esté subido a la rama.
-    published: false,
-    sourceUrl: "https://www.instagram.com/p/C5ZnCk4J4sa/",
-    images: [{
-      src: "/media/portfolio/design/mci-tampa-social.jpg",
-      alt: "Presentación editorial de publicaciones para MCI Tampa Bay, con captura de Instagram y piezas en español e inglés",
-      label: "Campaña digital / Publicaciones para redes",
-    }],
   },
 ];
 
