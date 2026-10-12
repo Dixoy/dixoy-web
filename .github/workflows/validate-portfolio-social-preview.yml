@@ -37,6 +37,14 @@ jobs:
             grep -q "https://dixoy.co/portafolio/$slug/opengraph-image.png" "out/portafolio/$slug.html"
             grep -q 'name="twitter:image"' "out/portafolio/$slug.html"
           done
+      - name: Confirm portfolio creator credit
+        run: |
+          grep -q "Productor multimedia" out/portafolio/diseno.html
+          grep -q "opengraph-image.png?v=2" out/portafolio/diseno.html
+          if grep -q "Dirección de diseño" out/portafolio/diseno.html; then
+            echo "Outdated professional title in Diseño portfolio"
+            exit 1
+          fi
       - name: Check DIXOY favicon is exported and referenced
         run: |
           test -s out/favicon.svg
