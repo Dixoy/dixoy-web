@@ -79,3 +79,13 @@ test("R2 origin resolves full videos, previews and posters without mutating the 
 test("rejects origins with insecure schemes, credentials or accidental paths", () => {
   for (const value of ["http://media.example.com", "not-a-url", "https://user:secret@media.example.com", "https://media.example.com/folder", "https://media.example.com?token=secret", "https://media.example.com/#video"]) assert.throws(() => resolveFilmAssets([film], value));
 });
+
+test("video cards use a branded vector launch icon rather than an iOS emoji glyph", () => {
+  const gallery = readFileSync(new URL("../app/portafolio/filmaker/FilmGallery.tsx", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../app/portafolio/filmaker/film.module.css", import.meta.url), "utf8");
+  assert.match(gallery, /function OpenVideoIcon\(\)/);
+  assert.match(gallery, /<OpenVideoIcon \/>/);
+  assert.doesNotMatch(gallery, /className=\{styles\.playIcon\}[^>]*>↗<\/span>/);
+  assert.match(styles, /\.playIcon svg/);
+  assert.match(styles, /\.playIcon \{ width: 42px; height: 42px;/);
+});

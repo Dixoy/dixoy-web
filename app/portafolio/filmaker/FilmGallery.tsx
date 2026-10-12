@@ -5,6 +5,21 @@ import type { Film } from "./catalog";
 import { layoutFilms } from "./masonry";
 import styles from "./film.module.css";
 
+function OpenVideoIcon() {
+  return (
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M6.5 17.5 17.5 6.5M10 6.5h7.5V14"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="5.5" cy="19.5" r="1.4" fill="#ed6b1d" />
+    </svg>
+  );
+}
+
 function Preview({ film, index, total, style, playing, onOpen }: { film: Film; index: number; total: number; style?: CSSProperties; playing: boolean; onOpen: () => void }) {
   const button = useRef<HTMLButtonElement>(null);
   const video = useRef<HTMLVideoElement>(null);
@@ -53,7 +68,7 @@ function Preview({ film, index, total, style, playing, onOpen }: { film: Film; i
             onError={() => setUnavailable(true)}
             onPlaying={() => setUnavailable(false)}
           />
-          <span className={styles.playIcon} aria-hidden="true">↗</span>
+          <span className={styles.playIcon} aria-hidden="true"><OpenVideoIcon /></span>
           <span className={styles.cardHint}>{unavailable ? "Abrir video completo" : "Ver con sonido"}</span>
         </span>
       </button>
