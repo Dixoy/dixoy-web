@@ -3,6 +3,8 @@ name: Validate portfolio social preview
 on:
   pull_request:
     paths:
+      - "app/layout.tsx"
+      - "public/favicon.svg"
       - "app/portafolio/diseno/**"
       - "app/portafolio/filmaker/**"
       - "app/portafolio/PortfolioTabs.tsx"
@@ -35,3 +37,9 @@ jobs:
             grep -q "https://dixoy.co/portafolio/$slug/opengraph-image.png" "out/portafolio/$slug.html"
             grep -q 'name="twitter:image"' "out/portafolio/$slug.html"
           done
+      - name: Check DIXOY favicon is exported and referenced
+        run: |
+          test -s out/favicon.svg
+          grep -q '#0b3559' out/favicon.svg
+          grep -q 'fill="#ffffff"' out/favicon.svg
+          grep -q 'favicon.svg?v=2' out/index.html
