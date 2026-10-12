@@ -62,3 +62,17 @@ export function shuffledFilms(films: readonly Film[]): Film[] {
   }
   return shuffled;
 }
+
+// A public R2 custom domain can serve the same catalog paths without putting
+// the MP4 binaries in Git or the Cloudflare Pages deployment.
+export function resolveFilmAssets(films: readonly Film[], mediaOrigin?: string): Film[] {
+  if (!mediaOrigin) return [...films];
+  let origin: URL;
+  try { origin = new URL(mediaOrigin); }
+  catch { throw new Error("FILM_MEDIA_ORIGIN debe ser un dominio público HTTPS válido."); }
+  if (origin.protocol !== "https:" || origin.username || origin.password || origin.search || origin.hash || origin.pathname !== "/") {
+    throw new Error("FILM_MEDIA_ORIGIN debe contener solo el dominio HTTPS, sin rutas, credenciales ni parámetros.");
+  }
+  const resolve = (path?: string) => path ? `${origin.origin}${path}` : undefined;
+  return films.map(film => ({ ...film, src: resolve(film.src)!, previewSrc: resolve(film.previewSrc), poster: resolve(film.poster) }));
+}

@@ -1,20 +1,25 @@
 import type { Metadata } from "next";
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 import Image from "next/image";
 import Link from "next/link";
 import PortfolioTabs from "../PortfolioTabs";
 import catalog from "@/public/media/portfolio/filmaker/videos.json";
-import { parseFilms } from "./catalog";
+import { parseFilms, resolveFilmAssets } from "./catalog";
 import FilmGallery from "./FilmGallery";
 import shared from "../diseno/design.module.css";
 import styles from "./film.module.css";
 
-const films = parseFilms(catalog);
+const films = resolveFilmAssets(parseFilms(catalog), process.env.FILM_MEDIA_ORIGIN);
 for (const film of films) {
   for (const asset of [film.src, film.previewSrc, film.poster]) {
-    if (asset && !existsSync(join(process.cwd(), "public", asset))) {
+    if (!asset || !asset.startsWith("/")) continue;
+    const file = join(process.cwd(), "public", asset);
+    if (!existsSync(file)) {
       throw new Error(`Filmmaker: falta el archivo public${asset} (${film.title}).`);
+    }
+    if (statSync(file).size > 25 * 1024 * 1024) {
+      throw new Error(`Filmmaker: ${asset} supera los 25 MiB de Cloudflare Pages. Alojar los videos en R2 y configurar FILM_MEDIA_ORIGIN.`);
     }
   }
 }

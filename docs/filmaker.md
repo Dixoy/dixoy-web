@@ -2,7 +2,21 @@
 
 Ruta de la página: `/portafolio/filmaker` (se conserva la URL solicitada).
 
-## Subir los videos
+## Alojar la colección en Cloudflare R2
+
+Para la colección de 22 videos, usar R2. Los originales suman aproximadamente 2,78 GB y varios archivos superan el límite de 25 MiB por archivo de Cloudflare Pages. GitHub conserva el código y el catálogo; los videos completos, las vistas previas y las portadas se suben a R2.
+
+1. Subir el contenido de la carpeta preparada `upload/` a un bucket R2 dedicado al portafolio, conservando las claves `media/portfolio/filmaker/full/...`, `media/portfolio/filmaker/previews/...` y `media/portfolio/filmaker/posters/...`.
+2. Conectar un dominio público de medios al bucket. Usar en producción un dominio propio; el dominio `r2.dev` es para desarrollo.
+3. Configurar en Cloudflare Pages la variable de compilación `FILM_MEDIA_ORIGIN` con el dominio HTTPS, sin rutas ni parámetros. Ejemplo ilustrativo: `https://media.example.com`. Configurar tanto Preview como Production cuando corresponda.
+4. Verificar que los archivos se reproducen desde ese dominio. Después reemplazar `public/media/portfolio/filmaker/videos.json` por el catálogo preparado `videos.ready.json`. Los títulos derivados de nombres de archivo son provisionales.
+5. Volver a desplegar. El dominio de medios se incorpora durante la compilación estática; cambiar la variable requiere un nuevo despliegue.
+
+Los archivos MP4 deben servirse como `video/mp4` y las portadas como `image/webp`. Conservar el soporte de peticiones parciales (Range) para adelantar y retroceder dentro del video. No guardar claves de R2 ni URLs temporales con credenciales en el catálogo: el dominio configurado es público y se entrega al navegador.
+
+Sin `FILM_MEDIA_ORIGIN`, se mantiene el modo local descrito a continuación. La compilación verifica que existan sus archivos y que ninguno supere 25 MiB. Con R2, el catálogo se valida, pero la disponibilidad remota se comprueba tras la subida.
+
+## Alternativa para videos pequeños dentro del repositorio
 
 Subir los archivos a `public/media/portfolio/filmaker/` en GitHub. Usar nombres en minúsculas, sin espacios ni tildes: `nombre-proyecto.mp4`.
 
@@ -35,7 +49,7 @@ Ejemplo (reemplazar con archivos que realmente existan):
 - `description`: opcional.
 - Cada `id` debe ser único. Solo se admiten archivos dentro de esta carpeta, incluidas subcarpetas.
 
-Para muchos videos o archivos grandes, definir el almacenamiento antes de subir los originales. Esta primera versión usa archivos estáticos servidos por Cloudflare Pages, no incorpora Cloudflare Stream ni R2. Confirmar los límites vigentes del alojamiento al preparar los archivos.
+Este modo es para archivos pequeños. Para esta colección, usar el flujo de R2 indicado arriba. La integración es mediante un dominio público de medios; no incorpora Cloudflare Stream ni transforma videos en el servidor.
 
 ## Comportamiento
 

@@ -7,7 +7,7 @@ import ts from "typescript";
 // Use the project's TypeScript compiler without requiring a new test runner.
 const source = readFileSync(new URL("../app/portafolio/filmaker/catalog.ts", import.meta.url), "utf8");
 const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 } });
-const { parseFilms, shuffledFilms } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString("base64")}`);
+const { parseFilms, shuffledFilms, resolveFilmAssets } = await import(`data:text/javascript;base64,${Buffer.from(outputText).toString("base64")}`);
 const film = { id: "mi-proyecto", title: "Mi proyecto", category: "Campaña", src: "/media/portfolio/filmaker/mi-proyecto.mp4", width: 1080, height: 1920 };
 
 test("an empty catalog is a valid coming-soon page", () => assert.deepEqual(parseFilms([]), []));
@@ -38,7 +38,20 @@ test("shuffling preserves the full catalog without mutating the input", () => {
 });
 test("the committed catalog references files that exist", () => {
   const catalog = JSON.parse(readFileSync(new URL("../public/media/portfolio/filmaker/videos.json", import.meta.url), "utf8"));
-  for (const item of parseFilms(catalog)) {
-    for (const asset of [item.src, item.previewSrc, item.poster].filter(Boolean)) assert.ok(existsSync(join(process.cwd(), "public", asset)), `Missing asset: ${asset}`);
+  for (const item of resolveFilmAssets(parseFilms(catalog), process.env.FILM_MEDIA_ORIGIN)) {
+    for (const asset of [item.src, item.previewSrc, item.poster].filter(Boolean)) {
+      if (asset.startsWith("/")) assert.ok(existsSync(join(process.cwd(), "public", asset)), `Missing asset: ${asset}`);
+    }
   }
+});
+test("R2 origin resolves full videos, previews and posters without mutating the catalog", () => {
+  const item = { ...film, previewSrc: "/media/portfolio/filmaker/previews/mi-proyecto.mp4", poster: "/media/portfolio/filmaker/posters/mi-proyecto.webp" };
+  const [resolved] = resolveFilmAssets([item], "https://media.example.com/");
+  for (const key of ["src", "previewSrc", "poster"]) assert.equal(resolved[key], "https://media.example.com" + item[key]);
+  assert.equal(item.src, film.src);
+  assert.deepEqual(resolveFilmAssets([film]), [film]);
+  assert.equal(resolveFilmAssets([film], "https://media.example.com")[0].poster, undefined);
+});
+test("rejects origins with insecure schemes, credentials or accidental paths", () => {
+  for (const value of ["http://media.example.com", "not-a-url", "https://user:secret@media.example.com", "https://media.example.com/folder", "https://media.example.com?token=secret", "https://media.example.com/#video"]) assert.throws(() => resolveFilmAssets([film], value));
 });
