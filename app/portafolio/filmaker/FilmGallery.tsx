@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { shuffledFilms, type Film } from "./catalog";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
+import type { Film } from "./catalog";
+import { layoutFilms } from "./masonry";
 import styles from "./film.module.css";
 
-function Preview({ film, playing, onOpen }: { film: Film; playing: boolean; onOpen: () => void }) {
+function Preview({ film, index, total, style, playing, onOpen }: { film: Film; index: number; total: number; style?: CSSProperties; playing: boolean; onOpen: () => void }) {
   const button = useRef<HTMLButtonElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const [visible, setVisible] = useState(false);
@@ -37,8 +38,8 @@ function Preview({ film, playing, onOpen }: { film: Film; playing: boolean; onOp
   }, [playing, visible, loaded]);
 
   return (
-    <article className={styles.card}>
-      <button ref={button} type="button" className={styles.cardButton} onClick={onOpen} aria-label={`Ver ${film.title} con sonido`}>
+    <article className={styles.card} style={style}>
+      <button ref={button} type="button" className={styles.cardButton} onClick={onOpen} aria-label={`Abrir video ${index + 1} de ${total} con sonido`}>
         <span className={styles.media} style={{ aspectRatio: `${film.width} / ${film.height}` }}>
           <video
             ref={video}
@@ -55,7 +56,6 @@ function Preview({ film, playing, onOpen }: { film: Film; playing: boolean; onOp
           <span className={styles.playIcon} aria-hidden="true">↗</span>
           <span className={styles.cardHint}>{unavailable ? "Abrir video completo" : "Ver con sonido"}</span>
         </span>
-        <span className={styles.caption}><strong>{film.title}</strong><small>{film.category}</small></span>
       </button>
     </article>
   );
@@ -72,7 +72,7 @@ function FilmPlayer({ film }: { film: Film }) {
   }, []);
   return (
     <div className={styles.player}>
-      <video ref={video} src={film.src} poster={film.poster} controls playsInline preload="metadata" aria-label={film.title} onError={() => setFailed(true)} />
+      <video ref={video} src={film.src} poster={film.poster} controls playsInline preload="metadata" aria-label="Reproductor de video" onError={() => setFailed(true)} />
       {failed && <p className={styles.error} role="status">No pudimos reproducir este video. <a href={film.src} target="_blank" rel="noopener noreferrer">Abrir archivo original ↗</a></p>}
     </div>
   );
@@ -94,14 +94,14 @@ function Viewer({ films, index, onChange, onClose }: { films: Film[]; index: num
     };
   }, []);
   return (
-    <dialog ref={dialog} className={styles.dialog} aria-labelledby="film-title" onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) onClose(); }} onKeyDown={event => {
+    <dialog ref={dialog} className={styles.dialog} aria-label={`Video ${index + 1} de ${films.length}`} onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => { if (event.target === event.currentTarget) onClose(); }} onKeyDown={event => {
       // Preserve arrow keys for seeking and volume on the video controls.
       if (event.target instanceof HTMLVideoElement) return;
       if (event.key === "ArrowRight") { event.preventDefault(); onChange((index + 1) % films.length); }
       if (event.key === "ArrowLeft") { event.preventDefault(); onChange((index - 1 + films.length) % films.length); }
     }}>
       <div className={styles.dialogPanel}>
-        <div className={styles.dialogTop}><div><span>{film.category}</span><h2 id="film-title">{film.title}</h2></div><button type="button" autoFocus onClick={onClose} aria-label="Cerrar video">Cerrar ×</button></div>
+        <div className={styles.dialogTop}><span>DIXOY / Filmmaker</span><button type="button" autoFocus onClick={onClose} aria-label="Cerrar video">Cerrar ×</button></div>
         <FilmPlayer key={film.id} film={film} />
         {film.description && <p className={styles.description}>{film.description}</p>}
         <div className={styles.dialogBottom}>
@@ -115,11 +115,28 @@ function Viewer({ films, index, onChange, onClose }: { films: Film[]; index: num
 }
 
 export default function FilmGallery({ films }: { films: Film[] }) {
-  const [order, setOrder] = useState(films);
+  const grid = useRef<HTMLDivElement>(null);
+  const [geometry, setGeometry] = useState<{ width: number; columns: number; gap: number } | null>(null);
+  const layout = geometry ? layoutFilms(films, geometry.width, geometry.columns, geometry.gap) : null;
   const [autoplay, setAutoplay] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const close = useCallback(() => setActiveIndex(null), []);
+
+  useEffect(() => {
+    const element = grid.current;
+    if (!element) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const width = entry.contentRect.width;
+      if (width <= 0) return;
+      const css = getComputedStyle(element);
+      const columns = Number(css.getPropertyValue("--film-columns"));
+      const gap = parseFloat(css.getPropertyValue("--film-gap"));
+      setGeometry(previous => previous?.width === width && previous.columns === columns && previous.gap === gap ? previous : { width, columns, gap });
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [films.length]);
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -127,7 +144,6 @@ export default function FilmGallery({ films }: { films: Film[] }) {
     const preferenceChanged = () => setAutoplay(!motion.matches && !connection?.saveData);
     const visibilityChanged = () => setPageVisible(!document.hidden);
     const frame = requestAnimationFrame(() => {
-      setOrder(shuffledFilms(films));
       preferenceChanged();
       visibilityChanged();
     });
@@ -140,7 +156,7 @@ export default function FilmGallery({ films }: { films: Film[] }) {
       connection?.removeEventListener?.("change", preferenceChanged);
       document.removeEventListener("visibilitychange", visibilityChanged);
     };
-  }, [films]);
+  }, []);
 
   if (!films.length) return (
     <section className={styles.empty} aria-labelledby="coming-title">
@@ -160,11 +176,11 @@ export default function FilmGallery({ films }: { films: Film[] }) {
         <div><h2 id="films-heading">En movimiento <span>({films.length.toString().padStart(2, "0")})</span></h2><p>Explora sin sonido. Abre una historia para escucharla.</p></div>
         <button type="button" aria-pressed={autoplay} onClick={() => setAutoplay(value => !value)}>{autoplay ? "Pausar vistas previas Ⅱ" : "Reproducir vistas previas ▷"}</button>
       </div>
-      <div className={styles.masonry}>
-        {order.map((film, index) => <Preview key={film.id} film={film} playing={autoplay && pageVisible && activeIndex === null} onOpen={() => setActiveIndex(index)} />)}
+      <div ref={grid} className={styles.masonry} data-positioned={Boolean(layout)} style={layout ? { height: layout.height } : undefined}>
+        {films.map((film, index) => <Preview key={film.id} film={film} index={index} total={films.length} style={layout?.cards[index]} playing={autoplay && pageVisible && activeIndex === null} onOpen={() => setActiveIndex(index)} />)}
       </div>
       <noscript>Activa JavaScript para explorar la galería y abrir los videos.</noscript>
-      {activeIndex !== null && <Viewer films={order} index={activeIndex} onChange={setActiveIndex} onClose={close} />}
+      {activeIndex !== null && <Viewer films={films} index={activeIndex} onChange={setActiveIndex} onClose={close} />}
     </section>
   );
 }

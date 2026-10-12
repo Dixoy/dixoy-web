@@ -32,17 +32,16 @@
 .toolbar h2 span { color: #6c7680; font-size: 12px; margin-left: 5px; }
 .toolbar p { margin: 0; font-size: 12px; color: #536271; }
 .toolbar button { background: transparent; border: 1px solid #071f3533; border-radius: 99px; color: inherit; padding: 12px 16px; font: inherit; font-size: 11px; cursor: pointer; }
-.masonry { columns: 4; column-gap: 18px; }
-.card { break-inside: avoid; margin: 0 0 20px; }
+.masonry { --film-columns: 4; --film-gap: 18px; position: relative; display: grid; grid-template-columns: repeat(var(--film-columns), minmax(0, 1fr)); gap: var(--film-gap); align-items: start; }
+.masonry[data-positioned="true"] { display: block; }
+.masonry[data-positioned="true"] > .card { position: absolute; }
+.card { min-width: 0; margin: 0; }
 .cardButton { display: block; width: 100%; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; font: inherit; cursor: pointer; }
 .media { position: relative; display: block; width: 100%; overflow: hidden; border-radius: 5px; background: #102a3f; }
-.media video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
 .media::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, #0008); pointer-events: none; }
 .playIcon { position: absolute; z-index: 1; top: 12px; right: 12px; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #ffffff50; border-radius: 50%; background: #071f3555; color: white; }
 .cardHint { position: absolute; z-index: 1; bottom: 14px; left: 14px; right: 12px; font-size: 10px; color: #fff; }
-.caption { display: flex; flex-direction: column; gap: 5px; padding: 12px 2px 4px; }
-.caption strong { font-size: 13px; font-weight: 550; }
-.caption small { color: #596876; font-size: 10px; }
 .closing { background: #e8e7e0; padding: 55px var(--film-gutter); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
 .closing p { font-size: 12px; color: #536271; margin: 0 0 15px; }
 .closing h2 { margin: 0; font-size: clamp(29px, 3.5vw, 49px); font-weight: 500; letter-spacing: -.05em; }
@@ -54,7 +53,6 @@
 .dialogPanel { width: min(1100px, 100%); background: #0c2132; border: 1px solid #ffffff22; border-radius: 10px; overflow: hidden; }
 .dialogTop, .dialogBottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 24px; }
 .dialogTop span { color: #b8c3cc; font-size: 10px; }
-.dialogTop h2 { margin: 5px 0 0; font-size: 19px; font-weight: 500; }
 .dialog button { cursor: pointer; color: #fff; background: #ffffff09; border: 1px solid #ffffff33; border-radius: 99px; padding: 10px 16px; font: inherit; font-size: 12px; white-space: nowrap; }
 .dialog button:focus-visible, .dialog a:focus-visible { outline: 2px solid #ed6b1d; outline-offset: 3px; }
 .dialog button:disabled { opacity: .4; cursor: default; }
@@ -64,7 +62,7 @@
 .dialogBottom { font-size: 11px; }
 .error { padding: 15px 24px; font-size: 13px; margin: 0; }
 .error a { text-decoration: underline; }
-@media (max-width: 1050px) { .masonry { columns: 3; } .heroMain > p { font-size: 22px; } }
+@media (max-width: 1050px) { .masonry { --film-columns: 3; } .heroMain > p { font-size: 22px; } }
 @media (max-width: 760px) {
   .heroMain { align-items: flex-start; flex-direction: column; gap: 18px; }
   .heroMain h1 { font-size: clamp(58px, 14vw, 100px); }
@@ -81,11 +79,10 @@
   .emptyCopy h2 { font-size: 42px; }
   .closing { align-items: flex-start; flex-direction: column; padding-top: 40px; padding-bottom: 40px; }
   .toolbar { align-items: flex-start; flex-direction: column; gap: 16px; }
-  .masonry { columns: 2; column-gap: 12px; }
+  .masonry { --film-columns: 2; --film-gap: 12px; }
   .dialog { padding: 10px; }
   .dialogTop, .dialogBottom { padding: 14px; gap: 10px; }
-  .dialogTop h2 { font-size: 16px; }
   .dialog button { padding: 10px 12px; font-size: 11px; }
   .player video { height: 58dvh; }
 }
-@media (max-width: 380px) { .heroMain h1 { font-size: 54px; } .caption strong { font-size: 12px; } }
+@media (max-width: 380px) { .heroMain h1 { font-size: 54px; } }

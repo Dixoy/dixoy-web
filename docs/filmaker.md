@@ -11,7 +11,7 @@ La colección activa contiene 22 videos, 22 vistas previas de 8 segundos y 22 po
 1. Subir el contenido de la carpeta preparada `upload/` a un bucket R2 dedicado al portafolio, conservando las claves `media/portfolio/filmaker/full/...`, `media/portfolio/filmaker/previews/...` y `media/portfolio/filmaker/posters/...`.
 2. Conectar un dominio público de medios al bucket. Usar en producción un dominio propio; el dominio `r2.dev` es para desarrollo.
 3. Actualizar `public/media/portfolio/filmaker/media-origin.json` con el dominio HTTPS, sin rutas ni parámetros. Para sobrescribirlo por entorno, configurar `FILM_MEDIA_ORIGIN` en Cloudflare Pages (Preview/Production según corresponda).
-4. Verificar que los archivos se reproducen desde ese dominio. Después reemplazar `public/media/portfolio/filmaker/videos.json` por el catálogo preparado `videos.ready.json`. Los títulos derivados de nombres de archivo son provisionales.
+4. Verificar que los archivos se reproducen desde ese dominio. Después reemplazar `public/media/portfolio/filmaker/videos.json` por el catálogo preparado `videos.ready.json`. Los nombres de archivo se conservan solo como referencia interna; no aparecen como títulos en la interfaz.
 5. Volver a desplegar. El dominio de medios se incorpora durante la compilación estática; cambiar la variable requiere un nuevo despliegue.
 
 Los archivos MP4 deben servirse como `video/mp4` y las portadas como `image/webp`. Conservar el soporte de peticiones parciales (Range) para adelantar y retroceder dentro del video. No guardar claves de R2 ni URLs temporales con credenciales en el catálogo: el dominio configurado es público y se entrega al navegador.
@@ -44,6 +44,7 @@ Ejemplo (reemplazar con archivos que realmente existan):
 ]
 ```
 
+- `title`: nombre de archivo de referencia interna, sin extensión; no se muestra al visitante.
 - `src`: video completo. MP4 H.264 con audio AAC es una opción ampliamente compatible.
 - `width` y `height`: dimensiones reales; determinan el formato de la tarjeta.
 - `previewSrc`: opcional. Fragmento liviano para la cuadrícula, preferiblemente sin pista de audio. Si se omite, se usa el video completo, silenciado.
@@ -55,7 +56,7 @@ Este modo es para archivos pequeños. Para esta colección, usar el flujo de R2 
 
 ## Comportamiento
 
-El orden se mezcla una vez al entrar. Las tarjetas conservan su posición mientras se explora. Los videos visibles se reproducen sin sonido, en bucle y desde puntos de inicio distintos. Los que salen de pantalla, los de una pestaña oculta y las vistas previas detrás del visor se pausan. Hay un botón de pausa general.
+El orden de `videos.json` fija la prioridad: primero `1.1`, `1`, `2` hasta `12`, y luego las piezas restantes. La galería y el visor conservan esa secuencia. No se muestran títulos ni categorías por video. La distribución coloca cada pieza en la columna disponible más alta y reserva la altura total según las proporciones originales, sin depender de la carga del video. Los videos visibles se reproducen sin sonido, en bucle y desde puntos de inicio distintos. Los que salen de pantalla, los de una pestaña oculta y las vistas previas detrás del visor se pausan. Hay un botón de pausa general.
 
 El movimiento reducido y el ahorro de datos desactivan la reproducción automática inicial; el visitante puede activarla explícitamente. Si el navegador bloquea el autoplay, el video completo sigue disponible al abrir la tarjeta.
 

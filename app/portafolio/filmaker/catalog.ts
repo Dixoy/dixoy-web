@@ -54,15 +54,6 @@ export function parseFilms(input: unknown): Film[] {
   });
 }
 
-export function shuffledFilms(films: readonly Film[]): Film[] {
-  const shuffled = [...films];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
 // A public R2 custom domain can serve the same catalog paths without putting
 // the MP4 binaries in Git or the Cloudflare Pages deployment.
 export function resolveFilmAssets(films: readonly Film[], mediaOrigin?: string): Film[] {
