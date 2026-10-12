@@ -88,8 +88,8 @@ export const metadata: Metadata = {
     images: ["/og-dixoy.png"],
   },
   icons: {
-    icon: "/logos/logo-dixoy-icon.svg",
-    shortcut: "/logos/logo-dixoy-icon.svg",
+    icon: [{ url: "/favicon.svg?v=2", type: "image/svg+xml", sizes: "any" }],
+    shortcut: "/favicon.svg?v=2",
   },
 };
 
