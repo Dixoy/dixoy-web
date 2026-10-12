@@ -6,6 +6,9 @@
 .heroMain { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 26px 0 30px; }
 .heroMain h1 { font-size: clamp(60px, 10.5vw, 155px); font-weight: 550; letter-spacing: -.075em; line-height: 1.05; margin: 0; }
 .heroMain h1 span, .closing h2 span { color: #ed6b1d; }
+.heroTitleBlock { min-width: 0; }
+.heroSignature { font-size: clamp(18px, 2.05vw, 28px); font-weight: 600; letter-spacing: -.035em; line-height: 1.25; margin: 9px 0 0; }
+.heroSignature span { display: block; color: #a8b8c6; font-size: clamp(11px, 1vw, 14px); font-weight: 400; letter-spacing: 0; margin-top: 4px; }
 .heroMain > p { font-size: clamp(20px, 2.4vw, 35px); line-height: 1.25; letter-spacing: -.025em; margin: 0; }
 .heroMain em { font-family: Georgia, serif; font-weight: 400; color: #ed6b1d; }
 .heroBottom { border-top: 1px solid #ffffff26; padding-top: 23px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
@@ -66,6 +69,8 @@
 @media (max-width: 760px) {
   .heroMain { align-items: flex-start; flex-direction: column; gap: 18px; }
   .heroMain h1 { font-size: clamp(58px, 14vw, 100px); }
+  .heroSignature { font-size: 22px; margin-top: 11px; }
+  .heroSignature span { font-size: 12px; }
   .heroMain > p br { display: none; }
   .heroMain > p em::before { content: " "; }
   .eyebrow > span:last-child { display: none; }
