@@ -24,16 +24,21 @@ for (const film of films) {
     }
   }
 }
-const title = "Filmmaker · Portafolio audiovisual | DIXOY";
-const description = "Historias en movimiento. Explora el portafolio audiovisual de DIXOY: producción, contenido y proyectos en video.";
+const title = "Filmmaker · Julián Bonilla | DIXOY";
+const description = "Portafolio audiovisual de Julián Bonilla, productor multimedia en DIXOY. Dirección, producción y edición de historias en movimiento.";
+const socialImage = "https://dixoy.co/portafolio/filmaker/opengraph-image.png";
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/portafolio/filmaker" },
   robots: { index: films.length > 0, follow: true, googleBot: { index: films.length > 0, follow: true } },
-  openGraph: { title, description, url: "https://dixoy.co/portafolio/filmaker", siteName: "DIXOY", locale: "es_CO", type: "website", images: ["/og-dixoy.png"] },
-  twitter: { card: "summary_large_image", title, description, images: ["/og-dixoy.png"] },
+  openGraph: {
+    title, description, url: "https://dixoy.co/portafolio/filmaker", siteName: "DIXOY",
+    locale: "es_CO", type: "website",
+    images: [{ url: socialImage, width: 1200, height: 630, alt: "Filmmaker · Julián Bonilla, productor multimedia en DIXOY" }],
+  },
+  twitter: { card: "summary_large_image", title, description, images: [socialImage] },
 };
 
 export default function FilmPortfolioPage() {
@@ -55,7 +60,10 @@ export default function FilmPortfolioPage() {
       <section className={styles.hero}>
         <div className={styles.eyebrow}><span>Portafolio DIXOY / Audiovisual</span><span>Bogotá · Colombia</span></div>
         <div className={styles.heroMain}>
-          <h1>Filmmaker<span>.</span></h1>
+          <div className={styles.heroTitleBlock}>
+            <h1>Filmmaker<span>.</span></h1>
+            <p className={styles.heroSignature}>Julián Bonilla<span>Productor multimedia</span></p>
+          </div>
           <p>Historias que<br /><em>se mueven.</em></p>
         </div>
         <div className={styles.heroBottom}>
