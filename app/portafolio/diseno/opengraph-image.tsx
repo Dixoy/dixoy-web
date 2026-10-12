@@ -62,7 +62,7 @@ export default function OpenGraphImage() {
               Julián Bonilla
             </span>
             <span style={{ color: "#b6c6d1", fontSize: 22, marginTop: 8 }}>
-              Dirección de diseño · DIXOY
+              Productor multimedia · DIXOY
             </span>
           </div>
         </div>
