@@ -2,19 +2,21 @@
 
 Ruta de la página: `/portafolio/filmaker` (se conserva la URL solicitada).
 
-## Alojar la colección en Cloudflare R2
+## Alojamiento de la colección en Cloudflare R2
 
-Para la colección de 22 videos, usar R2. Los originales suman aproximadamente 2,78 GB y varios archivos superan el límite de 25 MiB por archivo de Cloudflare Pages. GitHub conserva el código y el catálogo; los videos completos, las vistas previas y las portadas se suben a R2.
+Bucket dedicado: `dixoy-portfolio-media`. Dominio público: `https://portafolio-media.dixoy.co`. El origen público queda versionado en `public/media/portfolio/filmaker/media-origin.json`, para que las compilaciones locales, de GitHub y de Cloudflare usen la misma dirección. No contiene credenciales. `FILM_MEDIA_ORIGIN` es una sobrescritura opcional para usar otro origen; un valor vacío activa el modo local.
+
+La colección activa contiene 22 videos, 22 vistas previas de 8 segundos y 22 portadas (aproximadamente 599 MB en total). Los 66 objetos subidos se verificaron comparando tamaño, checksum MD5 y tipo de contenido con los archivos preparados. Los originales suman aproximadamente 2,78 GB y varios archivos superan el límite de 25 MiB por archivo de Cloudflare Pages. GitHub conserva el código y el catálogo; los videos completos, las vistas previas y las portadas se suben a R2.
 
 1. Subir el contenido de la carpeta preparada `upload/` a un bucket R2 dedicado al portafolio, conservando las claves `media/portfolio/filmaker/full/...`, `media/portfolio/filmaker/previews/...` y `media/portfolio/filmaker/posters/...`.
 2. Conectar un dominio público de medios al bucket. Usar en producción un dominio propio; el dominio `r2.dev` es para desarrollo.
-3. Configurar en Cloudflare Pages la variable de compilación `FILM_MEDIA_ORIGIN` con el dominio HTTPS, sin rutas ni parámetros. Ejemplo ilustrativo: `https://media.example.com`. Configurar tanto Preview como Production cuando corresponda.
+3. Actualizar `public/media/portfolio/filmaker/media-origin.json` con el dominio HTTPS, sin rutas ni parámetros. Para sobrescribirlo por entorno, configurar `FILM_MEDIA_ORIGIN` en Cloudflare Pages (Preview/Production según corresponda).
 4. Verificar que los archivos se reproducen desde ese dominio. Después reemplazar `public/media/portfolio/filmaker/videos.json` por el catálogo preparado `videos.ready.json`. Los títulos derivados de nombres de archivo son provisionales.
 5. Volver a desplegar. El dominio de medios se incorpora durante la compilación estática; cambiar la variable requiere un nuevo despliegue.
 
 Los archivos MP4 deben servirse como `video/mp4` y las portadas como `image/webp`. Conservar el soporte de peticiones parciales (Range) para adelantar y retroceder dentro del video. No guardar claves de R2 ni URLs temporales con credenciales en el catálogo: el dominio configurado es público y se entrega al navegador.
 
-Sin `FILM_MEDIA_ORIGIN`, se mantiene el modo local descrito a continuación. La compilación verifica que existan sus archivos y que ninguno supere 25 MiB. Con R2, el catálogo se valida, pero la disponibilidad remota se comprueba tras la subida.
+Con un origen vacío, se activa el modo local descrito a continuación. La compilación verifica que existan sus archivos y que ninguno supere 25 MiB. Con R2, el catálogo se valida, pero la disponibilidad remota se comprueba tras la subida.
 
 ## Alternativa para videos pequeños dentro del repositorio
 
@@ -68,7 +70,7 @@ npm run build
 
 La compilación comprueba los campos del catálogo y la existencia de los archivos. Probar reproducción en escritorio, iPhone y Android antes de publicar la colección definitiva; algunos dispositivos restringen los videos simultáneos.
 
-Con la primera entrada, la página permite indexación automáticamente. Añadir entonces a `public/sitemap.xml`:
+Con la primera entrada, la página permite indexación automáticamente. La colección activa incluye esta ruta en `public/sitemap.xml`:
 
 ```xml
 <url><loc>https://dixoy.co/portafolio/filmaker</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>

@@ -5,12 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import PortfolioTabs from "../PortfolioTabs";
 import catalog from "@/public/media/portfolio/filmaker/videos.json";
+import mediaConfig from "@/public/media/portfolio/filmaker/media-origin.json";
 import { parseFilms, resolveFilmAssets } from "./catalog";
 import FilmGallery from "./FilmGallery";
 import shared from "../diseno/design.module.css";
 import styles from "./film.module.css";
 
-const films = resolveFilmAssets(parseFilms(catalog), process.env.FILM_MEDIA_ORIGIN);
+const films = resolveFilmAssets(parseFilms(catalog), process.env.FILM_MEDIA_ORIGIN ?? mediaConfig.origin);
 for (const film of films) {
   for (const asset of [film.src, film.previewSrc, film.poster]) {
     if (!asset || !asset.startsWith("/")) continue;

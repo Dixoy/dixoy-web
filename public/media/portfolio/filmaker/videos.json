@@ -1,1 +1,222 @@
-[]
+[
+  {
+    "id": "film-01",
+    "title": "Pieza 01",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-01.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-01.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-01.webp",
+    "width": 1428,
+    "height": 1080
+  },
+  {
+    "id": "film-02",
+    "title": "Pieza 02",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-02.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-02.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-02.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-03",
+    "title": "Pieza 03",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-03.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-03.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-03.webp",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "film-04",
+    "title": "Pieza 04",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-04.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-04.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-04.webp",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "film-05",
+    "title": "Pieza 05",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-05.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-05.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-05.webp",
+    "width": 720,
+    "height": 1280
+  },
+  {
+    "id": "film-06",
+    "title": "Pieza 06",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-06.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-06.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-06.webp",
+    "width": 720,
+    "height": 1280
+  },
+  {
+    "id": "film-07",
+    "title": "Pieza 07",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-07.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-07.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-07.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-08",
+    "title": "Pieza 08",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-08.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-08.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-08.webp",
+    "width": 1428,
+    "height": 1080
+  },
+  {
+    "id": "film-09",
+    "title": "Pieza 09",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-09.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-09.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-09.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-10",
+    "title": "Pieza 10",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-10.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-10.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-10.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-11",
+    "title": "Pieza 11",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-11.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-11.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-11.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-12",
+    "title": "Pieza 12",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-12.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-12.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-12.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-13",
+    "title": "Pieza 13",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-13.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-13.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-13.webp",
+    "width": 1428,
+    "height": 1080
+  },
+  {
+    "id": "film-14",
+    "title": "Entrevista",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-14.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-14.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-14.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-15",
+    "title": "Entrevistas",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-15.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-15.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-15.webp",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "id": "film-16",
+    "title": "Pieza 16",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-16.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-16.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-16.webp",
+    "width": 720,
+    "height": 1280
+  },
+  {
+    "id": "film-17",
+    "title": "PCCD · Mañana",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-17.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-17.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-17.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-18",
+    "title": "PS Doris",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-18.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-18.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-18.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-19",
+    "title": "Reel · Marco",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-19.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-19.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-19.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-20",
+    "title": "Reel · Color",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-20.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-20.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-20.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-21",
+    "title": "Reel · Teens",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-21.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-21.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-21.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "film-22",
+    "title": "Mujer",
+    "category": "Audiovisual",
+    "src": "/media/portfolio/filmaker/full/film-22.mp4",
+    "previewSrc": "/media/portfolio/filmaker/previews/film-22.mp4",
+    "poster": "/media/portfolio/filmaker/posters/film-22.webp",
+    "width": 1080,
+    "height": 1920
+  }
+]

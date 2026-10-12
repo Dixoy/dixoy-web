@@ -36,9 +36,10 @@ test("shuffling preserves the full catalog without mutating the input", () => {
   assert.deepEqual(shuffledFilms([]), []);
   assert.deepEqual(shuffledFilms([film]), [film]);
 });
-test("the committed catalog references files that exist", () => {
+test("the committed catalog resolves public media or existing local files", () => {
+  const mediaConfig = JSON.parse(readFileSync(new URL("../public/media/portfolio/filmaker/media-origin.json", import.meta.url), "utf8"));
   const catalog = JSON.parse(readFileSync(new URL("../public/media/portfolio/filmaker/videos.json", import.meta.url), "utf8"));
-  for (const item of resolveFilmAssets(parseFilms(catalog), process.env.FILM_MEDIA_ORIGIN)) {
+  for (const item of resolveFilmAssets(parseFilms(catalog), process.env.FILM_MEDIA_ORIGIN ?? mediaConfig.origin)) {
     for (const asset of [item.src, item.previewSrc, item.poster].filter(Boolean)) {
       if (asset.startsWith("/")) assert.ok(existsSync(join(process.cwd(), "public", asset)), `Missing asset: ${asset}`);
     }
