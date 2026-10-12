@@ -17,10 +17,10 @@ export const metadata: Metadata = {
     locale: "es_CO",
     siteName: "DIXOY",
     images: [{
-      url: "https://dixoy.co/portafolio/diseno/opengraph-image.png",
+      url: "https://dixoy.co/portafolio/diseno/opengraph-image.png?v=2",
       width: 1200,
       height: 630,
-      alt: "Diseño. Julián Bonilla · Dirección de diseño",
+      alt: "Diseño. Julián Bonilla · Productor multimedia",
     }],
     type: "website",
     url: "https://dixoy.co/portafolio/diseno",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Portafolio Julián Bonilla - DIXOY",
     description:
       "Diseño gráfico, identidad visual y proyectos creativos de Julián Bonilla para DIXOY.",
-    images: ["https://dixoy.co/portafolio/diseno/opengraph-image.png"],
+    images: ["https://dixoy.co/portafolio/diseno/opengraph-image.png?v=2"],
   },
 };
 
@@ -86,7 +86,7 @@ export default function DesignPortfolioPage() {
           <p>Selección / 2026</p>
           <div className={styles.heroTitleHeading}>
             <h1>Diseño<span>.</span></h1>
-            <p className={styles.heroSignature}>Julián Bonilla <span>· Dirección de diseño</span></p>
+            <p className={styles.heroSignature}>Julián Bonilla <span>· Productor multimedia</span></p>
           </div>
         </div>
 
