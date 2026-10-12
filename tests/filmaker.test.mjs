@@ -87,5 +87,6 @@ test("video cards use a branded vector launch icon rather than an iOS emoji glyp
   assert.match(gallery, /<OpenVideoIcon \/>/);
   assert.doesNotMatch(gallery, /className=\{styles\.playIcon\}[^>]*>↗<\/span>/);
   assert.match(styles, /\.playIcon svg/);
-  assert.match(styles, /\.playIcon \{ width: 42px; height: 42px;/);
+  assert.match(styles, /\.playIcon \{ position: absolute;[^}]*width: 22px; height: 22px;/);
+  assert.match(styles, /\.playIcon \{ width: 24px; height: 24px;/);
 });
