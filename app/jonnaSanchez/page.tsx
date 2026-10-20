@@ -8,6 +8,7 @@ import { resolveFilmAssets } from "../portafolio/filmaker/catalog";
 import FilmGallery from "../portafolio/filmaker/FilmGallery";
 import shared from "../portafolio/diseno/design.module.css";
 import styles from "../portafolio/filmaker/film.module.css";
+import contactStyles from "./contact.module.css";
 
 // The videos are hosted on the same public Cloudflare R2 domain as the DIXOY portfolio.
 // Their distinct prefix keeps Jonnathan's catalog and media independent from Julián's.
@@ -75,7 +76,15 @@ export default function JonnathanPortfolioPage() {
         <div>
           <p>¿Tienes una historia que contar?</p>
           <h2>Hagamos que suceda<span>.</span></h2>
-          <p>Datos de contacto de Jonnathan pendientes de confirmar.</p>
+          <p className={contactStyles.contactInfo}>Jonnathan Sánchez · +57 318 562 8954</p>
+        </div>
+        <div className={contactStyles.actions}>
+          <a className={contactStyles.whatsapp} href="https://wa.me/573185628954?text=Hola%20Jonnathan%2C%20vi%20tu%20portafolio%20y%20quisiera%20hablar%20de%20un%20proyecto%20audiovisual." target="_blank" rel="noopener noreferrer">
+            Hablemos por WhatsApp <span aria-hidden="true">↗</span>
+          </a>
+          <a className={contactStyles.instagram} href="https://www.instagram.com/jonna.kimmedia/" target="_blank" rel="noopener noreferrer">
+            Instagram · Jonna &amp; Kim Media <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </section>
       <footer className={shared.footer}>
@@ -85,6 +94,7 @@ export default function JonnathanPortfolioPage() {
         <div className={shared.footerLinks}>
           <a href="#proyectos">Proyectos</a>
           <a href="#contacto">Contacto</a>
+          <a href="https://www.instagram.com/jonna.kimmedia/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
         </div>
         <span>© 2026 Jonnathan Sánchez · Sitio desarrollado por DIXOY</span>
       </footer>
