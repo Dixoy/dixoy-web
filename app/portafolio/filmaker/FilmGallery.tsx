@@ -93,7 +93,7 @@ function FilmPlayer({ film }: { film: Film }) {
   );
 }
 
-function Viewer({ films, index, onChange, onClose }: { films: Film[]; index: number; onChange: (index: number) => void; onClose: () => void }) {
+function Viewer({ films, index, viewerLabel, onChange, onClose }: { films: Film[]; index: number; viewerLabel: string; onChange: (index: number) => void; onClose: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const film = films[index];
   useEffect(() => {
@@ -116,7 +116,7 @@ function Viewer({ films, index, onChange, onClose }: { films: Film[]; index: num
       if (event.key === "ArrowLeft") { event.preventDefault(); onChange((index - 1 + films.length) % films.length); }
     }}>
       <div className={styles.dialogPanel}>
-        <div className={styles.dialogTop}><span>DIXOY / Filmmaker</span><button type="button" autoFocus onClick={onClose} aria-label="Cerrar video">Cerrar ×</button></div>
+        <div className={styles.dialogTop}><span>{viewerLabel}</span><button type="button" autoFocus onClick={onClose} aria-label="Cerrar video">Cerrar ×</button></div>
         <FilmPlayer key={film.id} film={film} />
         {film.description && <p className={styles.description}>{film.description}</p>}
         <div className={styles.dialogBottom}>
@@ -129,7 +129,7 @@ function Viewer({ films, index, onChange, onClose }: { films: Film[]; index: num
   );
 }
 
-export default function FilmGallery({ films }: { films: Film[] }) {
+export default function FilmGallery({ films, viewerLabel = "DIXOY / Filmmaker" }: { films: Film[]; viewerLabel?: string }) {
   const grid = useRef<HTMLDivElement>(null);
   const [geometry, setGeometry] = useState<{ width: number; columns: number; gap: number } | null>(null);
   const layout = geometry ? layoutFilms(films, geometry.width, geometry.columns, geometry.gap) : null;
@@ -195,7 +195,7 @@ export default function FilmGallery({ films }: { films: Film[] }) {
         {films.map((film, index) => <Preview key={film.id} film={film} index={index} total={films.length} style={layout?.cards[index]} playing={autoplay && pageVisible && activeIndex === null} onOpen={() => setActiveIndex(index)} />)}
       </div>
       <noscript>Activa JavaScript para explorar la galería y abrir los videos.</noscript>
-      {activeIndex !== null && <Viewer films={films} index={activeIndex} onChange={setActiveIndex} onClose={close} />}
+      {activeIndex !== null && <Viewer films={films} viewerLabel={viewerLabel} index={activeIndex} onChange={setActiveIndex} onClose={close} />}
     </section>
   );
 }
