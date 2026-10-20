@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
 
-export const alt = "Filmmaker. Jonnathan Sánchez · Videógrafo";
+export const alt = "Jonnathan Sánchez · Realizador audiovisual";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,35 +35,52 @@ export default function OpenGraphImage() {
           <span>PORTAFOLIO AUDIOVISUAL</span>
           <span>VIDEO · COLOMBIA</span>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              alignItems: "baseline",
-              display: "flex",
-              fontSize: 156,
-              fontWeight: 800,
-              letterSpacing: -10,
-              lineHeight: 1,
-              whiteSpace: "nowrap",
-            }}
-          >
-            <span>Filmmaker</span>
-            <span style={{ color: "#ed6b1d" }}>.</span>
-          </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            flexGrow: 1,
+            paddingTop: 28,
+          }}
+        >
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              marginLeft: 8,
-              marginTop: 22,
+              fontSize: 112,
+              fontWeight: 750,
+              letterSpacing: -6,
+              lineHeight: 0.98,
             }}
           >
-            <span style={{ fontSize: 36, fontWeight: 700, letterSpacing: -1 }}>
-              Jonnathan Sánchez
-            </span>
-            <span style={{ color: "#b6c6d1", fontSize: 22, marginTop: 8 }}>
-              Filmmaker · Videógrafo
-            </span>
+            <span>Jonnathan</span>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <span>Sánchez</span>
+              <span style={{ color: "#ed6b1d" }}>.</span>
+            </div>
+          </div>
+          <div
+            style={{
+              color: "#e9eef2",
+              display: "flex",
+              alignItems: "center",
+              fontSize: 32,
+              fontWeight: 500,
+              marginTop: 24,
+              letterSpacing: -0.5,
+            }}
+          >
+            <span
+              style={{
+                background: "#ed6b1d",
+                display: "flex",
+                height: 3,
+                width: 35,
+                marginRight: 16,
+              }}
+            />
+            <span>Realizador audiovisual</span>
           </div>
         </div>
         <div
