@@ -15,11 +15,11 @@ import heroStyles from "./hero.module.css";
 // Their distinct prefix keeps Jonnathan's catalog and media independent from Julián's.
 const films = resolveFilmAssets(catalog as Film[], process.env.FILM_MEDIA_ORIGIN ?? mediaConfig.origin);
 
-const title = "Jonnathan Sánchez | Filmmaker y videógrafo";
+const title = "Jonnathan Sánchez | Realizador audiovisual";
 const description =
-  "Portafolio audiovisual de Jonnathan Sánchez. Una selección de videos, documentales, reels y proyectos de producción audiovisual.";
+  "Conoce el portafolio de Jonnathan Sánchez, realizador audiovisual. Documentales, proyectos institucionales, eventos y producciones en video.";
 
-const socialImage = "https://dixoy.co/jonnaSanchez/opengraph-image.png";
+const socialImage = "https://dixoy.co/jonnaSanchez/opengraph-image.png?v=2";
 
 export const metadata: Metadata = {
   title,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     url: "https://dixoy.co/jonnaSanchez",
     locale: "es_CO",
     type: "website",
-    images: [{ url: socialImage, width: 1200, height: 630, alt: "Filmmaker Jonnathan Sánchez" }],
+    images: [{ url: socialImage, width: 1200, height: 630, alt: "Jonnathan Sánchez, realizador audiovisual" }],
   },
   twitter: { card: "summary_large_image", title, description, images: [socialImage] },
 };
