@@ -17,6 +17,8 @@ const title = "Jonnathan Sánchez | Filmmaker y videógrafo";
 const description =
   "Portafolio audiovisual de Jonnathan Sánchez. Una selección de videos, documentales, reels y proyectos de producción audiovisual.";
 
+const socialImage = "https://dixoy.co/jonnaSanchez/opengraph-image.png";
+
 export const metadata: Metadata = {
   title,
   description,
@@ -29,7 +31,9 @@ export const metadata: Metadata = {
     url: "https://dixoy.co/jonnaSanchez",
     locale: "es_CO",
     type: "website",
+    images: [{ url: socialImage, width: 1200, height: 630, alt: "Filmmaker Jonnathan Sánchez" }],
   },
+  twitter: { card: "summary_large_image", title, description, images: [socialImage] },
 };
 
 export default function JonnathanPortfolioPage() {
