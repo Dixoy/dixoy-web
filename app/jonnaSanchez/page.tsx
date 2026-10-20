@@ -85,7 +85,7 @@ export default function JonnathanPortfolioPage() {
               style={{ backgroundImage: `url("${films[6].poster}")` }}
             />
             <span className={heroStyles.frameLabel}>Ranchería Ishamana · La Guajira</span>
-            <span className={heroStyles.frameCount}>01 / 11</span>
+            <span className={heroStyles.frameCount}>11 proyectos</span>
             <span className={heroStyles.verticalWord}>Obra seleccionada</span>
           </div>
         </div>
