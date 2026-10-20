@@ -1,0 +1,53 @@
+.contactInfo {
+  margin-top: 14px !important;
+  color: #536271;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  min-width: min(100%, 255px);
+}
+
+.actions a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.actions a span {
+  font-size: 17px;
+}
+
+.whatsapp {
+  background: #071f35;
+  color: #fff;
+}
+
+.instagram {
+  border: 1px solid #071f35;
+  color: #071f35;
+}
+
+.actions a:focus-visible {
+  outline: 2px solid #ed6b1d;
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .whatsapp:hover { background: #0b3559; }
+  .instagram:hover { background: #071f35; color: #fff; }
+}
+
+@media (max-width: 760px) {
+  .actions { width: 100%; }
+  .actions a { white-space: normal; }
+}
