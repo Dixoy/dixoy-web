@@ -9,6 +9,7 @@ import FilmGallery from "../portafolio/filmaker/FilmGallery";
 import shared from "../portafolio/diseno/design.module.css";
 import styles from "../portafolio/filmaker/film.module.css";
 import contactStyles from "./contact.module.css";
+import heroStyles from "./hero.module.css";
 
 // The videos are hosted on the same public Cloudflare R2 domain as the DIXOY portfolio.
 // Their distinct prefix keeps Jonnathan's catalog and media independent from Julián's.
@@ -50,23 +51,47 @@ export default function JonnathanPortfolioPage() {
           <a className={shared.contactLink} href="#contacto">Contacto ↗</a>
         </nav>
       </header>
-      <section className={styles.hero}>
-        <div className={styles.eyebrow}>
-          <span>Jonnathan Sánchez / Portafolio audiovisual</span>
-          <span>Colombia</span>
+      <section className={heroStyles.hero} aria-label="Presentación de Jonnathan Sánchez">
+        <div className={heroStyles.topline}>
+          <span>Portafolio audiovisual / Jonnathan Sánchez</span>
+          <span>Colombia · Selección de proyectos</span>
         </div>
-        <div className={styles.heroMain}>
-          <div className={styles.heroTitleBlock}>
-            <h1>Filmmaker<span>.</span></h1>
-            <p className={styles.heroSignature}>
-              Jonnathan Sánchez<span>Filmmaker · Videógrafo</span>
-            </p>
+        <div className={heroStyles.columns}>
+          <div className={heroStyles.intro}>
+            <p className={heroStyles.role}>Filmmaker / Videógrafo</p>
+            <h1 className={heroStyles.name}>
+              <span>Jonnathan</span>
+              <span>Sánchez<span className={heroStyles.dot}>.</span></span>
+            </h1>
+            <div className={heroStyles.statement}>
+              <p>Una mirada puesta en lo que importa.</p>
+              <p>Territorios, personas y proyectos contados a través de la imagen.</p>
+            </div>
+            <a className={heroStyles.explore} href="#proyectos">
+              Explorar proyectos <span aria-hidden="true">↗</span>
+            </a>
           </div>
-          <p>Historias que<br /><em>se mueven.</em></p>
+          <div className={heroStyles.visual}>
+            <div
+              className={heroStyles.mainStill}
+              role="img"
+              aria-label="Fotograma del proyecto Ranchería Ishamana, La Guajira"
+              style={{ backgroundImage: `url("${films[5].poster}")` }}
+            />
+            <div
+              className={heroStyles.secondaryStill}
+              role="img"
+              aria-label="Fotograma del Reel Congreso Naturgas"
+              style={{ backgroundImage: `url("${films[6].poster}")` }}
+            />
+            <span className={heroStyles.frameLabel}>Ranchería Ishamana · La Guajira</span>
+            <span className={heroStyles.frameCount}>01 / 11</span>
+            <span className={heroStyles.verticalWord}>Obra seleccionada</span>
+          </div>
         </div>
-        <div className={styles.heroBottom}>
-          <p>Imágenes que cuentan historias.</p>
-          <span>Producción audiovisual · Video · Reels</span>
+        <div className={heroStyles.bottom}>
+          <p>Documental · Institucional · Eventos · Reels</p>
+          <a href="#proyectos">Ver los 11 proyectos <span aria-hidden="true">↓</span></a>
         </div>
       </section>
       <div id="proyectos">
