@@ -1,0 +1,30 @@
+name: Verify Jonnathan portfolio media
+
+on:
+  pull_request:
+    paths:
+      - "app/jonnaSanchez/**"
+      - "scripts/check-jonna-media.mjs"
+      - ".github/workflows/verify-jonna-portfolio.yml"
+  workflow_dispatch:
+
+jobs:
+  verify-media:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check all 33 Cloudflare R2 assets
+        run: node scripts/check-jonna-media.mjs
+      - name: Check exported Jonnathan page and metadata
+        run: |
+          npm ci
+          npm run build
+          test -s out/jonnaSanchez.html
+          test -s out/jonnaSanchez/opengraph-image.png
+          test -s out/jonnaSanchez/twitter-image.png
+          grep -q 'Jonnathan Sánchez' out/jonnaSanchez.html
+          grep -q '573185628954' out/jonnaSanchez.html
+          grep -q 'jonna.kimmedia' out/jonnaSanchez.html
