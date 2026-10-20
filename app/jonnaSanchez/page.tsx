@@ -25,8 +25,7 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/jonnaSanchez" },
-  // IMPORTANT: Enable indexing only after all R2 media and contact details are verified.
-  robots: { index: false, follow: false },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   openGraph: {
     title,
     description,
