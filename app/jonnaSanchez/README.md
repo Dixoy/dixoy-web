@@ -1,4 +1,4 @@
-# Jonnathan Sánchez — portafolio audiovisual (borrador)
+# Jonnathan Sánchez — portafolio audiovisual
 
 Ruta solicitada: `https://dixoy.co/jonnaSanchez`.
 
@@ -9,12 +9,12 @@ Se reutiliza la galería de `/portafolio/filmaker` sin duplicar sus componentes 
 - [x] Catálogo de 11 proyectos, con proporciones de cada video
 - [x] Misma galería: mosaico responsivo, vistas previas y visor con audio
 - [x] Etiqueta propia en el visor de video
-- [ ] Subir los 33 archivos (`full`, `previews` y `posters`) a Cloudflare R2
-- [ ] Verificar las 33 URLs públicas y la vista previa del sitio
+- [x] Subir los 33 archivos (`full`, `previews` y `posters`) a Cloudflare R2
+- [x] Verificar las 33 URLs públicas y la vista previa del sitio (GitHub Actions y aprobación del cliente)
 - [x] Agregar los datos de contacto compartidos por el cliente: WhatsApp +57 318 562 8954 e Instagram @jonna.kimmedia (perfil Jonna & Kim Media)
-- [ ] Aprobar nombre, texto de presentación, orden de proyectos y contenidos
-- [ ] Habilitar `metadata.robots.index` solo después de la validación integral
-- [ ] Hacer merge/publicar únicamente con autorización
+- [x] Aprobar nombre, texto de presentación, orden de proyectos y contenidos (confirmación en conversación)
+- [x] Habilitar `metadata.robots.index` tras validar y solicitar publicación
+- [x] Obtener autorización expresa para merge/publicación (20 oct 2026)
 
 ## Medios
 
@@ -30,4 +30,4 @@ Cada entrada del JSON usa estas rutas independientes:
 
 ## Publicación
 
-Este PR es un borrador. La ruta no está lista para producción mientras los videos no estén disponibles en R2 y no se haya validado la reproducción y el diseño responsive. Mantener `main` intacta hasta aprobar.
+El cliente aprobó el diseño y autorizó la publicación. Las verificaciones de CI comprueban compilación, páginas estáticas, metadatos y disponibilidad de 33 archivos en R2. Tras fusionar, verificar en https://dixoy.co/jonnaSanchez el despliegue de producción y la ruta canónica.
