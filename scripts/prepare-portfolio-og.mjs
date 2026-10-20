@@ -3,8 +3,8 @@ import { join } from "node:path";
 
 const pngSignature = "89504e470d0a1a0a";
 
-for (const portfolio of ["diseno", "filmaker"]) {
-  const outputDir = join(process.cwd(), "out", "portafolio", portfolio);
+for (const route of [["portafolio", "diseno"], ["portafolio", "filmaker"], ["jonnaSanchez"]]) {
+  const outputDir = join(process.cwd(), "out", ...route);
   for (const name of ["opengraph-image", "twitter-image"]) {
     const source = join(outputDir, name);
     const destination = join(outputDir, `${name}.png`);
