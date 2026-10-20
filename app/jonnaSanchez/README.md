@@ -11,7 +11,7 @@ Se reutiliza la galería de `/portafolio/filmaker` sin duplicar sus componentes 
 - [x] Etiqueta propia en el visor de video
 - [ ] Subir los 33 archivos (`full`, `previews` y `posters`) a Cloudflare R2
 - [ ] Verificar las 33 URLs públicas y la vista previa del sitio
-- [ ] Agregar los datos reales de contacto y redes de Jonnathan (sin inventarlos)
+- [x] Agregar los datos de contacto compartidos por el cliente: WhatsApp +57 318 562 8954 e Instagram @jonna.kimmedia (perfil Jonna & Kim Media)
 - [ ] Aprobar nombre, texto de presentación, orden de proyectos y contenidos
 - [ ] Habilitar `metadata.robots.index` solo después de la validación integral
 - [ ] Hacer merge/publicar únicamente con autorización
@@ -30,4 +30,4 @@ Cada entrada del JSON usa estas rutas independientes:
 
 ## Publicación
 
-Este PR es un borrador. La ruta no está lista para producción mientras los videos no estén disponibles en R2 y falten los datos de contacto. Mantener `main` intacta hasta aprobar.
+Este PR es un borrador. La ruta no está lista para producción mientras los videos no estén disponibles en R2 y no se haya validado la reproducción y el diseño responsive. Mantener `main` intacta hasta aprobar.
