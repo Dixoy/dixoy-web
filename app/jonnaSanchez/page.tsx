@@ -63,7 +63,7 @@ export default function JonnathanPortfolioPage() {
               <span>Sánchez<span className={heroStyles.dot}>.</span></span>
             </h1>
             <div className={heroStyles.statement}>
-              <p>Una mirada puesta en lo que importa.</p>
+              <p>Realizador audiovisual</p>
               <p>Territorios, personas y proyectos contados a través de la imagen.</p>
             </div>
             <a className={heroStyles.explore} href="#proyectos">
