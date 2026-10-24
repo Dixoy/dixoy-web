@@ -1,0 +1,27 @@
+name: Validate commercial requests
+on:
+  pull_request:
+    paths:
+      - "app/solicitar/**"
+      - "app/servicios/**"
+      - "app/soluciones/multimedia/page.tsx"
+      - "public/sitemap.xml"
+      - "tests/solicitudes.test.mjs"
+      - "package.json"
+      - ".github/workflows/validate-commercial-requests.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:filmaker
+      - run: npm run test:solicitudes
+      - run: npm run build
