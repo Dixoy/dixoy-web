@@ -25,3 +25,32 @@ jobs:
       - run: npm run test:filmaker
       - run: npm run test:solicitudes
       - run: npm run build
+
+  staging-smoke:
+    name: API staging (no production)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create one synthetic lead only in DixApp staging and verify retries
+        env:
+          STAGING_API: https://staging.app.dixoy.co/api/public/solicitudes
+        run: |
+          set -euo pipefail
+          submission="gh-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          email="qa+$GITHUB_RUN_ID@example.invalid"
+          payload=$(printf '{"name":"QA Solicitudes %s","phone":"+573001112233","email":"%s","category":"Soluciones digitales","description":"Prueba automatizada exclusiva en staging","submissionId":"%s","origin":"qa-github","sourcePath":"/solicitar","website":""}' "$GITHUB_RUN_ID" "$email" "$submission")
+          post() {
+            curl --fail-with-body --silent --show-error --max-time 25 \
+              --request POST "$STAGING_API" \
+              --header "Origin: https://dixoy-web.pages.dev" \
+              --header "Content-Type: application/json" \
+              --data "$payload"
+          }
+          first=$(post)
+          retry=$(post)
+          node -e 'const a=JSON.parse(process.argv[1]), b=JSON.parse(process.argv[2]); if(!a.ok||!a.code||!b.ok||b.code!==a.code||!b.duplicate){console.error("Fallo contrato staging/idempotencia");process.exit(1)} console.log("Staging API OK, misma referencia en reintento: "+a.code)' "$first" "$retry"
+          status=$(curl --silent --show-error --output /dev/null --write-out "%{http_code}" --max-time 25 \
+            --request POST "$STAGING_API" \
+            --header "Origin: https://no-permitido.invalid" \
+            --header "Content-Type: application/json" \
+            --data "$payload")
+          test "$status" = "403"
