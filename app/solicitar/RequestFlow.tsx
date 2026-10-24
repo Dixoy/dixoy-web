@@ -93,44 +93,47 @@ export default function RequestFlow() {
   const [fallbackActive, setFallbackActive] = useState(false);
 
   useEffect(() => {
-    // Eliminar borradores antiguos con datos personales en almacenamiento persistente.
-    window.localStorage.removeItem("dixoy-request-draft");
-    window.localStorage.removeItem("dixoy-request-submission-id");
-    window.localStorage.removeItem("dixoy-request-last");
-    const params = new URLSearchParams(window.location.search);
-    const service = params.get("servicio") || "";
-    const origin = params.get("origen") || "web";
-    const saved = window.sessionStorage.getItem("dixoy-request-draft");
-    const savedSubmissionId = window.sessionStorage.getItem("dixoy-request-submission-id");
-    const currentSubmissionId = savedSubmissionId || createSubmissionId();
+    const initTimer = window.setTimeout(() => {
+      // Eliminar borradores antiguos con datos personales en almacenamiento persistente.
+      window.localStorage.removeItem("dixoy-request-draft");
+      window.localStorage.removeItem("dixoy-request-submission-id");
+      window.localStorage.removeItem("dixoy-request-last");
+      const params = new URLSearchParams(window.location.search);
+      const service = params.get("servicio") || "";
+      const origin = params.get("origen") || "web";
+      const saved = window.sessionStorage.getItem("dixoy-request-draft");
+      const savedSubmissionId = window.sessionStorage.getItem("dixoy-request-submission-id");
+      const currentSubmissionId = savedSubmissionId || createSubmissionId();
 
-    setSubmissionId(currentSubmissionId);
-    if (!savedSubmissionId) {
-      window.sessionStorage.setItem("dixoy-request-submission-id", currentSubmissionId);
-    }
-
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved) as RequestData;
-        setData({
-          ...initialData,
-          ...parsed,
-          service: service || parsed.service || "",
-          category: service ? guessCategory(service) || parsed.category : parsed.category,
-          origin,
-        });
-        return;
-      } catch {
-        // Si el borrador quedó corrupto, iniciamos limpio.
+      setSubmissionId(currentSubmissionId);
+      if (!savedSubmissionId) {
+        window.sessionStorage.setItem("dixoy-request-submission-id", currentSubmissionId);
       }
-    }
 
-    setData((current) => ({
-      ...current,
-      service,
-      category: guessCategory(service),
-      origin,
-    }));
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved) as RequestData;
+          setData({
+            ...initialData,
+            ...parsed,
+            service: service || parsed.service || "",
+            category: service ? guessCategory(service) || parsed.category : parsed.category,
+            origin,
+          });
+          return;
+        } catch {
+          // Si el borrador quedó corrupto, iniciamos limpio.
+        }
+      }
+
+      setData((current) => ({
+        ...current,
+        service,
+        category: guessCategory(service),
+        origin,
+      }));
+    }, 0);
+    return () => window.clearTimeout(initTimer);
   }, []);
 
   useEffect(() => {
