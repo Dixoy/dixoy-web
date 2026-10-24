@@ -22,6 +22,7 @@ export default function ServiceDetail({
   useCases,
   closing,
 }: ServiceDetailProps) {
+  const requestHref = `/solicitar?servicio=${encodeURIComponent(title)}&origen=servicio`;
   return (
     <main className={styles.page}>
       <header className={styles.header}>
@@ -32,7 +33,7 @@ export default function ServiceDetail({
           <Link href="/proyectos">Proyectos</Link>
           <Link href="/bogota">Bogotá</Link>
           <Link href="/usme">Usme</Link>
-          <Link className={styles.cta} href="/#contacto">Hablemos</Link>
+          <Link className={styles.cta} href="/solicitar?origen=servicio">Solicitar</Link>
         </nav>
       </header>
 
@@ -41,7 +42,7 @@ export default function ServiceDetail({
         <h1>{title}</h1>
         <p className={styles.lead}>{intro}</p>
         <div className={styles.actions}>
-          <Link className={styles.primary} href="/#contacto">Solicitar una propuesta</Link>
+          <Link className={styles.primary} href={requestHref}>Solicitar este servicio</Link>
           <Link className={styles.secondary} href={solutionHref}>Ver {solutionLabel}</Link>
         </div>
       </section>
@@ -72,7 +73,7 @@ export default function ServiceDetail({
           </p>
         </div>
         <div className={styles.actions}>
-          <Link href="/soluciones">Conocer todas las soluciones</Link>
+          <Link href={requestHref}>Iniciar solicitud</Link>
           <Link href="/proyectos">Ver proyectos realizados</Link>
         </div>
       </section>

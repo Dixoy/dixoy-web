@@ -8,7 +8,8 @@
     "postbuild": "node scripts/prepare-portfolio-og.mjs",
     "start": "next start",
     "lint": "eslint",
-    "test:filmaker": "node --test tests/filmaker.test.mjs"
+    "test:filmaker": "node --test tests/filmaker.test.mjs",
+    "test:solicitudes": "node --test tests/solicitudes.test.mjs"
   },
   "dependencies": {
     "next": "16.2.9",
